@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from 'react';
 
 const PersonalDetailsForm = () => {
+  const [studentId, setStudentId] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Student ID:', studentId);
+    console.log('First Name:', firstName);
+    console.log('Last Name:', lastName);
+    console.log('Date of Birth:', dateOfBirth);
+  };
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0a192f]/90 text-white background-image">
       <div className="w-full max-w-lg p-6 bg-[#0a192f]/60 rounded-3xl shadow-2xl">
@@ -8,7 +22,7 @@ const PersonalDetailsForm = () => {
           <button className="text-white mr-20">&lt; Back</button>
           <h1 className="text-3xl font-bold text-center">Personal Details</h1>
         </div>
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="studentId"
@@ -20,6 +34,7 @@ const PersonalDetailsForm = () => {
               type="text"
               id="studentId"
               placeholder="Enter ID Number"
+              onChange={(e) => setStudentId(e.target.value)}
               className="w-full mt-1 px-3 py-2 bg-[#0a192f]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
             />
           </div>
@@ -34,6 +49,7 @@ const PersonalDetailsForm = () => {
               type="text"
               id="firstName"
               placeholder="Enter First Name"
+              onChange={(e) => setFirstName(e.target.value)}
               className="w-full mt-1 px-3 py-2 bg-[#0a192f]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
             />
           </div>
@@ -48,6 +64,7 @@ const PersonalDetailsForm = () => {
               type="text"
               id="lastName"
               placeholder="Enter Last Name"
+              onChange={(e) => setLastName(e.target.value)}
               className="w-full mt-1 px-3 py-2 bg-[#0a192f]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
             />
           </div>
@@ -62,6 +79,7 @@ const PersonalDetailsForm = () => {
               type="date"
               id="dob"
               placeholder="Enter Date of Birth"
+              onChange={(e) => setDateOfBirth(e.target.value)}
               className="w-full mt-1 px-3 py-2 bg-[#0a192f]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
             />
           </div>
