@@ -1,118 +1,114 @@
-import React, { useState } from 'react';
+import React from "react";
 
-const PersonalDetailsForm = () => {
-  const [studentId, setStudentId] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Student ID:', studentId);
-    console.log('First Name:', firstName);
-    console.log('Last Name:', lastName);
-    console.log('Date of Birth:', dateOfBirth);
-  };
-
-
+const Dashboard = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a192f]/90 text-white background-image">
-      <div className="w-full max-w-lg p-6 bg-[#0a192f]/60 rounded-3xl shadow-2xl">
-        <div className="flex mb-4">
-          <button className="text-white mr-20">&lt; Back</button>
-          <h1 className="text-3xl font-bold text-center">Personal Details</h1>
+    <div className="flex min-h-screen bg-gray-900 text-white">
+      {/* Sidebar */}
+      <aside className="w-64 bg-[#072D4A]/90 flex flex-col">
+        <div className="p-6">
+          <h1 className="text-lg font-bold mb-4">Accommodation's Office</h1>
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 bg-gray-500 rounded-full"></div>
+            <div>
+              <p className="font-semibold">Welcome Back,</p>
+              <p className="text-sm">Student's Name</p>
+            </div>
+          </div>
         </div>
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <label
-              htmlFor="studentId"
-              className="block text-sm font-medium text-white"
-            >
-              Student ID Number
-            </label>
-            <input
-              type="text"
-              id="studentId"
-              placeholder="Enter ID Number"
-              onChange={(e) => setStudentId(e.target.value)}
-              className="w-full mt-1 px-3 py-2 bg-[#0a192f]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
-            />
+        <nav className="mt-8 space-y-4">
+          <a
+            href="#"
+            className="block py-2 px-4 bg-[#007ECA]/70 rounded-xl text-white hover:bg-[#007ECA]/60"
+          >
+            Dashboard
+          </a>
+          <a
+            href="#"
+            className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
+          >
+            Forms
+          </a>
+          <a
+            href="#"
+            className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
+          >
+            Plans
+          </a>
+          <a
+            href="#"
+            className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
+          >
+            Feedback
+          </a>
+          <a
+            href="#"
+            className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
+          >
+            Calendar
+          </a>
+        </nav>
+        <div className="mt-auto p-6">
+          <button className="w-full text-left py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl">
+            Logout
+          </button>
+        </div>
+      </aside>
+
+      {/* Main Dashboard */}
+      <main className="flex-1 bg-blue-100 p-8">
+        <h1 className="text-2xl font-bold mb-6 text-black">Dashboard</h1>
+        <div className="grid grid-cols-3 gap-6">
+          {/* Cards */}
+          <div className="col-span-2 bg-[#007ECA] rounded-xl p-4 h-48">
+            <h2 className="text-lg font-semibold">Current Learning Plan</h2>
           </div>
-          <div>
-            <label
-              htmlFor="firstName"
-              className="block text-sm font-medium text-white"
-            >
-              First Name
-            </label>
-            <input
-              type="text"
-              id="firstName"
-              placeholder="Enter First Name"
-              onChange={(e) => setFirstName(e.target.value)}
-              className="w-full mt-1 px-3 py-2 bg-[#0a192f]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
-            />
+          <div className="bg-[#007ECA] rounded-xl p-4">
+            <h2 className="text-lg font-semibold">Pending Forms</h2>
           </div>
-          <div>
-            <label
-              htmlFor="lastName"
-              className="block text-sm font-medium text-white"
-            >
-              Last Name
-            </label>
-            <input
-              type="text"
-              id="lastName"
-              placeholder="Enter Last Name"
-              onChange={(e) => setLastName(e.target.value)}
-              className="w-full mt-1 px-3 py-2 bg-[#0a192f]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
-            />
+
+          {/* Calendar */}
+          <div className="col-span-3 bg-[#B9E4FE] rounded-xl p-6 text-black">
+            <h2 className="text-lg font-semibold mb-4">November</h2>
+            <div className="grid grid-cols-7 text-center">
+              <span>Mo</span>
+              <span>Tu</span>
+              <span>We</span>
+              <span>Th</span>
+              <span>Fr</span>
+              <span>Sa</span>
+              <span>Su</span>
+              {[...Array(30).keys()].map((day) => (
+                <div
+                  key={day}
+                  className={`py-2 rounded ${day + 1 === 23 ? "bg-[#072D4A]/90 text-white" : ""
+                    }`}
+                >
+                  {day + 1}
+                </div>
+              ))}
+            </div>
           </div>
-          <div>
-            <label
-              htmlFor="dob"
-              className="block text-sm font-medium text-white"
-            >
-              Date of Birth
-            </label>
-            <input
-              type="date"
-              id="dob"
-              placeholder="Enter Date of Birth"
-              onChange={(e) => setDateOfBirth(e.target.value)}
-              className="w-full mt-1 px-3 py-2 bg-[#0a192f]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
-            />
+
+          {/* Bottom Cards */}
+          <div className="bg-[#007ECA] rounded-xl p-4 h-48">
+            <h2 className="text-lg font-semibold">Approved Forms</h2>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <button
-              type="button"
-              className="w-full px-4 py-2 bg-[#0a192f]/70 text-white border border-blue-600 rounded-md text-md font-medium hover:bg-blue-800"
-            >
-              Medical Reports
-              <p className="text-xs mt-1">Please upload medical reports</p>
-            </button>
-            <button
-              type="button"
-              className="w-full px-4 py-2 bg-[#0a192f]/70 text-white border border-blue-600 rounded-md text-md font-medium hover:bg-blue-800"
-            >
-              Doctor’s Form
-              <p className="text-xs mt-1">
-                Please print this form and provide to your Doctor
-              </p>
-            </button>
+          <div className="bg-[#007ECA] rounded-xl p-4">
+            <h2 className="text-lg font-semibold">Previous Learning Plan</h2>
           </div>
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="px-6 py-2 bg-blue-800 hover:bg-blue-500 text-white rounded-lg font-medium text-lg"
-            >
-              Submit
-            </button>
+          <div className="bg-orange-500 rounded-xl p-4">
+            <h2 className="text-lg font-semibold">Feedback</h2>
           </div>
-        </form>
-      </div>
+        </div>
+      </main>
+
+      {/* Right Sidebar */}
+      <aside className="w-64 bg-[#072D4A]/90 p-6">
+        <div className="bg-[#007ECA] rounded-xl h-1/2 mb-6"></div>
+        <div className="bg-[#007ECA] rounded-xl h-2/5"></div>
+      </aside>
     </div>
   );
 };
 
-export default PersonalDetailsForm;
+export default Dashboard;
