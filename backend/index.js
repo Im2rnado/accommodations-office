@@ -21,15 +21,47 @@ router.get("/posts", (req, res) => {
     const posts = [
         {
             title: "Post One",
-            content: "This is the content of the first post. It contains insightful information on Express routing."
+            content: "This is the content of the first post. It contains insightful information on Express routing.",
+            author: "John Doe",
+            date: "2024-11-29"
         },
         {
             title: "Post Two",
-            content: "This post dives deeper into how middleware works in Express.js and why it's important."
+            content: "This post dives deeper into how middleware works in Express.js and why it's important.",
+            author: "John Smith",
+            date: "2024-11-28"
         },
         {
             title: "Post Three",
-            content: "Learn about the importance of error handling in Express applications through this example."
+            content: "Learn about the importance of error handling in Express applications through this example.",
+            auther: "Alice Johnson",
+            date: "2024-11-27"
+        }
+    ];
+    return res.status(200).json({ success: true, posts });
+});
+
+router.get("/posts", (req, res) => {
+    console.log("[GET] /posts");
+
+    const announcements  = [
+        {
+            title: "announcements One",
+            message: "next meeting on monday.",
+            sender: "Magi hossam ",
+            date: "2024-11-29"
+        },
+        {
+            title: "announcements Two",
+            message: "doctor feedback.",
+            sender: "Magi Hossam",
+            date: "2024-11-28"
+        },
+        {
+            title: "announcements Three",
+            message: "new plan implemented",
+            sender: "Magi hossam",
+            date: "2024-11-27"
         }
     ];
 
