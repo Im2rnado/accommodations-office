@@ -15,6 +15,27 @@ router.get("/", (req, res) => {
     return res.status(200).json({ success: true, message: "Server is working" });
 });
 
+router.get("/posts", (req, res) => {
+    console.log("[GET] /posts");
+
+    const posts = [
+        {
+            title: "Post One",
+            content: "This is the content of the first post. It contains insightful information on Express routing."
+        },
+        {
+            title: "Post Two",
+            content: "This post dives deeper into how middleware works in Express.js and why it's important."
+        },
+        {
+            title: "Post Three",
+            content: "Learn about the importance of error handling in Express applications through this example."
+        }
+    ];
+
+    return res.status(200).json({ success: true, posts });
+});
+
 router.post("/login", async (req, res) => {
     console.log("[POST] /login");
 
