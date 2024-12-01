@@ -112,7 +112,7 @@ const EditStudentAccommodations = () => {
                         ].map((support, index) => (
                             <div
                                 key={index}
-                                className="grid grid-cols-3 h-14 items-center text-center border-t border-[#007ECA]"
+                                className="grid grid-cols-3 h-14 items-center text-center"
                             >
                                 <div className="bg-[#1270B0]/60 h-full flex items-center justify-center">
                                     <p>{support}</p>

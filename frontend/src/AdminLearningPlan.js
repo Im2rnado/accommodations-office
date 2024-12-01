@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 
-const EditLearningPlan = () => {
+const EditStudentAccommodations = () => {
     return (
         <div className="flex min-h-screen bg-gray-900 text-white">
             {/* Sidebar */}
@@ -112,7 +112,7 @@ const EditLearningPlan = () => {
                         ].map((support, index) => (
                             <div
                                 key={index}
-                                className="grid grid-cols-3 h-14 items-center text-center border-t border-[#007ECA]"
+                                className="grid grid-cols-3 h-14 items-center text-center"
                             >
                                 <div className="bg-[#1270B0]/60 h-full flex items-center justify-center">
                                     <p>{support}</p>
@@ -186,4 +186,4 @@ const EditLearningPlan = () => {
     );
 };
 
-export default EditLearningPlan;
+export default EditStudentAccommodations;
