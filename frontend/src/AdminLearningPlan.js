@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 
-const EditStudentAccommodations = () => {
+const EditLearningPlan = () => {
     return (
         <div className="flex min-h-screen bg-gray-900 text-white">
             {/* Sidebar */}
@@ -186,4 +186,4 @@ const EditStudentAccommodations = () => {
     );
 };
 
-export default EditStudentAccommodations;
+export default EditLearningPlan;

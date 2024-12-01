@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 
 const Dashboard = () => {
@@ -15,7 +16,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-                <nav className="mt-8 space-y-4">
+                <nav className="m-2 space-y-4">
                     <a
                         href="#"
                         className="block py-2 px-4 bg-[#007ECA]/70 rounded-xl text-white hover:bg-[#007ECA]/60"
@@ -104,8 +105,12 @@ const Dashboard = () => {
 
             {/* Right Sidebar */}
             <aside className="w-64 bg-[#072D4A]/90 p-6">
-                <div className="bg-[#007ECA] rounded-xl h-1/2 mb-6"></div>
-                <div className="bg-[#007ECA] rounded-xl h-2/5"></div>
+                <div className="bg-[#007ECA] rounded-xl p-4 h-1/2 mb-6">
+                    <h2 className="text-xl font-bold">Announcements</h2>
+                </div>
+                <div className="bg-[#007ECA] rounded-xl p-4 h-2/5">
+                    <h2 className="text-xl font-bold">Meetings</h2>
+                </div>
             </aside>
         </div>
     );

@@ -41,31 +41,31 @@ router.get("/posts", (req, res) => {
     return res.status(200).json({ success: true, posts });
 });
 
-router.get("/posts", (req, res) => {
-    console.log("[GET] /posts");
+router.get("/announcements", (req, res) => {
+    console.log("[GET] /announcements");
 
     const announcements  = [
         {
-            title: "announcements One",
+            title: "Announcement One",
             message: "next meeting on monday.",
             sender: "Magi hossam ",
             date: "2024-11-29"
         },
         {
-            title: "announcements Two",
+            title: "Announcement Two",
             message: "doctor feedback.",
             sender: "Magi Hossam",
             date: "2024-11-28"
         },
         {
-            title: "announcements Three",
+            title: "Announcement Three",
             message: "new plan implemented",
             sender: "Magi hossam",
             date: "2024-11-27"
         }
     ];
 
-    return res.status(200).json({ success: true, posts });
+    return res.status(200).json({ success: true, announcements });
 });
 
 router.post("/login", async (req, res) => {
