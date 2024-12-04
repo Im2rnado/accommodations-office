@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
-const AdminStudents = () => {
+const AdminPending = () => {
     const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ const AdminStudents = () => {
             .get("http://localhost:4000/admin-students")
             .then((response) => {
                 if (response.data.success) {
-                    setStudents(response.data.students);
+                    setStudents(response.data.students.filter(student => student.status === "Pending"));
                 } else {
                     setError("Failed to fetch students");
                 }
@@ -50,9 +50,9 @@ const AdminStudents = () => {
 
                 <nav className="m-2 space-y-4">
                     <NavLink to="/admin-dashboard" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Dashboard </NavLink>
-                    <NavLink to="/admin-students" className="block py-2 px-4 bg-[#007ECA]/70 text-white hover:bg-[#007ECA]/60 rounded-xl"> Students </NavLink>
-                    <NavLink to="/admin-approved" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Approved </NavLink>
-                    <NavLink to="/admin-pending" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Pending </NavLink>
+                    <NavLink to="/admin-students" className="block py-2 px-4  text-white hover:bg-[#007ECA]/60 rounded-xl"> Students </NavLink>
+                    <NavLink to="/admin-approved" className="block py-2 px-4  text-white hover:bg-[#007ECA]/60 rounded-xl"> Approved </NavLink>
+                    <NavLink to="/admin-pending" className="block py-2 px-4 bg-[#007ECA]/70 text-white hover:bg-[#007ECA]/60 rounded-xl"> Pending </NavLink>
                     <NavLink to="/admin-applied" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Applied </NavLink>
                     <NavLink to="/admin-meetings" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Meetings </NavLink>
                 </nav>
@@ -133,4 +133,4 @@ const AdminStudents = () => {
     );
 };
 
-export default AdminStudents;
+export default AdminPending;

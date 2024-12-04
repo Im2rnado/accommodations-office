@@ -1,7 +1,38 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const AdminDashboard = () => {
+    const [stats, setStats] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:4000/admin-dashboard")
+            .then((response) => {
+                if (response.data.success) {
+                    setStats(response.data.stats);
+                } else {
+                    setError("Failed to fetch stats");
+                }
+                setLoading(false);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) {
+        return <div className="p-6">Loading...</div>;
+    }
+
+    if (error) {
+        return <div className="p-6 text-red-500">Error: {error}</div>;
+    }
+
     return (
         <div className="flex min-h-screen bg-gray-900 text-white">
             {/* Sidebar */}
@@ -16,44 +47,16 @@ const AdminDashboard = () => {
                         </div>
                     </div>
                 </div>
+
                 <nav className="m-2 space-y-4">
-                    <a
-                        href="#"
-                        className="block py-2 px-4 bg-[#007ECA]/70 rounded-xl text-white hover:bg-[#007ECA]/60"
-                    >
-                        Dashboard
-                    </a>
-                    <a
-                        href="#"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Students
-                    </a>
-                    <a
-                        href="#"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Approved
-                    </a>
-                    <a
-                        href="#"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Processing
-                    </a>
-                    <a
-                        href="#"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Applied
-                    </a>
-                    <a
-                        href="#"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Meetings
-                    </a>
+                    <NavLink to="/admin-dashboard" className="block py-2 px-4 bg-[#007ECA]/70 text-white hover:bg-[#007ECA]/60 rounded-xl"> Dashboard </NavLink>
+                    <NavLink to="/admin-students" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Students </NavLink>
+                    <NavLink to="/admin-approved" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Approved </NavLink>
+                    <NavLink to="/admin-pending" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Pending </NavLink>
+                    <NavLink to="/admin-applied" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Applied </NavLink>
+                    <NavLink to="/admin-meetings" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Meetings </NavLink>
                 </nav>
+
                 <div className="mt-auto p-6">
                     <button className="w-full text-left py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl">
                         Logout
@@ -66,19 +69,16 @@ const AdminDashboard = () => {
                 <h1 className="text-2xl font-bold mb-6 text-black">Dashboard</h1>
 
                 {/* Stats Cards */}
-                <div className="grid grid-cols-3 gap-6 mb-6">
-                    <div className="bg-[#007ECA] rounded-xl p-5 text-center">
-                        <h2 className="text-3xl font-bold">Applied Students</h2>
-                        <p className="text-5xl font-bold mt-2">2</p>
-                    </div>
-                    <div className="bg-[#007ECA] rounded-xl p-5 text-center">
-                        <h2 className="text-3xl font-bold">Pending Students</h2>
-                        <p className="text-5xl font-bold mt-2">3</p>
-                    </div>
-                    <div className="bg-[#007ECA] rounded-xl p-5 text-center">
-                        <h2 className="text-3xl font-bold">Approved Students</h2>
-                        <p className="text-5xl font-bold mt-2">10</p>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    {stats.map((stat, index) => (
+                        <div
+                            key={index}
+                            className="bg-[#007ECA] p-6 rounded-xl shadow-lg text-center"
+                        >
+                            <h2 className="text-2xl font-semibold">{stat.title}</h2>
+                            <p className="text-4xl mt-2">{stat.value}</p>
+                        </div>
+                    ))}
                 </div>
 
                 {/* Calendar */}
