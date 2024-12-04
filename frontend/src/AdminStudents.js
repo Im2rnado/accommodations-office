@@ -83,39 +83,41 @@ const AdminStudents = () => {
                 {/* Student Cards */}
                 <div className="grid grid-cols-3 gap-6">
                     {students.map((student) => (
-                        <div
-                            key={student.id}
-                            className="bg-[#007ECA] rounded-xl p-3 flex items-start space-x-3"
-                        >
-                            <div className="w-11 h-11 flex-shrink-0">
-                                <img
-                                    src={student.image}
-                                    alt={`${student.name}'s avatar`}
-                                    className="w-11 h-11 rounded-full object-cover"
-                                />
+                        <NavLink to={`/admin-learning-plan/${student.id}`}>
+                            <div
+                                key={student.id}
+                                className="bg-[#007ECA] rounded-xl p-3 flex items-start space-x-3"
+                            >
+                                <div className="w-11 h-11 flex-shrink-0">
+                                    <img
+                                        src={student.image}
+                                        alt={`${student.name}'s avatar`}
+                                        className="w-11 h-11 rounded-full object-cover"
+                                    />
+                                </div>
+                                <div className="flex-grow min-w-0">
+                                    <h2 className="text-lg font-semibold truncate">{student.name}</h2>
+                                    <p className="text-sm">{student.id}</p>
+                                    <p className="text-sm">{student.faculty}</p>
+                                    <p className="text-sm">{student.disability}</p>
+                                </div>
+                                <div className="flex-shrink-0 self-center">
+                                    <span
+                                        className={
+                                            "text-sm " +
+                                            (student.status === "Approved"
+                                                ? "bg-green-600"
+                                                : student.status === "Pending"
+                                                    ? "bg-yellow-600"
+                                                    : "bg-red-600") +
+                                            " text-white px-2 py-1 rounded-xl font-semibold"
+                                        }
+                                    >
+                                        {student.status}
+                                    </span>
+                                </div>
                             </div>
-                            <div className="flex-grow min-w-0">
-                                <h2 className="text-lg font-semibold truncate">{student.name}</h2>
-                                <p className="text-sm">{student.id}</p>
-                                <p className="text-sm">{student.faculty}</p>
-                                <p className="text-sm">{student.disability}</p>
-                            </div>
-                            <div className="flex-shrink-0 self-center">
-                                <span
-                                    className={
-                                        "text-sm " +
-                                        (student.status === "Approved"
-                                            ? "bg-green-600"
-                                            : student.status === "Pending"
-                                                ? "bg-yellow-600"
-                                                : "bg-red-600") +
-                                        " text-white px-2 py-1 rounded-xl font-semibold"
-                                    }
-                                >
-                                    {student.status}
-                                </span>
-                            </div>
-                        </div>
+                        </NavLink>
                     ))}
                 </div>
             </main>
