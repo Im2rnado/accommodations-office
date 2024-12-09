@@ -17,7 +17,7 @@ const AdminLearningPlan = () => {
             .then((response) => {
                 if (response.data.success) {
                     setStudent(response.data.student);
-                    
+
                     const initializedLearningPlan = {};
                     Object.entries(response.data.student.learningPlan).forEach(
                         ([category, supports]) => {
@@ -99,6 +99,7 @@ const AdminLearningPlan = () => {
                     <NavLink to="/admin-pending" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Pending </NavLink>
                     <NavLink to="/admin-applied" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Applied </NavLink>
                     <NavLink to="/admin-meetings" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Meetings </NavLink>
+                    <NavLink to="/admin-announcements" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Announcements </NavLink>
                 </nav>
 
                 <div className="mt-auto p-6">
@@ -121,28 +122,39 @@ const AdminLearningPlan = () => {
                     />
                     <div>
                         <h2 className="text-xl font-bold text-black">{student.name}</h2>
-                        <p className="text-sm text-black">ID: {student.id}</p>
-                        <p className="text-sm text-black">Faculty: {student.faculty}</p>
-                        <p className="text-sm text-black">Disability: {student.disability}</p>
-                        <p className="text-sm text-black">Status: {student.status}</p>
+                        <p className="text-sm text-black">ID: <a className="font-bold">{student.id}</a></p>
+                        <p className="text-sm text-black">Faculty: <a className="font-bold">{student.faculty}</a></p>
+                        <p className="text-sm text-black mb-1">Disability: <a className="font-bold">{student.disability}</a></p>
+                        <span
+                            className={
+                                "text-sm " +
+                                (student.status === "Approved"
+                                    ? "bg-green-600"
+                                    : student.status === "Pending"
+                                        ? "bg-yellow-600"
+                                        : "bg-red-600") +
+                                " text-white px-2 py-1 rounded-xl font-semibold"
+                            }
+                        >{student.status}
+                        </span>
                     </div>
                 </div>
 
                 {/* Progress Bar */}
-                <div className="w-full bg-[#072D4A] rounded-xl p-4 mb-6">
+                <div className="w-full bg-[#072D4A] rounded-xl p-4 mb-6 shadow-lg">
                     <div className="flex justify-between items-center">
-                        <div className="w-8 h-8 bg-white rounded-full"></div>
+                        <div className="w-6 h-6 bg-white rounded-full"></div>
                         <div className="flex-1 h-1 bg-gray-400 mx-2"></div>
-                        <div className="w-8 h-8 bg-purple-500 rounded-full"></div>
+                        <div className="w-6 h-6 bg-purple-500 rounded-full"></div>
                         <div className="flex-1 h-1 bg-gray-400 mx-2"></div>
-                        <div className="w-8 h-8 bg-white rounded-full"></div>
+                        <div className="w-6 h-6 bg-white rounded-full"></div>
                         <div className="flex-1 h-1 bg-gray-400 mx-2"></div>
-                        <div className="w-8 h-8 bg-white rounded-full"></div>
+                        <div className="w-6 h-6 bg-white rounded-full"></div>
                     </div>
                 </div>
 
                 {/* Form Section */}
-                <div className="bg-[#B9E4FE] mb-6 rounded-xl">
+                <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg">
                     <h1 className="text-2xl font-bold p-4 text-black">Exam Support</h1>
 
                     <div className="grid grid-cols-4 text-center bg-[#007ECA] text-white text-lg font-bold py-2 rounded-t-lg m-0">
@@ -236,7 +248,7 @@ const AdminLearningPlan = () => {
                                     <button
                                         type="button"
                                         onClick={() => toggleDropdown("Exam Support", index)}
-                                        className="text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        className="text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-[#007ECA] font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:hover:bg-blue-700 dark:focus:ring-[#007ECA]"
                                     >
                                         Applies To
                                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" /> </svg>
@@ -254,7 +266,7 @@ const AdminLearningPlan = () => {
                                                                 value={subject}
                                                                 checked={support.subject.includes(subject)}
                                                                 onChange={() => handleSubjectCheckboxChange("Exam Support", index, subject)}
-                                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-[#007ECA] dark:focus:ring-[#007ECA] dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                             />
                                                             <label
                                                                 htmlFor={`checkbox-item-Exam Support-${index}-${subjIndex}`}
@@ -275,7 +287,7 @@ const AdminLearningPlan = () => {
                 </div>
 
                 {/* Form Section */}
-                <div className="bg-[#B9E4FE] mb-6 rounded-xl">
+                <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg">
                     <h1 className="text-2xl font-bold p-4 text-black">Teaching Support</h1>
 
                     <div className="grid grid-cols-4 text-center bg-[#007ECA] text-white text-lg font-bold py-2 rounded-t-lg m-0">
@@ -369,7 +381,7 @@ const AdminLearningPlan = () => {
                                     <button
                                         type="button"
                                         onClick={() => toggleDropdown("Teaching Support", index)}
-                                        className="text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        className="text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-[#007ECA] font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:hover:bg-blue-700 dark:focus:ring-[#007ECA]"
                                     >
                                         Applies To
                                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" /> </svg>
@@ -387,7 +399,7 @@ const AdminLearningPlan = () => {
                                                                 value={subject}
                                                                 checked={support.subject.includes(subject)}
                                                                 onChange={() => handleSubjectCheckboxChange("Teaching Support", index, subject)}
-                                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-[#007ECA] dark:focus:ring-[#007ECA] dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                             />
                                                             <label
                                                                 htmlFor={`checkbox-item-Teaching Support-${index}-${subjIndex}`}

@@ -5,15 +5,18 @@ import axios from "axios";
 
 const AdminStudents = () => {
     const [students, setStudents] = useState([]);
+    const [filteredStudents, setFilteredStudents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [searchQuery, setSearchQuery] = useState("");
+    
     useEffect(() => {
         axios
             .get("http://localhost:4000/admin-students")
             .then((response) => {
                 if (response.data.success) {
                     setStudents(response.data.students);
+                    setFilteredStudents(students);
                 } else {
                     setError("Failed to fetch students");
                 }
@@ -24,6 +27,25 @@ const AdminStudents = () => {
                 setLoading(false);
             });
     }, []);
+
+    useEffect(() => {
+        handleSearch();
+    }, [searchQuery, students]);
+
+    const handleSearch = () => {
+        if (searchQuery.trim() === "") {
+            setFilteredStudents(students);
+        } else {
+            const lowerCaseQuery = searchQuery.toLowerCase();
+            const filtered = students.filter((student) =>
+                student.name.toLowerCase().includes(lowerCaseQuery) ||
+                student.id.toString().includes(lowerCaseQuery) ||
+                student.faculty.toLowerCase().includes(lowerCaseQuery) ||
+                student.disability.toLowerCase().includes(lowerCaseQuery)
+            );
+            setFilteredStudents(filtered);
+        }
+    };
 
     if (loading) {
         return <div className="p-6">Loading...</div>;
@@ -55,6 +77,7 @@ const AdminStudents = () => {
                     <NavLink to="/admin-pending" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Pending </NavLink>
                     <NavLink to="/admin-applied" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Applied </NavLink>
                     <NavLink to="/admin-meetings" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Meetings </NavLink>
+                    <NavLink to="/admin-announcements" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Announcements </NavLink>
                 </nav>
 
                 <div className="mt-auto p-6">
@@ -69,24 +92,23 @@ const AdminStudents = () => {
                 <h1 className="text-2xl font-bold mb-6 text-black">Students</h1>
 
                 {/* Search and Filter */}
-                <div className="flex items-center justify-between mb-6 gap-[2%]">
+                <div className="mb-6">
                     <input
                         type="text"
-                        placeholder="Search"
-                        className="px-4 py-2 rounded-xl w-[88%] bg-blue-200 text-black placeholder-gray-500 focus:outline-none"
+                        placeholder="Search by name, ID, department, disability, etc."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full p-3 px-4 py-2 rounded-xl shadow-lg bg-blue-200 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#007ECA]"
                     />
-                    <button className="py-2 px-4 bg-[#007ECA] text-white rounded-xl hover:bg-[#005F9E] w-[10%]">
-                        Filter
-                    </button>
                 </div>
 
                 {/* Student Cards */}
                 <div className="grid grid-cols-3 gap-6">
-                    {students.map((student) => (
+                    {filteredStudents.map((student) => (
                         <NavLink to={`/admin-learning-plan/${student.id}`}>
                             <div
                                 key={student.id}
-                                className="bg-[#007ECA] rounded-xl p-3 flex items-start space-x-3"
+                                className="bg-[#007ECA] rounded-xl p-3 flex items-start space-x-3 shadow-lg"
                             >
                                 <div className="w-11 h-11 flex-shrink-0">
                                     <img

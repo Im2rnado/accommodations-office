@@ -8,6 +8,7 @@ import AdminLearningPlan from './AdminLearningPlan.js';
 import AdminApproved from './AdminApproved.js';
 import AdminPending from './AdminPending.js';
 import AdminApplied from './AdminApplied.js';
+import AdminAnnoucements from './AdminAnnouncements.js';
 
 function Router() {
   return (
@@ -22,6 +23,7 @@ function Router() {
         <Route path="admin-approved" element={<AdminApproved />} />
         <Route path="admin-pending" element={<AdminPending />} />
         <Route path="admin-applied" element={<AdminApplied />} />
+        <Route path="admin-announcements" element={<AdminAnnoucements />} />
       </Routes>
     </BrowserRouter>
   );

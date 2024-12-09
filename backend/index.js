@@ -47,7 +47,31 @@ const students = [
         faculty: "Business",
         status: "Pending",
         disability: "Dyslexia",
-        learningPlan: {}
+        learningPlan: {
+            "Exam Support": [
+                { item: "Extra time in exams", value: "25 minutes" },
+                { item: "Rest break time in exams", value: "15 minutes" },
+                { item: "Use of university PC in exams", value: true },
+                { item: "Exam NOT in a large hall", value: true },
+                { item: "Exam taken alone", value: false },
+                { item: "Exam reader", value: true },
+                { item: "Exam scribe", value: false },
+                { item: "Use of assistive software in exams", value: true },
+                { item: "One to one tutoring", value: true },
+                { item: "Extra time for assignment submission", value: "7 days" },
+            ],
+            "Teaching Support": [
+                { item: "Allowed to record your lectures in line with University Policy", value: true },
+                { item: "Extensions to course work deadlines", value: true },
+                { item: "A note taker provided for your classes", value: true },
+                { item: "Materials in alternative formats (coloured paper or braille)", value: true },
+                { item: "Practical support (library or lab assistance)", value: false },
+                { item: "Assistive software (screen reading or speech recognition)", value: true },
+                { item: "Specialist equipment (radio aid)", value: false },
+                { item: "Access or mobility requirements", value: false }
+            ]
+        },
+        subjects: ["Marketing", "Finance", "Accounting", "Management", "Economics"]
     },
     {
         name: "Sarah Ahmed",
@@ -56,7 +80,31 @@ const students = [
         faculty: "Computing",
         status: "Applied",
         disability: "ADHD",
-        learningPlan: {}
+        learningPlan: {
+            "Exam Support": [
+                { item: "Extra time in exams", value: "25 minutes" },
+                { item: "Rest break time in exams", value: "15 minutes" },
+                { item: "Use of university PC in exams", value: true },
+                { item: "Exam NOT in a large hall", value: true },
+                { item: "Exam taken alone", value: false },
+                { item: "Exam reader", value: true },
+                { item: "Exam scribe", value: false },
+                { item: "Use of assistive software in exams", value: true },
+                { item: "One to one tutoring", value: true },
+                { item: "Extra time for assignment submission", value: "7 days" },
+            ],
+            "Teaching Support": [
+                { item: "Allowed to record your lectures in line with University Policy", value: true },
+                { item: "Extensions to course work deadlines", value: true },
+                { item: "A note taker provided for your classes", value: true },
+                { item: "Materials in alternative formats (coloured paper or braille)", value: true },
+                { item: "Practical support (library or lab assistance)", value: false },
+                { item: "Assistive software (screen reading or speech recognition)", value: true },
+                { item: "Specialist equipment (radio aid)", value: false },
+                { item: "Access or mobility requirements", value: false }
+            ]
+        },
+        subjects: ["Java", "Python", "C++", "Web Development", "Data Structures"]
     },
     {
         name: "Nada Hesham",
@@ -140,23 +188,49 @@ router.get("/announcements", (req, res) => {
             title: "Announcement One",
             message: "The next meeting is on Monday.",
             sender: "John Doe",
-            date: "2024-11-29"
+            date: "20/11/2024"
         },
         {
             title: "Announcement Two",
             message: "Doctor feedback is due tomorrow.",
             sender: "John Smith",
-            date: "2024-11-28"
+            date: "27/11/2024"
         },
         {
             title: "Announcement Three",
             message: "The new plan has been implemented.",
             sender: "Alice Johnson",
-            date: "2024-11-27"
+            date: "3/12/2024"
         }
     ];
 
     return res.status(200).json({ success: true, announcements });
+});
+
+router.post("/announcements", (req, res) => {
+    console.log("[POST] /announcements");
+
+    const { title, message, sender, date } = req.body;
+    
+    const newAnnouncement = { id: Date.now(), title, message, sender, date };
+    
+    // announcements.push(newAnnouncement);
+    res.json({ success: true, announcement: newAnnouncement });
+});
+
+router.delete("/announcements/:id", (req, res) => {
+    const { id } = req.params;
+
+    console.log("[DELETE] /announcements/" + id);
+    
+    // const index = announcements.findIndex((announcement) => announcement.id === parseInt(id));
+
+    // if (index !== -1) {
+        // announcements.splice(index, 1);
+        res.json({ success: true });
+    // } else {
+    //    res.status(404).json({ success: false, message: "Announcement not found" });
+    // }
 });
 
 router.post("/login", async (req, res) => {

@@ -55,6 +55,7 @@ const AdminDashboard = () => {
                     <NavLink to="/admin-pending" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Pending </NavLink>
                     <NavLink to="/admin-applied" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Applied </NavLink>
                     <NavLink to="/admin-meetings" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Meetings </NavLink>
+                    <NavLink to="/admin-announcements" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Announcements </NavLink>
                 </nav>
 
                 <div className="mt-auto p-6">
@@ -82,7 +83,7 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* Calendar */}
-                <div className="col-span-3 bg-[#B9E4FE] rounded-xl p-6 mb-6 text-black">
+                <div className="col-span-3 bg-[#B9E4FE] rounded-xl shadow-lg p-6 mb-6 text-black">
                     <h2 className="text-lg font-semibold mb-4">November</h2>
                     <div className="grid grid-cols-7 text-center">
                         <span>Mo</span>
@@ -106,7 +107,7 @@ const AdminDashboard = () => {
 
                 {/* Pending Students Sections */}
                 <div className="grid grid-cols-2 gap-6">
-                    <div className="bg-[#007ECA] rounded-xl p-6">
+                    <NavLink to={"/admin-pending"} className="bg-[#007ECA] rounded-xl p-6 shadow-lg">
                         <h2 className="text-2xl font-bold">Pending Students</h2>
                         <ul className="mt-4 space-y-2">
                             <li>Student 1</li>
@@ -116,9 +117,10 @@ const AdminDashboard = () => {
                             <li>Student 5</li>
                             <li>Student 6</li>
                         </ul>
-                    </div>
-                    <div className="bg-[#6A5ACD] rounded-xl p-6">
-                        <h2 className="text-2xl font-bold">Pending Students</h2>
+                    </NavLink>
+
+                    <NavLink to={"/admin-applied"} className="bg-[#6A5ACD] rounded-xl p-6 shadow-lg">
+                        <h2 className="text-2xl font-bold">Unviewed Students</h2>
                         <ul className="mt-4 space-y-2">
                             <li>Student 1</li>
                             <li>Student 2</li>
@@ -127,7 +129,7 @@ const AdminDashboard = () => {
                             <li>Student 5</li>
                             <li>Student 6</li>
                         </ul>
-                    </div>
+                    </NavLink>
                 </div>
             </main>
 

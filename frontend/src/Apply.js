@@ -35,7 +35,7 @@ const Apply = () => {
                             id="studentId"
                             placeholder="Enter ID Number"
                             onChange={(e) => setStudentId(e.target.value)}
-                            className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
+                            className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-[#007ECA]"
                         />
                     </div>
                     <div>
@@ -50,7 +50,7 @@ const Apply = () => {
                             id="firstName"
                             placeholder="Enter First Name"
                             onChange={(e) => setFirstName(e.target.value)}
-                            className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
+                            className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-[#007ECA]"
                         />
                     </div>
                     <div>
@@ -65,7 +65,7 @@ const Apply = () => {
                             id="lastName"
                             placeholder="Enter Last Name"
                             onChange={(e) => setLastName(e.target.value)}
-                            className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
+                            className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-[#007ECA]"
                         />
                     </div>
                     <div>
@@ -80,7 +80,7 @@ const Apply = () => {
                             id="dob"
                             placeholder="Enter Date of Birth"
                             onChange={(e) => setDateOfBirth(e.target.value)}
-                            className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-blue-500"
+                            className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-blue-600 rounded-md focus:ring focus:ring-[#007ECA]"
                         />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
