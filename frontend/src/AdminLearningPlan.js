@@ -211,7 +211,7 @@ const AdminLearningPlan = () => {
                                                 handleSupportChange("Exam Support", index, e.target.value)
                                             }
                                             placeholder="Time needed"
-                                            className="rounded-xl h-10 w-28 text-center px-2 py-1 dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none"
+                                            className="rounded-xl h-10 w-28 text-center px-2 py-1 dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-[#007ECA] peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none"
                                         />
                                     )}
                                 </div>
@@ -344,7 +344,7 @@ const AdminLearningPlan = () => {
                                                 handleSupportChange("Teaching Support", index, e.target.value)
                                             }
                                             placeholder="Time needed"
-                                            className="rounded-xl h-10 w-28 text-center px-2 py-1 dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none"
+                                            className="rounded-xl h-10 w-28 text-center px-2 py-1 dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-[#007ECA] peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none"
                                         />
                                     )}
                                 </div>

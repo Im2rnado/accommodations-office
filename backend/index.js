@@ -211,9 +211,9 @@ router.post("/announcements", (req, res) => {
     console.log("[POST] /announcements");
 
     const { title, message, sender, date } = req.body;
-    
+
     const newAnnouncement = { id: Date.now(), title, message, sender, date };
-    
+
     // announcements.push(newAnnouncement);
     res.json({ success: true, announcement: newAnnouncement });
 });
@@ -222,12 +222,12 @@ router.delete("/announcements/:id", (req, res) => {
     const { id } = req.params;
 
     console.log("[DELETE] /announcements/" + id);
-    
+
     // const index = announcements.findIndex((announcement) => announcement.id === parseInt(id));
 
     // if (index !== -1) {
-        // announcements.splice(index, 1);
-        res.json({ success: true });
+    // announcements.splice(index, 1);
+    res.json({ success: true });
     // } else {
     //    res.status(404).json({ success: false, message: "Announcement not found" });
     // }
@@ -236,14 +236,19 @@ router.delete("/announcements/:id", (req, res) => {
 router.post("/login", async (req, res) => {
     console.log("[POST] /login");
 
-    let username = req.body.username;
-    const password = req.body.password;
+    let email = req.body.email;
 
-    username = username.toLowerCase();
+    email = email.toLowerCase();
 
     try {
-        console.log("[200] Login successful");
-        return res.status(200).json({ success: true, message: "Login successful", type: user.type });
+        if (email.includes("@eslsca.edu.eg")) {
+            console.log("[200] Login successful");
+            return res.status(200).json({ success: true, message: "Login successful", type: "admin" });
+        }
+        else {
+            console.log("[200] Login successful");
+            return res.status(200).json({ success: true, message: "Login successful", type: "student" });
+        }
     } catch (error) {
         console.log("[500] Internal server error");
         res.status(500).json({ success: false, message: error.message });
