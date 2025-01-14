@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'DyslexicFont'; /* Replace 'MyCustomFont' with your desired font name */
+  src: url('../fonts/OpendyslexicRegular-nRLZ0.otf') format('opentype'); /* Replace 'path/to/your/font/file.otf' with the actual path to your font file */
+}
 body {
-  margin: 0;
+  margin: 0; 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -13,7 +17,8 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
+  
 }
 
 .background-image {

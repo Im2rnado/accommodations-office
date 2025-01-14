@@ -19,7 +19,7 @@ function StudentSettings()
                 </div>
                 <nav className="m-2 space-y-4">
                     <a
-                        href="#"
+                        href="/dashboard"
                         className="block py-2 px-4 bg-[#007ECA]/70 rounded-xl text-white hover:bg-[#007ECA]/60"
                     >
                         Dashboard
@@ -89,7 +89,7 @@ function StudentSettings()
             </div>
 
             <div className="flex mt-10 ml-4">
-                <p className="m-auto ml-4 mr-0 text-2xl text-black">Enable Animations</p>
+                <p className="m-auto ml-4 mr-0 text-2xl text-black">Enable Dyslexic Font</p>
                 <input value={true} type="checkbox" className="text-lg font-bold m-auto hover:bg-[#072D4A] hover:text-white transition text-[#072D4A]/90 ml-4 mr-0 w-8 h-8 bg-white rounded-lg border-solid border-4 border-[#072D4A]"></input>
             </div>
         </div>
