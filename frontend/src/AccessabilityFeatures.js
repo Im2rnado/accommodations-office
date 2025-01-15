@@ -2,6 +2,10 @@ import React from "react";
 
 let isMenuHidden = true;
 let isDyslexia = false;
+let isFontLarge = false;
+
+const DEFAULT_FONT_LARGE = 19;
+const DEFAULT_FONT_SIZE = 16;
 
 function AccessabilityFeatures()
 {
@@ -9,22 +13,22 @@ function AccessabilityFeatures()
         <button 
             onClick={() => openAccessMenu()} 
             role="Accessability Features" aria-label="Click on this button to change your accessability features"
-            className="fixed flex items-center text-cyan-100 bg-sky-500 w-[70px] h-[70px] rounded-full left-5 bottom-5 text-6xl">
+            className="fixed flex items-center text-cyan-100 bg-sky-500 w-18 h-18 rounded-full left-5 bottom-5 text-6xl">
             <i className="m-auto fa-solid fa-universal-access"></i>
         </button>  
         <div 
             className="fixed hidden items-center rounded-xl flex-col text-cyan-100 bg-white w-[200px] h-[400px] left-5 bottom-24 text-6xl" 
             id="accessMenuBox">
-            <button className="flex flex-col rounded-xl items-center w-[160px] h-[100px] text-base m-auto text-black border-4 border-solid border-sky-800">
-                <i className="text-sky-950 m-auto fa-solid fa-font text-4xl"></i>
-                <p className="m-auto font-bold">Increase Text Size</p>
+            <button id="increaseButton" onClick={() => increaseGlobalFontSize()} className="Accessability-Button" >
+                <i className="fa-solid fa-magnifying-glass"></i>
+                <p className="m-auto font-bold">Increase Size</p>
             </button>
-            <button onClick={() => setGlobalFontToDyslexic()} className="flex flex-col rounded-xl items-center w-[160px] h-[100px] text-base m-auto text-black border-4 border-solid border-sky-800">
-                <i className="text-sky-950 m-auto fa-solid fa-eye text-4xl"></i>
+            <button id="dslxyaButton" onClick={() => setGlobalFontToDyslexic()} className="Accessability-Button">
+                <i className="text-blue-700 m-auto fa-solid fa-eye text-4xl"></i>
                 <p className="m-auto font-bold">Dyslexia Friendly</p>
             </button>
-            <button className="flex flex-col rounded-xl items-center w-[160px] h-[100px] text-base m-auto text-black border-4 border-solid border-sky-800">
-                <i className="text-sky-950 m-auto fa-solid fa-volume-high text-4xl"></i>
+            <button className="Accessability-Button">
+                <i className="text-blue-700 m-auto fa-solid fa-volume-high text-4xl"></i>
                 <p className="m-auto font-bold">Screen Reader</p>
             </button>
         </div>
@@ -33,10 +37,13 @@ function AccessabilityFeatures()
     );
 }
 
+
+
+
 function openAccessMenu()
 {
     var menu = document.getElementById("accessMenuBox");
-    if(isMenuHidden)
+    if(isMenuHidden) 
     {
         menu.style.display = "flex";
         isMenuHidden = false;
@@ -48,17 +55,71 @@ function openAccessMenu()
     }
 }
 
+function increaseGlobalFontSize() {
+
+    const root = document.documentElement;
+    const increaseButton = document.getElementById("increaseButton");
+
+
+    if(isFontLarge)
+    {
+        root.style.setProperty("--base-font-size", DEFAULT_FONT_SIZE + "px");
+        isFontLarge = false;
+
+        // Change the color of the button
+        increaseButton.style.backgroundColor = "white";
+        increaseButton.style.color = "#1d4ed8";
+        increaseButton.firstChild.style.color = "#1d4ed8";
+    }
+    else
+    {
+        root.style.setProperty("--base-font-size", DEFAULT_FONT_LARGE + "px");
+        isFontLarge = true;
+
+        // Change the color of the button
+        increaseButton.style.backgroundColor = "#1d4ed8";
+        increaseButton.style.color = "white";
+        increaseButton.firstChild.style.color = "white";
+    }
+    
+}
+
 function setGlobalFontToDyslexic()
 {
+    const root = document.documentElement;
+    const dyslexiaButton = document.getElementById("dslxyaButton");
+
     if(isDyslexia)
     {
         document.body.style.fontFamily = "-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Oxygen\','Ubuntu\', \'Cantarell\', \'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif";
         isDyslexia = false;
+
+        dyslexiaButton.style.backgroundColor = "white";
+        dyslexiaButton.style.color = "#1d4ed8";
+        dyslexiaButton.firstChild.style.color = "#1d4ed8";
+
+        if(isFontLarge)
+        {
+            root.style.setProperty("--base-font-size", DEFAULT_FONT_LARGE + "px");
+        }
+
     }
     else
     {
-        document.body.style.fontFamily = 'DyslexicFont, sans-serif';
+        document.body.style.fontFamily = "DyslexicFont, sans-serif";
         isDyslexia = true;
+        
+        dyslexiaButton.style.backgroundColor = "#1d4ed8";
+        dyslexiaButton.style.color = "white";
+        dyslexiaButton.firstChild.style.color = "white";
+
+        if(isFontLarge)
+        {
+            const newSize = DEFAULT_FONT_LARGE - 1;
+            console.log("newSize = " + newSize);
+            root.style.setProperty("--base-font-size", newSize + "px");
+        }
+
     }
     
 }
