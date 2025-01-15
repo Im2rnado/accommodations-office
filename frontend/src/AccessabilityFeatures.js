@@ -13,11 +13,14 @@ function AccessabilityFeatures()
         <button 
             onClick={() => openAccessMenu()} 
             role="Accessability Features" aria-label="Click on this button to change your accessability features"
-            className="fixed flex items-center text-cyan-100 bg-sky-500 w-18 h-18 rounded-full left-5 bottom-5 text-6xl">
+            className="fixed flex items-center text-cyan-100 bg-blue-700 w-18 h-18 
+            rounded-full left-5 bottom-5 text-6xl border-solid border-4 border-blue-700 shadow-blue-solid
+            hover:border-white hover:text-blue-700 hover:bg-white hover:shadow-gray-solid transition duration-200 ease-in-out">
             <i className="m-auto fa-solid fa-universal-access"></i>
         </button>  
         <div 
-            className="fixed hidden items-center rounded-xl flex-col text-cyan-100 bg-white w-[200px] h-[400px] left-5 bottom-24 text-6xl" 
+            className="fixed hidden items-center rounded-xl flex-col text-cyan-100 bg-white w-[200px] h-[400px] 
+            left-5 bottom-24 text-6xl border-solid border-4 border-gray-300 shadow-gray-solid" 
             id="accessMenuBox">
             <button id="increaseButton" onClick={() => increaseGlobalFontSize()} className="Accessability-Button" >
                 <i className="fa-solid fa-magnifying-glass"></i>
