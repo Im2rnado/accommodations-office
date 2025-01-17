@@ -3,6 +3,7 @@ import React from "react";
 let isMenuHidden = true;
 let isDyslexia = false;
 let isFontLarge = false;
+let isIndicatorHidden = true;
 
 const DEFAULT_FONT_LARGE = 19;
 const DEFAULT_FONT_SIZE = 16;
@@ -14,30 +15,50 @@ function AccessabilityFeatures()
             onClick={() => openAccessMenu()} 
             role="Accessability Features" aria-label="Click on this button to change your accessability features"
             className="fixed flex items-center text-cyan-100 bg-blue-700 w-18 h-18 
-            rounded-full left-5 bottom-5 text-6xl border-solid border-4 border-blue-700 shadow-blue-solid
+            rounded-full left-5 bottom-5 z-20 text-6xl border-solid border-4 border-blue-700 shadow-blue-solid
             hover:border-white hover:text-blue-700 hover:bg-white hover:shadow-gray-solid transition duration-200 ease-in-out">
             <i className="m-auto fa-solid fa-universal-access"></i>
-        </button>  
+        </button>
+        <div id="indicatorBar" onMouseMove={() => setIndicatorLocation()} className="w-full h-full hidden flex-col absolute z-10 left-0 top-0 m-0 justify-center items-center">
+            <div className="w-full h-full bg-black opacity-80"></div>
+
+            <div className="w-full h-32  border-t-8 border-b-8 
+            border-solid border-red-500"></div>
+            
+            <div className="w-full h-full bg-black opacity-80"></div>
+        </div>  
         <div 
-            className="fixed hidden items-center rounded-xl flex-col text-cyan-100 bg-white w-[200px] h-[400px] 
-            left-5 bottom-24 text-6xl border-solid border-4 border-gray-300 shadow-gray-solid" 
+            className="fixed flex items-center rounded-xl flex-col text-cyan-100 bg-white 
+            w-[200px] h-max transition-all duration-200 pt-2 pb-2 z-20
+            left-[-200px] bottom-24 text-6xl border-solid border-4 border-gray-300 shadow-gray-solid" 
             id="accessMenuBox">
+
             <button id="increaseButton" onClick={() => increaseGlobalFontSize()} className="Accessability-Button" >
                 <i className="fa-solid fa-magnifying-glass"></i>
                 <p className="m-auto font-bold">Increase Size</p>
             </button>
+
             <button id="dslxyaButton" onClick={() => setGlobalFontToDyslexic()} className="Accessability-Button">
                 <i className="text-blue-700 m-auto fa-solid fa-eye text-4xl"></i>
                 <p className="m-auto font-bold">Dyslexia Friendly</p>
             </button>
+
+            <button id="indicatorButton" onClick={() => setIndicatorVisible()} className="Accessability-Button">
+                <i className="text-blue-700 m-auto fa-solid fa-arrow-pointer text-4xl"></i>
+                <p className="m-auto font-bold">Indicator</p>
+            </button>
+
             <button className="Accessability-Button">
                 <i className="text-blue-700 m-auto fa-solid fa-volume-high text-4xl"></i>
                 <p className="m-auto font-bold">Screen Reader</p>
             </button>
         </div>
+
+
     </>
     
     );
+
 }
 
 
@@ -48,12 +69,12 @@ function openAccessMenu()
     var menu = document.getElementById("accessMenuBox");
     if(isMenuHidden) 
     {
-        menu.style.display = "flex";
+        menu.style.left = "20px";
         isMenuHidden = false;
     }
     else
     {
-        menu.style.display = "none";
+        menu.style.left = "-200px";
         isMenuHidden = true;
     }
 }
@@ -125,6 +146,34 @@ function setGlobalFontToDyslexic()
 
     }
     
+}
+
+function setIndicatorVisible()
+{
+    let indicatorBar = document.getElementById("indicatorBar");
+
+    if(isIndicatorHidden)
+    {
+        indicatorBar.style.display = "Flex";
+        isIndicatorHidden = false;    
+    }
+    else
+    {
+        indicatorBar.style.display = "None";
+        isIndicatorHidden = true;
+    }
+}
+
+function setIndicatorLocation()
+{
+    let indicatorBar = document.getElementById("indicatorBar");
+
+    if(indicatorBar.style.display != "Hidden")
+    {
+        document.addEventListener("mousemove", function(e){
+            indicatorBar.style.top = (e.clientY - 420) + "px";
+        });
+    }
 }
 
 export default AccessabilityFeatures;

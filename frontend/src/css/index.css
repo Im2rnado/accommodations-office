@@ -12,12 +12,24 @@
 
 html {
   font-size: var(--base-font-size);
+  padding: 0;
+  margin: 0; 
+  box-sizing: border-box;
+}
+
+*{
+  padding: 0;
+  margin: 0; 
+  box-sizing: border-box;
+
 }
 
 
-
 body {
+  padding: 0;
   margin: 0; 
+  box-sizing: border-box;
+  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
@@ -59,7 +71,7 @@ code {
 /* This is the style for the Accessability buttons */
 .Accessability-Button{ 
   @apply flex flex-col rounded-xl items-center 
-  w-[160px] h-[100px] text-base m-auto text-blue-700 
+  w-[160px] h-[100px] text-base m-auto mt-2 mb-2 text-blue-700 
   border-4 border-solid border-blue-700
   shadow-blue-solid;
 }
