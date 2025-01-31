@@ -1,4 +1,6 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import Router from "./Route";
 
 let isMenuHidden = true;
 let isDyslexia = false;
@@ -30,20 +32,20 @@ function AccessabilityFeatures()
         <div 
             className="fixed flex items-center rounded-xl flex-col text-cyan-100 bg-white 
             w-[200px] h-max transition-all duration-200 pt-2 pb-2 z-20
-            left-[-200px] bottom-24 text-6xl border-solid border-4 border-gray-300 shadow-gray-solid" 
+            left-[-220px] bottom-24 text-6xl border-solid border-4 border-gray-300 shadow-gray-solid" 
             id="accessMenuBox">
 
-            <button id="increaseButton" onClick={() => increaseGlobalFontSize()} className="Accessability-Button" >
+            <button id="increaseButton" onClick={() => increaseGlobalFontSize()} className="Accessability-Button transition-all duration-150" >
                 <i className="fa-solid fa-magnifying-glass"></i>
                 <p className="m-auto font-bold">Increase Size</p>
             </button>
 
-            <button id="dslxyaButton" onClick={() => setGlobalFontToDyslexic()} className="Accessability-Button">
+            <button id="dslxyaButton" onClick={() => setGlobalFontToDyslexic()} className="Accessability-Button transition-all duration-150">
                 <i className="text-blue-700 m-auto fa-solid fa-eye text-4xl"></i>
-                <p className="m-auto font-bold">Dyslexia Friendly</p>
+                <p className="m-auto font-bold">Dyslexic Font</p>
             </button>
 
-            <button id="indicatorButton" onClick={() => setIndicatorVisible()} className="Accessability-Button">
+            <button id="indicatorButton" onClick={() => setIndicatorVisible()} className="Accessability-Button transition-all duration-150">
                 <i className="text-blue-700 m-auto fa-solid fa-arrow-pointer text-4xl"></i>
                 <p className="m-auto font-bold">Indicator</p>
             </button>
@@ -52,6 +54,26 @@ function AccessabilityFeatures()
                 <i className="text-blue-700 m-auto fa-solid fa-volume-high text-4xl"></i>
                 <p className="m-auto font-bold">Screen Reader</p>
             </button>
+
+            <div className="flex rounded-xl justify-center items-center  
+                w-[160px] h-16 text-base m-auto mt-2 mb-2 pb-1">
+
+                <button className="flex flex-col rounded-xl items-center bg-white hover:bg-blue-700 
+                w-full h-full text-base m-auto mr-1 text-blue-700 hover:text-white 
+                border-4 border-solid border-blue-700
+                shadow-blue-solid transition-all duration-150;">
+                    <i className="fa-solid fa-circle-half-stroke text-2xl"></i>
+                    <p className="m-auto font-bold text-sm">Contrast</p>
+                </button>
+
+                <a href="/accessability-tutorial" className="flex flex-col rounded-xl items-center bg-white hover:bg-blue-700 
+                w-full h-full text-base m-auto ml-1 text-blue-700 hover:text-white 
+                border-4 border-solid border-blue-700
+                shadow-blue-solid transition-all duration-150;">
+                    <i className="fa-solid fa-question text-2xl"></i>
+                    <p className="m-auto font-bold text-sm">Tutorial</p>
+                </a>
+            </div>
         </div>
 
 
@@ -74,7 +96,7 @@ function openAccessMenu()
     }
     else
     {
-        menu.style.left = "-200px";
+        menu.style.left = "-220px";
         isMenuHidden = true;
     }
 }
@@ -151,16 +173,25 @@ function setGlobalFontToDyslexic()
 function setIndicatorVisible()
 {
     let indicatorBar = document.getElementById("indicatorBar");
+    let indicatorButton = document.getElementById("indicatorButton");
 
     if(isIndicatorHidden)
     {
         indicatorBar.style.display = "Flex";
-        isIndicatorHidden = false;    
+        isIndicatorHidden = false;
+
+        indicatorButton.style.backgroundColor = "#1d4ed8";
+        indicatorButton.style.color = "white";
+        indicatorButton.firstChild.style.color = "white";
     }
     else
     {
         indicatorBar.style.display = "None";
         isIndicatorHidden = true;
+
+        indicatorButton.style.backgroundColor = "white";
+        indicatorButton.style.color = "#1d4ed8";
+        indicatorButton.firstChild.style.color = "#1d4ed8";  
     }
 }
 
