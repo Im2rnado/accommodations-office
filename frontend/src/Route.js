@@ -28,7 +28,7 @@ function Router() {
         <Route path="admin-pending" element={<AdminPending />} />
         <Route path="admin-applied" element={<AdminApplied />} />
         <Route path="admin-announcements" element={<AdminAnnoucements />} />
-        <Route path="accessability-tutorial" element={<AccessabilityTutorial />} />
+        <Route path="accessability-tutorial" element={<AccessabilityTutorialTest />} />
       </Routes>
     </BrowserRouter>
   );

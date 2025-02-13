@@ -1,6 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import Router from "./Route";
+
 
 let isMenuHidden = true;
 let isDyslexia = false;
