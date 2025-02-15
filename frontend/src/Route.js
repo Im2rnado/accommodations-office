@@ -10,7 +10,7 @@ import AdminPending from './AdminPending.js';
 import AdminApplied from './AdminApplied.js';
 import AdminAnnoucements from './AdminAnnouncements.js';
 import StudentSettings from './StudentSettings';
-import AccessabilityTutorial from './AccessibilityTutorial';
+import AccessabilityTutorialTest from './AccessibilityTutorial';
 
 function Router() {
   return (
@@ -28,7 +28,7 @@ function Router() {
         <Route path="admin-pending" element={<AdminPending />} />
         <Route path="admin-applied" element={<AdminApplied />} />
         <Route path="admin-announcements" element={<AdminAnnoucements />} />
-        <Route path="accessability-tutorial" element={<AccessabilityTutorialTest />} />
+        <Route path="accessability-tutorial-test" element={<AccessabilityTutorialTest />} />
       </Routes>
     </BrowserRouter>
   );
