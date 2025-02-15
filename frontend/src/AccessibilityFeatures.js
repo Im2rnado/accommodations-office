@@ -1,6 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import Router from "./Route";
+
 
 let isMenuHidden = true;
 let isDyslexia = false;
@@ -16,12 +15,12 @@ function AccessabilityFeatures()
         <button 
             onClick={() => openAccessMenu()} 
             role="Accessability Features" aria-label="Click on this button to change your accessability features"
-            className="fixed flex items-center text-cyan-100 bg-blue-700 w-18 h-18 
+            className="fixed flex items-center text-cyan-100 bg-blue-700 w-18 h-18
             rounded-full left-5 bottom-5 z-20 text-6xl border-solid border-4 border-blue-700 shadow-blue-solid
             hover:border-white hover:text-blue-700 hover:bg-white hover:shadow-gray-solid transition duration-200 ease-in-out">
             <i className="m-auto fa-solid fa-universal-access"></i>
         </button>
-        <div id="indicatorBar" onMouseMove={() => setIndicatorLocation()} className="w-full h-full hidden flex-col absolute z-10 left-0 top-0 m-0 justify-center items-center">
+        <div id="indicatorBar"  className="w-full h-full hidden flex-col absolute pointer-events-none z-10 left-0 top-0 m-0 justify-center items-center">
             <div className="w-full h-full bg-black opacity-80"></div>
 
             <div className="w-full h-32  border-t-8 border-b-8 
@@ -66,7 +65,7 @@ function AccessabilityFeatures()
                     <p className="m-auto font-bold text-sm">Contrast</p>
                 </button>
 
-                <a href="/accessability-tutorial" className="flex flex-col rounded-xl items-center bg-white hover:bg-blue-700 
+                <a href="/accessability-tutorial-test" className="flex flex-col rounded-xl items-center bg-white hover:bg-blue-700 
                 w-full h-full text-base m-auto ml-1 text-blue-700 hover:text-white 
                 border-4 border-solid border-blue-700
                 shadow-blue-solid transition-all duration-150;">
@@ -84,7 +83,12 @@ function AccessabilityFeatures()
 }
 
 
-
+document.addEventListener("keypress", function(event){
+    if(event.key === "`")
+    {
+        openAccessMenu();
+    }
+})
 
 function openAccessMenu()
 {
@@ -195,16 +199,16 @@ function setIndicatorVisible()
     }
 }
 
-function setIndicatorLocation()
-{
+document.addEventListener("mousemove", function(e){
     let indicatorBar = document.getElementById("indicatorBar");
-
-    if(indicatorBar.style.display != "Hidden")
-    {
-        document.addEventListener("mousemove", function(e){
-            indicatorBar.style.top = (e.clientY - 420) + "px";
-        });
+    
+    // Check if the element exists before proceeding
+    if (indicatorBar) {
+        let newY = e.clientY + window.scrollY;
+        indicatorBar.style.top = (newY - 480) + "px";
     }
-}
+});
+
+
 
 export default AccessabilityFeatures;
