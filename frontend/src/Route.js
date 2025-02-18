@@ -9,6 +9,8 @@ import AdminApproved from './AdminApproved.js';
 import AdminPending from './AdminPending.js';
 import AdminApplied from './AdminApplied.js';
 import AdminAnnoucements from './AdminAnnouncements.js';
+import StudentSettings from './StudentSettings';
+import AccessabilityTutorialTest from './AccessibilityTutorial';
 
 function Router() {
   return (
@@ -16,6 +18,7 @@ function Router() {
       <Routes>
         <Route index element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="StudentSettings" element={<StudentSettings />} />
         <Route path="apply" element={<Apply />} />
         <Route path="login" element={<Login />} />
         <Route path="admin-dashboard" element={<AdminDashboard />} />
@@ -25,6 +28,7 @@ function Router() {
         <Route path="admin-pending" element={<AdminPending />} />
         <Route path="admin-applied" element={<AdminApplied />} />
         <Route path="admin-announcements" element={<AdminAnnoucements />} />
+        <Route path="accessability-tutorial-test" element={<AccessabilityTutorialTest />} />
       </Routes>
     </BrowserRouter>
   );

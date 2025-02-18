@@ -5,7 +5,12 @@ module.exports = {
   ],
 
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        "blue-solid": "0px 4px 0px #003fa3",
+        "gray-solid": "0px 4px 0px #757575",
+      },
+    },
   },
   plugins: [],
 }

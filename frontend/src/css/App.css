@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Accessability-Button{
+    @apply flex flex-col rounded-xl items-center 
+    w-[160px] h-[100px] text-base m-auto  text-blue-700 
+    border-4 border-solid border-blue-700;
+}
+
