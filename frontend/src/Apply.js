@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Apply = () => {
+    const navigate = useNavigate();
     const [studentId, setStudentId] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -13,6 +14,8 @@ const Apply = () => {
         console.log('First Name:', firstName);
         console.log('Last Name:', lastName);
         console.log('Date of Birth:', dateOfBirth);
+
+        navigate('/dashboard');
     };
 
     return (
