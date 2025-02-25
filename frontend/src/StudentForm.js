@@ -31,13 +31,13 @@ function StudentForm()
                 <nav className="m-2 space-y-4">
                     <a
                         href="/dashboard"
-                        className="block py-2 px-4 bg-[#007ECA]/70 rounded-xl text-white hover:bg-[#007ECA]/60"
+                        className="block py-2 px-4  rounded-xl text-white hover:bg-[#007ECA]/60"
                     >
                         Dashboard
                     </a>
                     <a
-                        href="#"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
+                        href="/StudentForm"
+                        className="block py-2 px-4 bg-[#007ECA]/70 text-white hover:bg-[#007ECA]/60 rounded-xl"
                     >
                         Forms
                     </a>
@@ -59,12 +59,7 @@ function StudentForm()
                     >
                         Calendar
                     </a>
-                    <a
-                        href="/StudentSettings"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Settings
-                    </a>
+                    
                 </nav>
                 <div className="mt-auto p-6">
                     <button className="w-full text-left py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl">
