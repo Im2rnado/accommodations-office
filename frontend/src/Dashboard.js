@@ -66,7 +66,7 @@ const Dashboard = () => {
                         Dashboard
                     </a>
                     <a
-                        href="#"
+                        href="/StudentForm"
                         className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
                     >
                         Forms
