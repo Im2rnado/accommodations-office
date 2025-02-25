@@ -11,6 +11,8 @@ import AdminApplied from './AdminApplied.js';
 import AdminAnnoucements from './AdminAnnouncements.js';
 import StudentSettings from './StudentSettings';
 import StudentForm from './StudentForm';
+import StudentPlan from './StudentPlan';
+import StudentRequests from './StudentRequests';
 import AccessabilityTutorialTest from './AccessibilityTutorial';
 
 function Router() {
@@ -21,6 +23,8 @@ function Router() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="StudentSettings" element={<StudentSettings />} />
         <Route path="StudentForm" element={<StudentForm />} />
+        <Route path="StudentPlan" element={<StudentPlan />} />
+        <Route path="StudentRequests" element={<StudentRequests />} />
         <Route path="apply" element={<Apply />} />
         <Route path="login" element={<Login />} />
         <Route path="admin-dashboard" element={<AdminDashboard />} />
