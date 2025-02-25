@@ -11,12 +11,10 @@ const Dashboard = () => {
     };
 
     const pendingForms = [
-        { id: "F-2024-089", type: "Extra Time Request", submitted: "2024-02-20" },
-        { id: "F-2024-092", type: "Assistive Technology", submitted: "2024-02-22" }
+        { id: "F-2024-089", type: "Missing Medical Report", submitted: "2024-02-20" },
     ];
 
     const approvedForms = [
-        { id: "F-2024-067", type: "Learning Support", approved: "2024-01-15" },
         { id: "F-2024-071", type: "Exam Accommodation", approved: "2024-01-20" },
         { id: "F-2024-075", type: "Note-Taking Service", approved: "2024-02-01" }
     ];
@@ -123,7 +121,7 @@ const Dashboard = () => {
 
                     {/* Pending Forms */}
                     <div className="bg-[#007ECA] rounded-xl p-4">
-                        <h2 tabIndex="4" role="Pending Forms" aria-label="This section shows any pending forms" className="text-lg font-semibold mb-3">Pending Forms</h2>
+                        <h2 tabIndex="4" role="Pending Forms" aria-label="This section shows any pending forms" className="text-lg font-semibold mb-3">Requested Forms from Office</h2>
                         {pendingForms.map((form, index) => (
                             <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
                                 <p className="font-medium">{form.type}</p>
@@ -135,7 +133,7 @@ const Dashboard = () => {
 
                     {/* Approved Forms */}
                     <div className="bg-[#007ECA] rounded-xl p-4 h-auto">
-                        <h2 tabIndex="5" role="Approved Forms" className="text-lg font-semibold mb-3">Approved Forms</h2>
+                        <h2 tabIndex="5" role="Approved Forms" className="text-lg font-semibold mb-3">Approved New Requests</h2>
                         {approvedForms.map((form, index) => (
                             <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
                                 <p className="font-medium">{form.type}</p>
