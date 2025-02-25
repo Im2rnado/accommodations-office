@@ -42,7 +42,7 @@ const Login = () => {
                         <input
                             type="email"
                             id="email"
-                            placeholder="Enter ESLSCA Email"
+                            placeholder="Enter Email or ID"
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full mt-1 text-2xl px-3 py-2 bg-[#072D4A]/70 text-white border border-[#007ECA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#007ECA]"
                         />

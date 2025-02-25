@@ -10,6 +10,7 @@ import AdminPending from './AdminPending.js';
 import AdminApplied from './AdminApplied.js';
 import AdminAnnoucements from './AdminAnnouncements.js';
 import StudentSettings from './StudentSettings';
+import StudentForm from './StudentForm';
 import AccessabilityTutorialTest from './AccessibilityTutorial';
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
         <Route index element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="StudentSettings" element={<StudentSettings />} />
+        <Route path="StudentForm" element={<StudentForm />} />
         <Route path="apply" element={<Apply />} />
         <Route path="login" element={<Login />} />
         <Route path="admin-dashboard" element={<AdminDashboard />} />

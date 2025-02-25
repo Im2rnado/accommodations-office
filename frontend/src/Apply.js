@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
-import { NavLink } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Apply = () => {
+    const navigate = useNavigate();
     const [studentId, setStudentId] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
+    const [medicalReports, setMedicalReports] = useState([]);
+    const [doctorsForm, setDoctorsForm] = useState(null);
+
+    // References for file inputs
+    const medicalReportRef = useRef();
+    const doctorsFormRef = useRef();
+
+    const handleMedicalReportChange = (e) => {
+        const files = Array.from(e.target.files);
+        setMedicalReports(files);
+    };
+
+    const handleDoctorsFormChange = (e) => {
+        setDoctorsForm(e.target.files[0]);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,6 +29,11 @@ const Apply = () => {
         console.log('First Name:', firstName);
         console.log('Last Name:', lastName);
         console.log('Date of Birth:', dateOfBirth);
+        console.log('Medical Reports:', medicalReports);
+        console.log('Doctor\'s Form:', doctorsForm);
+
+        // Here you would typically send the files to your server
+        navigate('/dashboard');
     };
 
     return (
@@ -83,28 +104,60 @@ const Apply = () => {
                             className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-[#007ECA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#007ECA]"
                         />
                     </div>
+
                     <div className="grid grid-cols-2 gap-4">
-                        <button className="flex justify-center items-center">
-                            <div className="bg-[#0A4770]  text-center rounded-lg shadow-lg w-72">
+                        {/* Medical Reports Upload */}
+                        <div
+                            onClick={() => medicalReportRef.current.click()}
+                            className="cursor-pointer"
+                        >
+                            <div className="bg-[#0A4770] text-center rounded-lg shadow-lg w-[100%] hover:bg-[#0A4770]/80 transition-colors">
                                 <div className="bg-[#35B7FB] px-4 py-2 rounded-lg w-full">
                                     <h1 className="text-xl font-semibold text-black">Medical Reports</h1>
                                 </div>
                                 <div className="flex items-center p-2">
-                                    <span className='text-white text-sm'>Please upload all your medical reports</span>
+                                    <span className='text-white text-sm'>
+                                        {medicalReports.length > 0
+                                            ? `${medicalReports.length} files selected`
+                                            : "Click to upload medical reports"}
+                                    </span>
                                 </div>
                             </div>
-                        </button>
+                            <input
+                                type="file"
+                                multiple
+                                ref={medicalReportRef}
+                                onChange={handleMedicalReportChange}
+                                className="hidden"
+                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                            />
+                        </div>
 
-                        <button className="flex justify-center items-center">
-                            <div className="bg-[#0A4770]  text-center rounded-lg shadow-lg w-72">
+                        {/* Doctor's Form Upload */}
+                        <div
+                            onClick={() => doctorsFormRef.current.click()}
+                            className="cursor-pointer"
+                        >
+                            <div className="bg-[#0A4770] text-center rounded-lg shadow-lg w-[100%] hover:bg-[#0A4770]/80 transition-colors">
                                 <div className="bg-[#35B7FB] px-4 py-2 rounded-lg w-full">
-                                    <h1 className="text-xl font-semibold text-black">Doctor’s Form</h1>
+                                    <h1 className="text-xl font-semibold text-black">Doctor's Form</h1>
                                 </div>
                                 <div className="flex items-center p-2">
-                                    <span className='text-white text-sm'>Please print this form and provide it to your Doctor</span>
+                                    <span className='text-white text-sm'>
+                                        {doctorsForm
+                                            ? doctorsForm.name
+                                            : "Click to upload doctor's form"}
+                                    </span>
                                 </div>
                             </div>
-                        </button>
+                            <input
+                                type="file"
+                                ref={doctorsFormRef}
+                                onChange={handleDoctorsFormChange}
+                                className="hidden"
+                                accept=".pdf,.doc,.docx"
+                            />
+                        </div>
                     </div>
                     <div className="flex justify-center">
                         <button

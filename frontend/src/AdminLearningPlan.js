@@ -87,7 +87,7 @@ const AdminLearningPlan = () => {
                         <div className="w-12 h-12 bg-gray-500 rounded-full"></div>
                         <div>
                             <p className="font-semibold">Welcome Back,</p>
-                            <p className="text-sm">Staff Name</p>
+                            <p className="text-sm">Laila</p>
                         </div>
                     </div>
                 </div>
@@ -144,145 +144,12 @@ const AdminLearningPlan = () => {
                     <div className="flex justify-between items-center">
                         <div className="w-6 h-6 bg-white rounded-full"></div>
                         <div className="flex-1 h-1 bg-gray-400 mx-2"></div>
-                        <div className="w-6 h-6 bg-purple-500 rounded-full"></div>
+                        <div className="w-6 h-6 bg-[#007ECA] rounded-full"></div>
                         <div className="flex-1 h-1 bg-gray-400 mx-2"></div>
                         <div className="w-6 h-6 bg-white rounded-full"></div>
                         <div className="flex-1 h-1 bg-gray-400 mx-2"></div>
                         <div className="w-6 h-6 bg-white rounded-full"></div>
                     </div>
-                </div>
-
-                {/* Form Section */}
-                <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg">
-                    <h1 className="text-2xl font-bold p-4 text-black">Exam Support</h1>
-
-                    <div className="grid grid-cols-4 text-center bg-[#007ECA] text-white text-lg font-bold py-2 rounded-t-lg m-0">
-                        <p>Type of Support</p>
-                        <p>Needed</p>
-                        <p>Not Needed</p>
-                        <p>Courses</p>
-                    </div>
-
-                    <form>
-                        {learningPlan["Exam Support"].map((support, index) => (
-                            <div
-                                key={index}
-                                className="grid grid-cols-4 h-14 items-center text-center"
-                            >
-                                {/* Support Item */}
-                                <div className="bg-[#1270B0]/60 h-full flex items-center justify-center">
-                                    <p>{support.item}</p>
-                                </div>
-
-                                {/* Yes Radio Button */}
-                                <div className="flex justify-center">
-                                    {typeof support.value === "boolean" ? (
-                                        <div>
-                                            <input
-                                                type="radio"
-                                                id={`support-0-${index}-yes`}
-                                                name={`support-0-${index}`}
-                                                value="yes"
-                                                checked={support.value === true}
-                                                onChange={() => handleSupportChange("Exam Support", index, true)}
-                                                className="hidden peer"
-                                                required
-                                            />
-                                            <label
-                                                htmlFor={`support-0-${index}-yes`}
-                                                className={`inline-flex items-center justify-between h-10 p-5 text-green-500 border border-green-200 rounded-xl cursor-pointer dark:hover:text-green-300 dark:border-gray-700 dark:peer-checked:text-gray-700 peer-checked:bg-green-600 peer-checked:text-green-600 hover:text-green-600 hover:bg-gray-100 dark:text-green-400 dark:bg-gray-800 dark:hover:bg-green-700
-                                                ${support.value === true
-                                                        ? "bg-green-600 text-white"
-                                                        : "hover:bg-green-100 hover:text-green-600"
-                                                    }`}
-                                            >
-                                                <div className="block">
-                                                    <div className="w-10 text-md font-semibold">Yes</div>
-                                                </div>
-                                                <svg className="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10" > <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5l3 3 7-7" /></svg>
-                                            </label>
-                                        </div>
-                                    ) : (
-                                        <input
-                                            type="text"
-                                            value={support.value}
-                                            onChange={(e) =>
-                                                handleSupportChange("Exam Support", index, e.target.value)
-                                            }
-                                            placeholder="Time needed"
-                                            className="rounded-xl h-10 w-28 text-center px-2 py-1 dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-[#007ECA] peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none"
-                                        />
-                                    )}
-                                </div>
-
-                                {/* No Radio Button */}
-                                <div className="flex justify-center">
-                                    <input
-                                        type="radio"
-                                        id={`support-0-${index}-no`}
-                                        name={`support-0-${index}`}
-                                        value="no"
-                                        checked={support.value === false}
-                                        onChange={() => handleSupportChange("Exam Support", index, false)}
-                                        className="hidden peer"
-                                        required
-                                    />
-                                    <label
-                                        htmlFor={`support-0-${index}-no`}
-                                        className={`inline-flex items-center justify-between h-10 p-5 text-red-500 border border-red-200 rounded-xl cursor-pointer dark:hover:text-red-300 dark:border-gray-700 dark:peer-checked:text-gray-700 peer-checked:bg-red-600 peer-checked:text-red-600 hover:text-red-600 hover:bg-gray-100 dark:text-red-400 dark:bg-gray-800 dark:hover:bg-red-700 
-                                                        ${support.value === false
-                                                ? "bg-red-600 text-white"
-                                                : "hover:bg-red-100 hover:text-red-600"
-                                            }`}
-                                    >
-                                        <div className="block">
-                                            <div className="w-10 text-md font-semibold">No</div>
-                                        </div>
-                                        <svg className="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" > <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1L13 13M13 1L1 13" /> </svg>
-                                    </label>
-                                </div>
-
-                                {/* Subject Dropdown */}
-                                <div className="relative flex justify-center">
-                                    <button
-                                        type="button"
-                                        onClick={() => toggleDropdown("Exam Support", index)}
-                                        className="text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-[#007ECA] font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:hover:bg-blue-700 dark:focus:ring-[#007ECA]"
-                                    >
-                                        Applies To
-                                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" /> </svg>
-                                    </button>
-
-                                    {dropdownOpen[`Exam Support-${index}`] && (
-                                        <div className="absolute z-10 mt-12 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
-                                            <ul className="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200">
-                                                {student.subjects.map((subject, subjIndex) => (
-                                                    <li key={subjIndex}>
-                                                        <div className="flex items-center">
-                                                            <input
-                                                                id={`checkbox-item-Exam Support-${index}-${subjIndex}`}
-                                                                type="checkbox"
-                                                                value={subject}
-                                                                checked={support.subject.includes(subject)}
-                                                                onChange={() => handleSubjectCheckboxChange("Exam Support", index, subject)}
-                                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-[#007ECA] dark:focus:ring-[#007ECA] dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                                                            />
-                                                            <label
-                                                                htmlFor={`checkbox-item-Exam Support-${index}-${subjIndex}`}
-                                                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                                            >
-                                                                {subject}
-                                                            </label>
-                                                        </div>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </form>
                 </div>
 
                 {/* Form Section */}
@@ -323,14 +190,14 @@ const AdminLearningPlan = () => {
                                             />
                                             <label
                                                 htmlFor={`support-1-${index}-yes`}
-                                                className={`inline-flex items-center justify-between h-10 p-5 text-green-500 border border-green-200 rounded-xl cursor-pointer dark:hover:text-green-300 dark:border-gray-700 dark:peer-checked:text-gray-700 peer-checked:bg-green-600 peer-checked:text-green-600 hover:text-green-600 hover:bg-gray-100 dark:text-green-400 dark:bg-gray-800 dark:hover:bg-green-700
-                                                ${support.value === true
-                                                        ? "bg-green-600 text-white"
-                                                        : "hover:bg-green-100 hover:text-green-600"
+                                                className={`inline-flex items-center justify-between h-10 p-5 text-[#007ECA] border border-[#007ECA]/20 rounded-xl cursor-pointer dark:hover:text-[#007ECA]/80 dark:border-gray-700 dark:peer-checked:text-gray-700 peer-checked:bg-[#007ECA] peer-checked:text-white hover:text-[#007ECA] hover:bg-[#007ECA]/10 dark:text-[#007ECA] dark:bg-gray-800 dark:hover:bg-[#007ECA]/20
+                                                    ${support.value === true
+                                                        ? "bg-[#007ECA] text-white"
+                                                        : "hover:bg-[#007ECA]/10 hover:text-[#007ECA]"
                                                     }`}
                                             >
                                                 <div className="block">
-                                                    <div className="w-10 text-md font-semibold">Yes</div>
+                                                    <div className="w-10 text-md text-white font-semibold">Yes</div>
                                                 </div>
                                                 <svg className="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10" > <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5l3 3 7-7" /></svg>
                                             </label>
@@ -362,14 +229,14 @@ const AdminLearningPlan = () => {
                                     />
                                     <label
                                         htmlFor={`support-1-${index}-no`}
-                                        className={`inline-flex items-center justify-between h-10 p-5 text-red-500 border border-red-200 rounded-xl cursor-pointer dark:hover:text-red-300 dark:border-gray-700 dark:peer-checked:text-gray-700 peer-checked:bg-red-600 peer-checked:text-red-600 hover:text-red-600 hover:bg-gray-100 dark:text-red-400 dark:bg-gray-800 dark:hover:bg-red-700 
-                                                        ${support.value === false
-                                                ? "bg-red-600 text-white"
-                                                : "hover:bg-red-100 hover:text-red-600"
+                                        className={`inline-flex items-center justify-between h-10 p-5 text-[#007ECA] border border-[#007ECA]/20 rounded-xl cursor-pointer dark:hover:text-[#007ECA]/80 dark:border-gray-700 dark:peer-checked:text-gray-700 peer-checked:bg-[#007ECA] peer-checked:text-white hover:text-[#007ECA] hover:bg-[#007ECA]/10 dark:text-[#007ECA] dark:bg-gray-800 dark:hover:bg-[#007ECA]/20
+    ${support.value === false
+                                                ? "bg-[#007ECA] text-white"
+                                                : "hover:bg-[#007ECA]/10 hover:text-[#007ECA]"
                                             }`}
                                     >
                                         <div className="block">
-                                            <div className="w-10 text-md font-semibold">No</div>
+                                            <div className="w-10 text-md text-white font-semibold">No</div>
                                         </div>
                                         <svg className="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" > <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1L13 13M13 1L1 13" /> </svg>
                                     </label>
@@ -402,6 +269,139 @@ const AdminLearningPlan = () => {
                                                             />
                                                             <label
                                                                 htmlFor={`checkbox-item-Teaching Support-${index}-${subjIndex}`}
+                                                                className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                                            >
+                                                                {subject}
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </form>
+                </div>
+
+                {/* Form Section */}
+                <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg">
+                    <h1 className="text-2xl font-bold p-4 text-black">Exam Support</h1>
+
+                    <div className="grid grid-cols-4 text-center bg-[#007ECA] text-white text-lg font-bold py-2 rounded-t-lg m-0">
+                        <p>Type of Support</p>
+                        <p>Needed</p>
+                        <p>Not Needed</p>
+                        <p>Courses</p>
+                    </div>
+
+                    <form>
+                        {learningPlan["Exam Support"].map((support, index) => (
+                            <div
+                                key={index}
+                                className="grid grid-cols-4 h-14 items-center text-center"
+                            >
+                                {/* Support Item */}
+                                <div className="bg-[#1270B0]/60 h-full flex items-center justify-center">
+                                    <p>{support.item}</p>
+                                </div>
+
+                                {/* Yes Radio Button */}
+                                <div className="flex justify-center">
+                                    {typeof support.value === "boolean" ? (
+                                        <div>
+                                            <input
+                                                type="radio"
+                                                id={`support-0-${index}-yes`}
+                                                name={`support-0-${index}`}
+                                                value="yes"
+                                                checked={support.value === true}
+                                                onChange={() => handleSupportChange("Exam Support", index, true)}
+                                                className="hidden peer"
+                                                required
+                                            />
+                                            <label
+                                                htmlFor={`support-1-${index}-yes`}
+                                                className={`inline-flex items-center justify-between h-10 p-5 text-[#007ECA] border border-[#007ECA]/20 rounded-xl cursor-pointer dark:hover:text-[#007ECA]/80 dark:border-gray-700 dark:peer-checked:text-gray-700 peer-checked:bg-[#007ECA] peer-checked:text-white hover:text-[#007ECA] hover:bg-[#007ECA]/10 dark:text-[#007ECA] dark:bg-gray-800 dark:hover:bg-[#007ECA]/20
+                                                    ${support.value === true
+                                                        ? "bg-[#007ECA] text-white"
+                                                        : "hover:bg-[#007ECA]/10 hover:text-[#007ECA]"
+                                                    }`}
+                                            >
+                                                <div className="block">
+                                                    <div className="w-10 text-md text-white font-semibold">Yes</div>
+                                                </div>
+                                                <svg className="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10" > <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5l3 3 7-7" /></svg>
+                                            </label>
+                                        </div>
+                                    ) : (
+                                        <input
+                                            type="text"
+                                            value={support.value}
+                                            onChange={(e) =>
+                                                handleSupportChange("Exam Support", index, e.target.value)
+                                            }
+                                            placeholder="Time needed"
+                                            className="rounded-xl h-10 w-28 text-center px-2 py-1 dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-[#007ECA] peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none"
+                                        />
+                                    )}
+                                </div>
+
+                                {/* No Radio Button */}
+                                <div className="flex justify-center">
+                                    <input
+                                        type="radio"
+                                        id={`support-0-${index}-no`}
+                                        name={`support-0-${index}`}
+                                        value="no"
+                                        checked={support.value === false}
+                                        onChange={() => handleSupportChange("Exam Support", index, false)}
+                                        className="hidden peer"
+                                        required
+                                    />
+                                    <label
+                                        htmlFor={`support-1-${index}-no`}
+                                        className={`inline-flex items-center justify-between h-10 p-5 text-[#007ECA] border border-[#007ECA]/20 rounded-xl cursor-pointer dark:hover:text-[#007ECA]/80 dark:border-gray-700 dark:peer-checked:text-gray-700 peer-checked:bg-[#007ECA] peer-checked:text-white hover:text-[#007ECA] hover:bg-[#007ECA]/10 dark:text-[#007ECA] dark:bg-gray-800 dark:hover:bg-[#007ECA]/20
+    ${support.value === false
+                                                ? "bg-[#007ECA] text-white"
+                                                : "hover:bg-[#007ECA]/10 hover:text-[#007ECA]"
+                                            }`}
+                                    >
+                                        <div className="block">
+                                            <div className="w-10 text-white text-md font-semibold">No</div>
+                                        </div>
+                                        <svg className="w-5 h-5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" > <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1L13 13M13 1L1 13" /> </svg>
+                                    </label>
+                                </div>
+
+                                {/* Subject Dropdown */}
+                                <div className="relative flex justify-center">
+                                    <button
+                                        type="button"
+                                        onClick={() => toggleDropdown("Exam Support", index)}
+                                        className="text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-[#007ECA] font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:hover:bg-blue-700 dark:focus:ring-[#007ECA]"
+                                    >
+                                        Applies To
+                                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" /> </svg>
+                                    </button>
+
+                                    {dropdownOpen[`Exam Support-${index}`] && (
+                                        <div className="absolute z-10 mt-12 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+                                            <ul className="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200">
+                                                {student.subjects.map((subject, subjIndex) => (
+                                                    <li key={subjIndex}>
+                                                        <div className="flex items-center">
+                                                            <input
+                                                                id={`checkbox-item-Exam Support-${index}-${subjIndex}`}
+                                                                type="checkbox"
+                                                                value={subject}
+                                                                checked={support.subject.includes(subject)}
+                                                                onChange={() => handleSubjectCheckboxChange("Exam Support", index, subject)}
+                                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-[#007ECA] dark:focus:ring-[#007ECA] dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                            />
+                                                            <label
+                                                                htmlFor={`checkbox-item-Exam Support-${index}-${subjIndex}`}
                                                                 className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                                                             >
                                                                 {subject}

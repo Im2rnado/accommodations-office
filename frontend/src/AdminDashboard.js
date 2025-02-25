@@ -43,7 +43,7 @@ const AdminDashboard = () => {
                         <div className="w-12 h-12 bg-gray-500 rounded-full"></div>
                         <div>
                             <p className="font-semibold">Welcome Back,</p>
-                            <p className="text-sm">Staff Name</p>
+                            <p className="text-sm">Laila</p>
                         </div>
                     </div>
                 </div>
