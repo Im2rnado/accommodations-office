@@ -58,6 +58,7 @@ function StudentRequests() {
             {/* Settings */}
         <div className="flex flex-col bg-blue-100 w-full h-screen">
             <h1 className="mt-10 ml-4 text-4xl font-bold text-[#072D4A]/90">Requests</h1>
+
         </div>
         </div>
   );
