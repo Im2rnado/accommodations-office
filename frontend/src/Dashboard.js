@@ -72,6 +72,12 @@ const Dashboard = () => {
                         Forms
                     </a>
                     <a
+                        href="/StudentForm"
+                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
+                    >
+                        Requests
+                    </a>
+                    <a
                         href="#"
                         className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
                     >
