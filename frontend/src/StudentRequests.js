@@ -67,7 +67,7 @@ function StudentRequests() {
 
             {/* Content */}
             <div className="flex mt-10">
-            <div className="w-3/5  ml-4 m-auto bg-sky-700 rounded-xl p-6 text-center">
+            <div className="w-3/5  ml-4 m-auto bg-[#007ECA] rounded-xl p-6 text-center">
                 <b className="text-5xl block">Requests Form</b>
 
                 <form method="#" action="#" className="mt-6">
@@ -111,7 +111,7 @@ function StudentRequests() {
                 </button>
                 </form>
             </div>
-            <div className=" h-[100%] m-auto ml-0 w-[22%]  bg-sky-700 rounded-xl p-6 text-center"></div>
+            <div className=" h-[100%] m-auto ml-0 w-[22%]  bg-[#007ECA] rounded-xl p-6 text-center"></div>
           </div>
         </div>
         </div>
