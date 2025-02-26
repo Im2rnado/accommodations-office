@@ -57,14 +57,14 @@ function StudentRequests() {
 
             {/* Settings */}
         <div className="flex flex-col bg-blue-100 w-full h-screen">
-            <h1 className="mt-10 ml-4 text-4xl font-bold text-[#072D4A]/90">Requests</h1>
+            <h1 className="mt-10 ml-4 mr-0  text-4xl font-bold text-[#072D4A]/90">Requests</h1>
 
             {/* Content */}
-            <div className="mt-10 ml-4 mr-96 bg-sky-700 rounded-xl p-6 text-center">
+            <div className="flex mt-10">
+            <div className="w-3/5  ml-4 m-auto bg-sky-700 rounded-xl p-6 text-center">
                 <b className="text-5xl block">Requests Form</b>
 
                 <form method="#" action="#" className="mt-6">
-
                 <div className="mb-4">
                     <label htmlFor="TypeOfRequest" className="text-2xl font-bold block text-left">
                         Type of Request:
@@ -105,7 +105,8 @@ function StudentRequests() {
                 </button>
                 </form>
             </div>
-
+            <div className=" h-[100%] m-auto ml-0 w-[22%]  bg-sky-700 rounded-xl p-6 text-center"></div>
+          </div>
         </div>
         </div>
   );
