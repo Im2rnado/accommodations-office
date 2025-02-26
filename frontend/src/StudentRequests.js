@@ -63,35 +63,48 @@ function StudentRequests() {
             <div className="mt-10 ml-4 mr-96 bg-sky-700 rounded-xl p-6 text-center">
                 <b className="text-5xl block">Requests Form</b>
 
-                <div className="mt-6">
-                    <b className="text-2xl">Type of Request:</b>
+                <form method="#" action="#" className="mt-6">
+
+                <div className="mb-4">
+                    <label htmlFor="TypeOfRequest" className="text-2xl font-bold block text-left">
+                        Type of Request:
+                    </label>
                     <select
+                        id="TypeOfRequest"
                         name="TypeOfRequest"
-                        className="ml-3 font-bold text-black rounded-xl p-1 text-center"
-                    >
-                        <option>Mobility Assistance</option>
-                        <option>Medication storage</option>
-                        <option>Personal caregiver tag-along request</option>
-                        <option>Extra time on exam</option>
-                        <option>Assignment extension</option>
-                        <option>Note taker request</option>
-                        <option>Mental support</option>
-                        <option>Technology request</option>
-                    </select>
+                        className="mt-2 block w-full max-w-md mx-auto font-bold text-black rounded-xl p-2 text-center"
+                        >
+                            <option>Mobility Assistance</option>
+                            <option>Medication Storage</option>
+                            <option>Personal Caregiver Tag-Along Request</option>
+                            <option>Extra Time on Exam</option>
+                            <option>Assignment Extension</option>
+                            <option>Note Taker Request</option>
+                            <option>Mental Support</option>
+                            <option>Technology Request</option>
+                        </select>
                 </div>
 
-                <div className="mt-6 text-left">
-                    <b className="text-2xl">Relevant details:</b>
+                <div className="mb-6">
+                    <label htmlFor="details" className="text-2xl font-bold block text-left">
+                        Relevant details:
+                    </label>
                     <textarea
-                        className="mt-2 block leading-normal rounded-xl font-bold p-3 w-full h-40 text-black"
+                        id="details"
+                        name="details"
+                        className="mt-2 block w-full max-w-md mx-auto leading-normal rounded-xl font-bold p-3 h-40 text-black"
                         placeholder="Add your details here..."
                     />
-                    <center>
-                        <input type="submit" className="m-2 bg-white text-black p-1 rounded-lg " value="submit" />
-                        <input type="reset" className="m-2 bg-white text-black p-1 rounded-lg " value="reset" />
-                    </center>
-    </div>
-    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    className="bg-white text-sky-700 font-bold py-2 px-6 rounded-xl hover:bg-gray-200 transition"
+                >
+                    Submit Request
+                </button>
+                </form>
+            </div>
 
         </div>
         </div>
