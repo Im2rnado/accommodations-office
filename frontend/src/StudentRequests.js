@@ -24,9 +24,15 @@ function StudentRequests() {
                     </a>
                     <a
                         href="/StudentForm"
-                        className="block py-2 px-4 bg-[#007ECA]/70 text-white hover:bg-[#007ECA]/60 rounded-xl"
+                        className="block py-2 px-4  text-white hover:bg-[#007ECA]/60 rounded-xl"
                     >
                         Forms
+                    </a>
+                    <a
+                        href="/StudentRequests"
+                        className="block py-2 px-4 bg-[#007ECA]/70 text-white hover:bg-[#007ECA]/60 rounded-xl"
+                    >
+                        Requests
                     </a>
                     <a
                         href="./StudentPlan"

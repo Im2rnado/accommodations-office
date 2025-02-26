@@ -4,9 +4,10 @@ import React from "react";
 const Dashboard = () => {
     const currentLearningPlan = {
         teachingSupport: [
-            { type: "Extended Assignment Deadlines", status: "Approved", courses: ["Marketing 101", "Business Ethics"] },
-            { type: "Note-Taking Assistant", status: "Active", courses: ["Financial Management", "Economics"] },
-            { type: "Recorded Lectures", status: "Active", courses: ["All Courses"] }
+            { type: "Access to private study rooms/exams", status: "Approved", courses: ["Marketing 101", "Business Ethics"] },
+            { type: "Scribe Teacher", status: "Active", courses: ["Financial Management", "Economics"] },
+            { type: "Attendance policy", status: "Active", courses: ["All Courses"] },
+            { type: "Modifying course materials", status: "Inactive", courses: ["Calculus D401"] }
         ]
     };
 
@@ -78,7 +79,7 @@ const Dashboard = () => {
                         Requests
                     </a>
                     <a
-                        href="#"
+                        href="/StudentPlan"
                         className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
                     >
                         Plans
@@ -94,12 +95,6 @@ const Dashboard = () => {
                         className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
                     >
                         Calendar
-                    </a>
-                    <a
-                        href="/StudentSettings"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Settings
                     </a>
                 </nav>
                 <div className="mt-auto p-6">
@@ -159,7 +154,7 @@ const Dashboard = () => {
                                     <li key={index}>{item}</li>
                                 ))}
                             </ul>
-                        </div>
+                        </div>  
                     </div>
 
                     {/* Feedback */}
