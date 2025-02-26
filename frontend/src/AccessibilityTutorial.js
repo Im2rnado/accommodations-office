@@ -165,6 +165,20 @@ function AccessabilityTutorial()
 
             <div id="module7" className="hidden flex-col justify-start items-center w-full h-fit">
                 <h1 className="w-full text-2xl pt-5 pb-5 pl-10 font-bold bg-blue-500 flex justify-start items-center">
+                <i class="fa-solid fa-list mr-3"></i>Reading PDFs using the Accessability Tools
+                </h1>
+
+                <p className="Tutorial-Text mb-6">
+                If you are struggling with reading any PDF, you can use the PDF converter tool at the Dashboard
+                </p>
+
+                <button id="nextButton" onClick={()=>changeModule()} className="w-48 h-20 pt-2 pb-2 m-auto mt-6 mb-6 bg-blue-500 text-white border-solid border-4 transition-all duration-200
+                border-blue-500 shadow-blue-solid hover:bg-white hover:border-white hover:shadow-gray-solid hover:text-black
+                rounded-md text-xl font-bold">Next <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+
+            <div id="module8" className="hidden flex-col justify-start items-center w-full h-fit">
+                <h1 className="w-full text-2xl pt-5 pb-5 pl-10 font-bold bg-blue-500 flex justify-start items-center">
                 <i class="fa-solid fa-list mr-3"></i>You are all set
                 </h1>
 
@@ -176,6 +190,7 @@ function AccessabilityTutorial()
                justify-center items-center flex border-blue-500 shadow-blue-solid hover:bg-white hover:border-white hover:shadow-gray-solid hover:text-black
                 rounded-md text-xl font-bold">Return<i class="fa-solid fa-house ml-2"></i></a>
             </div>
+
         </div>
 
     );
@@ -185,7 +200,7 @@ let moduleOrder = 1;
 function changeModule()
 {   
     moduleOrder++
-    if(moduleOrder > 7)
+    if(moduleOrder > 8)
     {
         return;
     }

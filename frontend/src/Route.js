@@ -13,6 +13,7 @@ import StudentSettings from './StudentSettings';
 import StudentForm from './StudentForm';
 import StudentPlan from './StudentPlan';
 import StudentRequests from './StudentRequests';
+import StudentPDF from './StudentPDF';
 import AccessabilityTutorialTest from './AccessibilityTutorial';
 
 function Router() {
@@ -24,6 +25,7 @@ function Router() {
         <Route path="StudentSettings" element={<StudentSettings />} />
         <Route path="StudentForm" element={<StudentForm />} />
         <Route path="StudentPlan" element={<StudentPlan />} />
+        <Route path="StudentPDF" element={<StudentPDF/>}/>
         <Route path="StudentRequests" element={<StudentRequests />} />
         <Route path="apply" element={<Apply />} />
         <Route path="login" element={<Login />} />

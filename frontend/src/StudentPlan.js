@@ -72,7 +72,12 @@ function StudentPlan()
                     >
                         Calendar
                     </a>
-                    
+                    <a
+                        href="./StudentPDF"
+                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
+                    >
+                        Convert PDF
+                    </a>
                 </nav>
                 <div className="mt-auto p-6">
                     <button className="w-full text-left py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl">
