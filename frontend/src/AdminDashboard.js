@@ -10,7 +10,7 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:4000/admin-dashboard")
+            .get("http://localhost:4000/api/dashboard")
             .then((response) => {
                 if (response.data.success) {
                     setStats(response.data.stats);

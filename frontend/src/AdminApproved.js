@@ -10,7 +10,7 @@ const AdminApproved = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:4000/admin-students")
+            .get("http://localhost:4000/api/students")
             .then((response) => {
                 if (response.data.success) {
                     setStudents(response.data.students.filter(student => student.status === "Approved"));

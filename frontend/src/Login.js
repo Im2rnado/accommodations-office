@@ -12,7 +12,7 @@ const Login = () => {
         e.preventDefault();
 
         axios
-            .post("http://localhost:4000/login", { email })
+            .post("http://localhost:4000/api/login", { email })
             .then((response) => {
                 if (response.data.success) {
                     if (response.data.type === "admin") {
