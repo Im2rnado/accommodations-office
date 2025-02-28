@@ -107,7 +107,10 @@ function StudentRequests() {
                         placeholder="Add your details here..."
                     />
                 </div>
-
+                <label htmlFor="reasonFile" className="text-2xl font-bold block text-left">
+                        Supporting documents:
+                    </label>
+                <input type="file" className="mb-5 mt-5" name="reasonFile" /> <br />
                 <button
                     type="submit"
                     className="bg-white text-sky-700 font-bold py-2 px-6 rounded-xl hover:bg-gray-200 transition"
