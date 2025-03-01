@@ -16,6 +16,7 @@ import StudentPlan from './StudentPlan';
 import StudentRequests from './StudentRequests';
 import StudentPDF from './StudentPDF';
 import AccessabilityTutorialTest from './AccessibilityTutorial';
+import MissionVision from './MissionVision.js';
 
 function Router() {
   return (
@@ -40,6 +41,7 @@ function Router() {
         <Route path="admin-applied" element={<AdminApplied />} />
         <Route path="admin-announcements" element={<AdminAnnoucements />} />
         <Route path="accessability-tutorial-test" element={<AccessabilityTutorialTest />} />
+        <Route path="Mission-Vision" element={<MissionVision />} />
       </Routes>
     </BrowserRouter>
   );

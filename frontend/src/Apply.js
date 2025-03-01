@@ -9,6 +9,7 @@ const Apply = () => {
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [medicalReports, setMedicalReports] = useState([]);
     const [doctorsForm, setDoctorsForm] = useState(null);
+    const [school, setSchool] = useState('');
 
     // References for file inputs
     const medicalReportRef = useRef();
@@ -31,6 +32,7 @@ const Apply = () => {
         console.log('Date of Birth:', dateOfBirth);
         console.log('Medical Reports:', medicalReports);
         console.log('Doctor\'s Form:', doctorsForm);
+        console.log('School Name:', school)
 
         // Here you would typically send the files to your server
         navigate('/dashboard');
@@ -103,6 +105,27 @@ const Apply = () => {
                             onChange={(e) => setDateOfBirth(e.target.value)}
                             className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-[#007ECA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#007ECA]"
                         />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor="school"
+                            className="block text-base font-medium text-white"
+                        >
+                            School
+                        </label>
+                        <select
+                            id="school"
+                            onChange={(e) => setSchool(e.target.value)}
+                            className="w-full mt-1 px-3 py-2 bg-[#072D4A]/70 text-white border border-[#007ECA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#007ECA]"
+                        >
+                            <option value="">Select School</option>
+                            <option value="Business">Business</option>
+                            <option value="Computing">Computing</option>
+                            <option value="Media">Media</option>
+                            <option value="Cinema">Cinema</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Postgrad">Postgrad</option>
+                        </select>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">

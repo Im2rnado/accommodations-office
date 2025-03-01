@@ -13,7 +13,7 @@ const AdminAnnoucements = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:4000/announcements")
+            .get("http://localhost:4000/api/announcements")
             .then((response) => {
                 if (response.data.success) {
                     setAnnouncements(response.data.announcements);
@@ -39,7 +39,7 @@ const AdminAnnoucements = () => {
         };
 
         axios
-            .post("http://localhost:4000/announcements", newAnnouncement)
+            .post("http://localhost:4000/api/announcements", newAnnouncement)
             .then((response) => {
                 if (response.data.success) {
                     setAnnouncements([...announcements, response.data.announcement]);
@@ -60,7 +60,7 @@ const AdminAnnoucements = () => {
         if (!window.confirm("Are you sure you want to delete this announcement?")) return;
 
         axios
-            .delete(`http://localhost:4000/announcements/${title}`)
+            .delete(`http://localhost:4000/api/announcements/${title}`)
             .then((response) => {
                 if (response.data.success) {
                     setAnnouncements(announcements.filter((announcement) => announcement.title !== title));

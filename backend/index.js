@@ -10,6 +10,7 @@ const students = [
     {
         name: "Ahmed Hatem",
         id: 232400404,
+        dob: "2006-05-28",
         image: "https://i.pravatar.cc/150",
         faculty: "Computing",
         status: "Approved",
@@ -43,6 +44,7 @@ const students = [
     {
         name: "Mohamed Ali",
         id: 232400405,
+        dob: "2006-05-28",
         image: "https://i.pravatar.cc/150",
         faculty: "Business",
         status: "Pending",
@@ -76,10 +78,13 @@ const students = [
     {
         name: "Sarah Ahmed",
         id: 232400406,
+        dob: "2006-05-28",
         image: "https://i.pravatar.cc/150",
         faculty: "Computing",
         status: "Applied",
         disability: "ADHD",
+        medicalReports: [{ name: "Al Salam Hospital Report", url: "https://www.google.com" }],
+        doctorsForm: { name: "Dr. Ahmed Shawky", url: "https://www.google.com" },
         learningPlan: {
             "Exam Support": [
                 { item: "Extra time in exams", value: "25 minutes" },
@@ -109,6 +114,7 @@ const students = [
     {
         name: "Nada Hesham",
         id: 232400407,
+        dob: "2006-05-28",
         image: "https://i.pravatar.cc/150",
         faculty: "Business",
         status: "Approved",
