@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import AccessabilityFeatures from './AccessibilityFeatures';
 
 const Dashboard = () => {
     const currentLearningPlan = {
@@ -47,6 +48,7 @@ const Dashboard = () => {
 
     return (
         <div className="flex min-h-screen bg-gray-900 text-white">
+            <AccessabilityFeatures></AccessabilityFeatures>
             {/* Sidebar */}
             <aside className="w-64 bg-[#072D4A]/90 flex flex-col">
                 <div className="p-6">

@@ -1,8 +1,10 @@
 import React from "react";
+import AccessabilityFeatures from './AccessibilityFeatures';
 
 function StudentRequests() {
   return (
       <div className="flex min-h-screen bg-gray-900 text-white">
+        <AccessabilityFeatures></AccessabilityFeatures>
             {/* Sidebar */}
             <aside className="w-64 bg-[#072D4A]/90 flex flex-col">
                 <div className="p-6">

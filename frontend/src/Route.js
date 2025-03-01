@@ -1,5 +1,6 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Dashboard from "./Dashboard";
+import Homepage from './Homepage';
 import Apply from "./Apply";
 import Login from './Login.js';
 import AdminDashboard from './AdminDashboard.js';
@@ -20,8 +21,10 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Login />} />
+        <Route index element={<Homepage />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="login" element={<Login />} />
+        <Route path="Homepage" element={<Homepage />} />
         <Route path="StudentSettings" element={<StudentSettings />} />
         <Route path="StudentForm" element={<StudentForm />} />
         <Route path="StudentPlan" element={<StudentPlan />} />
