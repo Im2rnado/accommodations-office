@@ -1,28 +1,32 @@
-import React from "react";
-import AccessabilityFeatures from './AccessibilityFeatures';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Vision & Mission</title>
+    <link rel="stylesheet" href="MV.css">
+</head>
+<body>
+    <section class="logo-section">
+        <img src="EUL.png" alt="ESLSCA University Logo">
+    </section>
 
-function MissionVision() {
-  return ( 
-    <section>
-    <img src="EUL.png" alt="ESLSCA University Logo">
-</section>
+    <!-- Title Section -->
+    <h2 class="section-title">Our Mission & Vision</h2>
 
-<h2>Our Mission & Vision</h2>
-
-<section>
-    <div>
-        <img src="Mission.JPG" alt="Mission Image">
-        <p>Providing tailored support, reasonable accommodations, and advocacy,
-         ensuring that students with disabilities have equitable access to all aspects of university life and a supportive learning experience.
-        </p>
-    </div>
-    <div>
-        <img src="Vision.jpg" alt="Vision Image">
-        <p>Fostering an inclusive and accessible educational environment where students of all abilities can fully participate,
-         excel, and achieve their academic potential.
-        </p>
-    </div>
-</section>
-);
-}
-export default MissionVision;
+    <section class="vision-mission">
+        <div class="box">
+            <img src="Mission.JPG" alt="Mission Image" class="title-image">
+            <p>Providing tailored support, reasonable accommodations, and advocacy,
+             ensuring that students with disabilities have equitable access to all aspects of university life and a supportive learning experience.
+            </p>
+        </div>
+        <div class="box">
+            <img src="Vision.jpg" alt="Vision Image" class="title-image">
+            <p>Fostering an inclusive and accessible educational environment where students of all abilities can fully participate,
+             excel, and achieve their academic potential.
+            </p>
+        </div>
+    </section>
+</body>
+</html>
