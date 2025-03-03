@@ -95,6 +95,7 @@ function StudentRequests() {
                             <option>Note Taker Request</option>
                             <option>Mental Support</option>
                             <option>Technology Request</option>
+                            <option>Other</option>
                         </select>
                 </div>
 
@@ -122,7 +123,7 @@ function StudentRequests() {
                 </form>
             </div>
             <div className=" h-[100%] m-auto ml-0 w-[22%]  bg-[#007ECA] rounded-xl p-6 text-center">
-                <b className="text-3xl block">Requests Form</b>
+                <b className="text-3xl block">Pending Requests</b>
                 <div className="mt-3 rounded-xl h-max bg-[#072D4A]/10">
                     Mobility assistance <br/>
                     ID: F-2024-089 <br/>
