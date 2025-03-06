@@ -1,33 +1,11 @@
 import React from "react";
-import ESLSCAlogo from "./assets/ESLSCA Accommidation Office.svg";
+import NavbarLanding from "./NavbarLanding";
 function Policy()
 {
     return(
         <div className="w-full h-[100%] min-h-screen bg-white">
-            <nav className="h-20 flex justify-center bg-gradient-to-r from-blue-900 to-blue-950">
-                <img className="w-36 m-auto ml-5 mt-4" src={ESLSCAlogo} alt="" />
-                <div className="flex justify-center items-center m-auto mr-3 h-full">
-                    <a href="./Homepage" className="font-bold text-white m-auto flex justify-center 
-                    items-center transition-all text-2xl h-full bg-transparent 
-                    hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-house mr-2"></i>Home</a>
 
-                    <a href="./Homepage" className="font-thin text-white m-auto flex justify-center 
-                    items-center transition-all text-2xl h-full bg-transparent 
-                    hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-screwdriver-wrench mr-2"></i>Accessability Tools</a>
-
-                    <a href="./Policy" className="font-thin text-white m-auto flex justify-center 
-                    items-center transition-all text-2xl h-full bg-transparent 
-                    hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-file-lines mr-2"></i>Policy</a>
-
-                    <a href="./Apply" className="font-thin text-white m-auto flex justify-center 
-                    items-center transition-all text-2xl h-full bg-transparent 
-                    hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-graduation-cap mr-2"></i>Apply</a>
-                    
-                    <a href="./login" className="font-thin text-white m-auto flex justify-center 
-                    items-center transition-all text-2xl h-full bg-transparent 
-                    hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-user mr-2"></i>Login</a>
-                </div>
-            </nav>
+            <NavbarLanding/>
 
             <section className="w-full h-[400px] bg-[url('https://eslsca.edu.eg/wp-content/uploads/2023/03/E61884.jpg')] bg-center bg-cover 
             relative flex justify-center items-center after:w-full after:h-[400px] after:bg-black after:opacity-60">
@@ -52,7 +30,7 @@ function Policy()
                     <a href="/Homepage" className="text-blue-500 mr-4">Home</a>
                     <a href="/AccessabilityTools" className="text-blue-500 mr-4">Accessability Tools</a>
                     <a href="/Policy" className="text-blue-500 mr-4">Policy</a>
-                    <a href="/Apply" className="text-blue-500 mr-4">Apply</a>
+                    <a href="/ApplyLandingPage" className="text-blue-500 mr-4">Apply</a>
                     <a href="/Contact" className="text-blue-500 mr-4">Contact Us</a>
                 </div>
             </section>
