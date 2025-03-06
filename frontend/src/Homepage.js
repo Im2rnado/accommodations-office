@@ -33,7 +33,7 @@ function Homepage()
             <section className="w-full h-[600px] bg-[url('https://eslsca.edu.eg/wp-content/uploads/2023/03/E61884.jpg')] bg-center bg-cover 
             relative flex justify-center items-center">
                 <div className="w-[40%] h-48 bg-blue-900 rounded-lg m-auto mr-10 mb-10 flex flex-col justify-center items-center">
-                    <h1 className="text-white text-3xl font-bold m-auto mt-10">Welcome to ESLSCA Accommidation Office</h1>
+                    <h1 className="text-white text-3xl font-bold ml-5 m-auto mt-7">Welcome to ESLSCA Accommidation Office</h1>
                     <div className="m-auto flex justify-center items-center">
                         <a href="./login" className="text-white text-3xl mr-2 ml-2 flex justify-center items-center transition-all
                         pr-10 pl-10 h-14 border-2 border-white rounded-lg hover:bg-white hover:text-blue-900 hover:font-bold"><i class="fa-solid fa-graduation-cap"></i>Apply</a>
