@@ -16,9 +16,13 @@ function Homepage()
                     items-center transition-all text-2xl h-full bg-transparent 
                     hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-screwdriver-wrench mr-2"></i>Accessability Tools</a>
 
-                    <a href="./Homepage" className="font-thin text-white m-auto flex justify-center 
+
+                    <a href="./Policy" className="font-thin text-white m-auto flex justify-center 
                     items-center transition-all text-2xl h-full bg-transparent 
                     hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-file-lines mr-2"></i>Policy</a>
+                    <a href="./Apply" className="font-thin text-white m-auto flex justify-center 
+                    items-center transition-all text-2xl h-full bg-transparent 
+                    hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-graduation-cap mr-2"></i>Apply</a>
                     
                     <a href="./login" className="font-thin text-white m-auto flex justify-center 
                     items-center transition-all text-2xl h-full bg-transparent 
@@ -92,7 +96,15 @@ function Homepage()
                     bg-cover rounded-lg"></div>
                 </div>
             </section>
-            
+            <section className="w-full h-[150px] bg-gradient-to-r from-gray-900 to-gray-950 p-8 flex flex-col justify-center items-start">
+                <h1 className="text-2xl font-bold text-white">Links</h1>
+                <div className="flex text-white">
+                    <a href="/Homepage" className="text-blue-500 mr-4">Home</a>
+                    <a href="/AccessabilityTools" className="text-blue-500 mr-4">Accessability Tools</a>
+                    <a href="/Policy" className="text-blue-500 mr-4">Policy</a>
+                    <a href="/Contact" className="text-blue-500 mr-4">Contact Us</a>
+                </div>
+            </section>
         </div>
     );
 }
