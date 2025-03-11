@@ -1,35 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
     const [email, setEmail] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios
-            .post("http://localhost:4000/api/login", { email })
-            .then((response) => {
-                if (response.data.success) {
-                    if (response.data.type === "admin") {
-                        navigate("/admin-dashboard")
-                    }
-                    else if (response.data.type === "student") {
-                        navigate("/apply")
-                    }
-                } else {
-                    setError("Failed to fetch announcements");
-                }
-                setLoading(false);
-            })
-            .catch((err) => {
-                setError(err.message);
-                setLoading(false);
-            });
+        if (email.includes('@eslsca.edu.eg')) {
+            navigate('/admin-dashboard');
+        } else {
+            navigate('/apply');
+        }
     };
 
     return (

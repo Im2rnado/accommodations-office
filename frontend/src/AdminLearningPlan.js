@@ -39,6 +39,29 @@ const AdminLearningPlan = () => {
             });
     }, [id]);
 
+    const handleAcceptRequest = async () => {
+        try {
+            setLoading(true);
+            // Call API to update student status to "Pending"
+            const response = await axios.put(`http://localhost:4000/api/students/${id}`, {
+                status: "Pending"
+            });
+
+            if (response.data.success) {
+                // If the update was successful, reload the page to show the changes
+                window.location.reload();
+                // Alternatively, you could navigate to the same page which would trigger a reload
+                // navigate(`/admin-learning-plan/${id}`);
+            } else {
+                setError("Failed to update student status");
+                setLoading(false);
+            }
+        } catch (err) {
+            setError(err.message);
+            setLoading(false);
+        }
+    };
+
     const handleSupportChange = (category, index, value) => {
         const updatedLearningPlan = { ...learningPlan };
         updatedLearningPlan[category][index].value = value;
@@ -178,7 +201,7 @@ const AdminLearningPlan = () => {
                             <div className="space-y-4">
                                 <div className="bg-white p-4 rounded-lg shadow">
                                     <p className="text-sm text-gray-500">Date of Birth</p>
-                                    <p className="font-semibold text-black">{student.dob}</p>
+                                    <p className="font-semibold text-black">{new Date(student.dob).toLocaleDateString()}</p>
                                 </div>
 
                                 <div className="bg-white p-4 rounded-lg shadow">
@@ -240,14 +263,20 @@ const AdminLearningPlan = () => {
                     </div>
 
                     {/* Admin Actions */}
-                    <div className="bg-[#B9E4FE] rounded-xl shadow-lg p-6">
+                    < div className="bg-[#B9E4FE] rounded-xl shadow-lg p-6">
                         <h2 className="text-xl font-bold mb-4 text-black">Actions</h2>
                         <div className="flex space-x-4">
-                            <button className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                            <button
+                                className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                            >
                                 Reject Application
                             </button>
-                            <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                                Accept & Request Meeting
+                            <button
+                                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                                onClick={handleAcceptRequest}
+                                disabled={loading}
+                            >
+                                {loading ? "Processing..." : "Accept & Request Meeting"}
                             </button>
                         </div>
                     </div>
@@ -344,7 +373,7 @@ const AdminLearningPlan = () => {
 
                     {/* Form Section */}
                     <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg">
-                        <h1 className="text-2xl font-bold p-4 text-black">Teaching Support</h1>
+                        <h1 className="text-2xl font-bold p-4 text-black">Academic Support</h1>
 
                         <div className="grid grid-cols-4 text-center bg-[#007ECA] text-white text-lg font-bold py-2 rounded-t-lg m-0">
                             <p>Type of Support</p>
