@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './css/index.css';
 import reportWebVitals from './reportWebVitals';
 import Route from './Route';
-import AccessabilityFeatures from './AccessibilityFeatures';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,5 +1,6 @@
 import React from "react";
-import ESLSCAlogo from "./assets/ESLSCA Accommidation Office.svg";
+import ESLSCAlogo from "./assets/ESLSCA Accommodations Office.svg";
+
 function NavbarLanding()
 {
     return (
