@@ -17,6 +17,8 @@ import StudentRequests from './StudentRequests';
 import StudentPDF from './StudentPDF';
 import AccessabilityTutorialTest from './AccessibilityTutorial';
 import MissionVision from './MissionVision.js';
+import Policy from './Policy';
+import ApplyLandingPage from './ApplyLandingPage';
 
 function Router() {
   return (
@@ -24,6 +26,8 @@ function Router() {
       <Routes>
         <Route index element={<Homepage />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="Policy" element={<Policy />} />
+        <Route path="ApplyLandingPage" element={<ApplyLandingPage />} />
         <Route path="login" element={<Login />} />
         <Route path="Homepage" element={<Homepage />} />
         <Route path="StudentSettings" element={<StudentSettings />} />
