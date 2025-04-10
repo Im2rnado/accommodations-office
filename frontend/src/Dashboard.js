@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import AccessabilityFeatures from './AccessibilityFeatures';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Dashboard = () => {
     const currentLearningPlan = {
@@ -30,10 +32,25 @@ const Dashboard = () => {
         ]
     };
 
-    const feedbacks = [
-        { from: "Dr. Sarah", date: "2024-02-20", message: "Good progress in utilizing note-taking services" },
-        { from: "Support Office", date: "2024-02-15", message: "Successfully implemented exam accommodations" }
-    ];
+    const [feedbacks, setFeedbacks] = useState([]);
+
+    useEffect(() => {
+        const fetchFeedbacks = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/feedback'); // Adjust port if needed
+            setFeedbacks(response.data);
+            console.log('Fetched feedbacks:', response.data);
+        } catch (error) {
+            console.error('Error fetching feedbacks:', error);
+        }
+        };
+
+        fetchFeedbacks();
+    }, []);
+    // const feedbacks = [
+    //     { from: "Dr. Sarah", date: "2024-02-20", message: "Good progress in utilizing note-taking services" },
+    //     { from: "Support Office", date: "2024-02-15", message: "Successfully implemented exam accommodations" }
+    // ];
 
     const announcements = [
         { title: "Spring Break Support Services", date: "2024-02-23" },
