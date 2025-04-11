@@ -1,10 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const feedbackRouter = require("./routes/feedbackRouter");
 const app = express();
 require("dotenv").config();
 const cors = require("cors");
 const PORT = process.env.PORT || 4000;
+
+const feedbackRouter = require("./routes/feedbackRouter");
+const previousPlanRouter = require("./routes/previousPlanRouter");
 
 const connectToDatabase = async() =>
 {
@@ -19,7 +21,10 @@ const connectToDatabase = async() =>
 connectToDatabase();
 
 app.use(cors({origin: 'http://localhost:3000'}));
-app.use("/", feedbackRouter);
+
+app.use("/feedback", feedbackRouter);
+
+app.use("/previousPlan", previousPlanRouter);
 
 app.listen(PORT, () => {
     console.log(`[SERVER] Running on http://localhost:${PORT}`);

@@ -23,21 +23,28 @@ const Dashboard = () => {
         { id: "F-2024-075", type: "Note-Taking Service", approved: "2024-02-01" }
     ];
 
-    const previousPlan = {
-        semester: "Fall 2023",
-        accommodations: [
-            "Extra Time on Exams (25%)",
-            "Quiet Testing Environment",
-            "Digital Materials"
-        ]
-    };
+    const [previousPlan, setPreviousPlan] = useState([]);
+
+    useEffect(() => {
+        const fetchPreviousPlan = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/previousPlan');
+            setPreviousPlan(response.data);
+            console.log('Fetched PreviousPlan:', response.data);
+        } catch (error) {
+            console.error('Error fetching PreviousPlan:', error);
+        }
+        };
+
+        fetchPreviousPlan();
+    }, []);
 
     const [feedbacks, setFeedbacks] = useState([]);
 
     useEffect(() => {
         const fetchFeedbacks = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/feedback'); // Adjust port if needed
+            const response = await axios.get('http://localhost:4000/feedback');
             setFeedbacks(response.data);
             console.log('Fetched feedbacks:', response.data);
         } catch (error) {
@@ -47,10 +54,6 @@ const Dashboard = () => {
 
         fetchFeedbacks();
     }, []);
-    // const feedbacks = [
-    //     { from: "Dr. Sarah", date: "2024-02-20", message: "Good progress in utilizing note-taking services" },
-    //     { from: "Support Office", date: "2024-02-15", message: "Successfully implemented exam accommodations" }
-    // ];
 
     const announcements = [
         { title: "Spring Break Support Services", date: "2024-02-23" },
@@ -173,10 +176,13 @@ const Dashboard = () => {
                     <div className="bg-[#007ECA] rounded-xl p-4">
                         <h2 tabIndex="6" role="Previous learning plan" className="text-lg font-semibold mb-3">Previous Learning Plan</h2>
                         <div className="bg-[#072D4A]/10 p-2 rounded-lg">
-                            <p className="font-medium">{previousPlan.semester}</p>
+                            <p className="font-medium">{previousPlan[0].semester}</p>
                             <ul className="list-disc list-inside text-sm mt-2">
-                                {previousPlan.accommodations.map((item, index) => (
-                                    <li key={index}>{item}</li>
+                                {previousPlan.map((plan, index) => (
+                                    <li key={index}>Accommodations:
+                                        {plan.accommodations.map((accommodation, index)=>(
+                                             <ol key={index}>{accommodation}</ol>
+                                        ))}</li>
                                 ))}
                             </ul>
                         </div>  

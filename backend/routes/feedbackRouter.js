@@ -12,7 +12,7 @@ const feedbackSchema = new mongoose.Schema({
 
 const Feedback = mongoose.model("Feedback", feedbackSchema);
 
-feedbackRouter.get("/feedback", async (req, res)=>{
+feedbackRouter.get("/", async (req, res)=>{
 
     try {
         const feedbacks = await Feedback.find({});
