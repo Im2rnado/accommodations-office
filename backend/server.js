@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 4000;
 
 const feedbackRouter = require("./routes/feedbackRouter");
 const previousPlanRouter = require("./routes/previousPlanRouter");
+const pendingFormsRouter = require("./routes/pendingFormsRouter.js");
+const currentLearningPlanRouter = require("./routes/currentLearningPlanRouter.js")
 
 const connectToDatabase = async() =>
 {
@@ -25,6 +27,10 @@ app.use(cors({origin: 'http://localhost:3000'}));
 app.use("/feedback", feedbackRouter);
 
 app.use("/previousPlan", previousPlanRouter);
+
+app.use("/pendingForms", pendingFormsRouter);
+
+app.use("/currentLearningPlan", currentLearningPlanRouter);
 
 app.listen(PORT, () => {
     console.log(`[SERVER] Running on http://localhost:${PORT}`);

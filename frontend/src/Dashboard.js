@@ -5,18 +5,48 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Dashboard = () => {
-    const currentLearningPlan = {
-        teachingSupport: [
-            { type: "Access to private study rooms/exams", status: "Approved", courses: ["Marketing 101", "Business Ethics"] },
-            { type: "Scribe Teacher", status: "Active", courses: ["Financial Management", "Economics"] },
-            { type: "Attendance policy", status: "Active", courses: ["All Courses"] },
-            { type: "Modifying course materials", status: "Inactive", courses: ["Calculus D401"] }
-        ]
-    };
+    // const currentLearningPlan = {
+    //     teachingSupport: [
+    //         { type: "Access to private study rooms/exams", status: "Approved", courses: ["Marketing 101", "Business Ethics"] },
+    //         { type: "Scribe Teacher", status: "Active", courses: ["Financial Management", "Economics"] },
+    //         { type: "Attendance policy", status: "Active", courses: ["All Courses"] },
+    //         { type: "Modifying course materials", status: "Inactive", courses: ["Calculus D401"] }
+    //     ]
+    // };
 
-    const pendingForms = [
-        { id: "F-2024-089", type: "Missing Medical Report", submitted: "2024-02-20" },
-    ];
+    const [currentLearningPlan, setCurrentLearningPlan] = useState([]);
+
+    useEffect(() => {
+        const fetchCurrentLearningPlan = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/currentLearningPlan');
+            setCurrentLearningPlan(response.data);
+            console.log('Fetched CurrentLearningPlan:', response.data);
+        } catch (error) {
+            console.error('Error fetching CurrentLearningPlan:', error);
+        }
+        };
+
+        fetchCurrentLearningPlan();
+    }, []);
+
+    console.log(currentLearningPlan);
+
+    const [pendingForms, setPendingForms] = useState([]);
+
+    useEffect(() => {
+        const fetchPendingForms = async () => {
+        try {
+            const response = await axios.get('http://localhost:4000/pendingForms');
+            setPendingForms(response.data);
+            console.log('Fetched PendingForms:', response.data);
+        } catch (error) {
+            console.error('Error fetching PendingForms:', error);
+        }
+        };
+
+        fetchPendingForms();
+    }, []);
 
     const approvedForms = [
         { id: "F-2024-071", type: "Exam Accommodation", approved: "2024-01-20" },
@@ -38,6 +68,7 @@ const Dashboard = () => {
 
         fetchPreviousPlan();
     }, []);
+
 
     const [feedbacks, setFeedbacks] = useState([]);
 
@@ -139,7 +170,7 @@ const Dashboard = () => {
                     {/* Current Learning Plan */}
                     <div className="col-span-2 bg-[#007ECA] rounded-xl p-4 h-auto min-h-[12rem]">
                         <h2 tabIndex="3" role="Current Learning Plan" aria-label="This section shows the current learning plan assigned" className="text-lg font-semibold mb-3">Current Learning Plan</h2>
-                        {currentLearningPlan.teachingSupport.map((item, index) => (
+                        {currentLearningPlan[0].teachingSupport?.map((item, index) => (
                             <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
                                 <p className="font-medium">{item.type}</p>
                                 <p className="text-sm">Status: {item.status}</p>
@@ -151,7 +182,7 @@ const Dashboard = () => {
                     {/* Pending Forms */}
                     <div className="bg-[#007ECA] rounded-xl p-4">
                         <h2 tabIndex="4" role="Pending Forms" aria-label="This section shows any pending forms" className="text-lg font-semibold mb-3">Requested Forms from Office</h2>
-                        {pendingForms.map((form, index) => (
+                        {pendingForms?.map((form, index) => (
                             <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
                                 <p className="font-medium">{form.type}</p>
                                 <p className="text-sm">ID: {form.id}</p>
@@ -176,7 +207,8 @@ const Dashboard = () => {
                     <div className="bg-[#007ECA] rounded-xl p-4">
                         <h2 tabIndex="6" role="Previous learning plan" className="text-lg font-semibold mb-3">Previous Learning Plan</h2>
                         <div className="bg-[#072D4A]/10 p-2 rounded-lg">
-                            <p className="font-medium">{previousPlan[0].semester}</p>
+        
+                            <p className="font-medium">{previousPlan[0]?.semester}</p>
                             <ul className="list-disc list-inside text-sm mt-2">
                                 {previousPlan.map((plan, index) => (
                                     <li key={index}>Accommodations:
