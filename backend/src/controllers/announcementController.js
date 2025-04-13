@@ -5,6 +5,7 @@ exports.getAllAnnouncements = async (req, res) => {
         const announcements = await Announcement.find();
         return res.status(200).json({ success: true, announcements });
     } catch (error) {
+        console.error(error);
         return res.status(500).json({ success: false, message: error.message });
     }
 };
@@ -16,6 +17,7 @@ exports.createAnnouncement = async (req, res) => {
         await newAnnouncement.save();
         return res.status(201).json({ success: true, announcement: newAnnouncement });
     } catch (error) {
+        console.error(error);
         return res.status(500).json({ success: false, message: error.message });
     }
 };
@@ -28,6 +30,7 @@ exports.getAnnouncementById = async (req, res) => {
         }
         return res.status(200).json({ success: true, announcement });
     } catch (error) {
+        console.error(error);
         return res.status(500).json({ success: false, message: error.message });
     }
 };
@@ -40,6 +43,7 @@ exports.updateAnnouncement = async (req, res) => {
         }
         return res.status(200).json({ success: true, announcement });
     } catch (error) {
+        console.error(error);
         return res.status(500).json({ success: false, message: error.message });
     }
 };
@@ -52,6 +56,7 @@ exports.deleteAnnouncement = async (req, res) => {
         }
         return res.status(200).json({ success: true, message: "Announcement deleted successfully" });
     } catch (error) {
+        console.error(error);
         return res.status(500).json({ success: false, message: error.message });
     }
 };

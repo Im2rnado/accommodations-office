@@ -19,7 +19,7 @@ const AdminLearningPlan = () => {
                     setStudent(response.data.student);
 
                     const initializedLearningPlan = {};
-                    Object.entries(response.data.student.learningPlan).forEach(
+                    Object.entries(response.data.student.currentLearningPlan).forEach(
                         ([category, supports]) => {
                             initializedLearningPlan[category] = supports.map((support) => ({
                                 ...support,
@@ -34,6 +34,7 @@ const AdminLearningPlan = () => {
                 setLoading(false);
             })
             .catch((err) => {
+                console.error(err);
                 setError(err.message);
                 setLoading(false);
             });
@@ -57,6 +58,7 @@ const AdminLearningPlan = () => {
                 setLoading(false);
             }
         } catch (err) {
+            console.error(err);
             setError(err.message);
             setLoading(false);
         }
