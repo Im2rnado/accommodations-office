@@ -26,7 +26,11 @@ const AdminPending = () => {
     }, []);
 
     if (loading) {
-        return <div className="p-6">Loading...</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-900">
+                <div className="text-white text-xl">Loading...</div>
+            </div>
+        );
     }
 
     if (error) {

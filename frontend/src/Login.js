@@ -1,17 +1,52 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
     const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError('');
 
-        if (email.includes('@eslsca.edu.eg')) {
-            navigate('/admin-dashboard');
-        } else {
-            navigate('/apply');
+        try {
+            // If email is for admin, redirect to admin dashboard
+            if (email.includes('admin')) {
+                navigate('/admin-dashboard');
+                return;
+            }
+
+            // Check if student exists with this email
+            const response = await axios.get('http://localhost:4000/api/students');
+            if (response.data.success) {
+                const student = response.data.students.find(
+                    student => student.email && student.email.toLowerCase() === email.toLowerCase()
+                );
+
+                if (student) {
+                    // Store student info in localStorage for later use
+                    localStorage.setItem('studentId', student.id);
+                    localStorage.setItem('studentName', student.name);
+                    localStorage.setItem('studentEmail', student.email);
+
+                    // Redirect to dashboard
+                    navigate('/dashboard');
+                } else {
+                    // Not a registered student, redirect to apply
+                    navigate('/apply');
+                }
+            } else {
+                setError('Failed to check student status');
+            }
+        } catch (err) {
+            console.error('Login error:', err);
+            setError('An error occurred while logging in');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -28,15 +63,23 @@ const Login = () => {
                             placeholder="Enter Email or ID"
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full mt-1 text-2xl px-3 py-2 bg-[#072D4A]/70 text-white border border-[#007ECA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#007ECA]"
+                            required
                         />
                     </div>
+
+                    {error && (
+                        <div className="text-red-400 text-center">
+                            {error}
+                        </div>
+                    )}
 
                     <div className="flex justify-center">
                         <button
                             type="submit"
-                            className="px-6 py-2 bg-[#007ECA] hover:bg-[#0A4770] text-white rounded-lg font-medium text-xl"
+                            disabled={loading}
+                            className="px-6 py-2 bg-[#007ECA] hover:bg-[#0A4770] text-white rounded-lg font-medium text-xl disabled:opacity-50"
                         >
-                            Continue
+                            {loading ? "Please wait..." : "Continue"}
                         </button>
                     </div>
                 </form>

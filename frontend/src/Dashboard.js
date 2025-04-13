@@ -3,46 +3,87 @@ import React from "react";
 import AccessabilityFeatures from './AccessibilityFeatures';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-    // const currentLearningPlan = {
-    //     teachingSupport: [
-    //         { type: "Access to private study rooms/exams", status: "Approved", courses: ["Marketing 101", "Business Ethics"] },
-    //         { type: "Scribe Teacher", status: "Active", courses: ["Financial Management", "Economics"] },
-    //         { type: "Attendance policy", status: "Active", courses: ["All Courses"] },
-    //         { type: "Modifying course materials", status: "Inactive", courses: ["Calculus D401"] }
-    //     ]
-    // };
-
+    const navigate = useNavigate();
+    const studentId = localStorage.getItem('studentId');
+    const studentName = localStorage.getItem('studentName');
     const [currentLearningPlan, setCurrentLearningPlan] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError,] = useState(null);
+
+    // Check if user is logged in
+    useEffect(() => {
+        if (!studentId) {
+            navigate('/login');
+        }
+    }, [navigate, studentId]);
 
     useEffect(() => {
-        const fetchCurrentLearningPlan = async () => {
-        try {
-            const response = await axios.get('http://localhost:4000/currentLearningPlan');
-            setCurrentLearningPlan(response.data);
-            console.log('Fetched CurrentLearningPlan:', response.data);
-        } catch (error) {
-            console.error('Error fetching CurrentLearningPlan:', error);
-        }
+        const fetchStudentData = async () => {
+            setLoading(true);
+
+            try {
+                if (studentId) {
+                    // Fetch student by ID
+                    const studentResponse = await axios.get(`http://localhost:4000/api/students/${studentId}`);
+
+                    if (studentResponse.data.success && studentResponse.data.student) {
+                        const student = studentResponse.data.student;
+
+                        // Set current learning plan from student data
+                        if (student.currentLearningPlan) {
+                            setCurrentLearningPlan([{
+                                teachingSupport: student.currentLearningPlan.teachingSupport?.map(item => ({
+                                    type: item.item,
+                                    status: item.value === true ? "Active" : "Inactive",
+                                    courses: Array.isArray(item.subject) ? item.subject : ["All Courses"]
+                                })) || []
+                            }]);
+                        } else {
+                            setCurrentLearningPlan([{ teachingSupport: [] }]);
+                        }
+
+                        // Set previous plan data if available
+                        if (student.previousLearningPlan) {
+                            setPreviousPlan([{
+                                semester: "Previous Semester",
+                                accommodations: student.previousLearningPlan.teachingSupport?.map(item =>
+                                    `${item.item}${typeof item.value === 'boolean' ? (item.value ? " - Enabled" : " - Disabled") : `: ${item.value}`}`
+                                ) || []
+                            }]);
+                        } else {
+                            setPreviousPlan([{
+                                semester: "No Previous Plans",
+                                accommodations: ["No previous accommodations found"]
+                            }]);
+                        }
+                    } else {
+                        setError("Student data not found");
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching student data:', error);
+                setError("Error loading student data");
+            } finally {
+                setLoading(false);
+            }
         };
 
-        fetchCurrentLearningPlan();
-    }, []);
-
-    console.log(currentLearningPlan);
+        fetchStudentData();
+    }, [studentId]);
 
     const [pendingForms, setPendingForms] = useState([]);
 
     useEffect(() => {
         const fetchPendingForms = async () => {
-        try {
-            const response = await axios.get('http://localhost:4000/pendingForms');
-            setPendingForms(response.data);
-            console.log('Fetched PendingForms:', response.data);
-        } catch (error) {
-            console.error('Error fetching PendingForms:', error);
-        }
+            try {
+                const response = await axios.get('http://localhost:4000/pendingForms');
+                setPendingForms(response.data);
+            } catch (error) {
+                console.error('Error fetching PendingForms:', error);
+            }
         };
 
         fetchPendingForms();
@@ -55,32 +96,16 @@ const Dashboard = () => {
 
     const [previousPlan, setPreviousPlan] = useState([]);
 
-    useEffect(() => {
-        const fetchPreviousPlan = async () => {
-        try {
-            const response = await axios.get('http://localhost:4000/previousPlan');
-            setPreviousPlan(response.data);
-            console.log('Fetched PreviousPlan:', response.data);
-        } catch (error) {
-            console.error('Error fetching PreviousPlan:', error);
-        }
-        };
-
-        fetchPreviousPlan();
-    }, []);
-
-
     const [feedbacks, setFeedbacks] = useState([]);
 
     useEffect(() => {
         const fetchFeedbacks = async () => {
-        try {
-            const response = await axios.get('http://localhost:4000/feedback');
-            setFeedbacks(response.data);
-            console.log('Fetched feedbacks:', response.data);
-        } catch (error) {
-            console.error('Error fetching feedbacks:', error);
-        }
+            try {
+                const response = await axios.get('http://localhost:4000/feedback');
+                setFeedbacks(response.data);
+            } catch (error) {
+                console.error('Error fetching feedbacks:', error);
+            }
         };
 
         fetchFeedbacks();
@@ -97,6 +122,32 @@ const Dashboard = () => {
         { title: "Exam Arrangements Discussion", date: "2024-03-05", time: "11:30" }
     ];
 
+    // Show loading state
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-900">
+                <div className="text-white text-xl">Loading your dashboard...</div>
+            </div>
+        );
+    }
+
+    // Show error state
+    if (error) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-900">
+                <div className="text-red-400 text-xl">
+                    <p>{error}</p>
+                    <button
+                        onClick={() => navigate('/login')}
+                        className="mt-4 px-4 py-2 bg-[#007ECA] rounded-lg"
+                    >
+                        Return to Login
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="flex min-h-screen bg-gray-900 text-white">
             <AccessabilityFeatures></AccessabilityFeatures>
@@ -108,11 +159,11 @@ const Dashboard = () => {
                         <div className="w-12 h-12 bg-gray-500 rounded-full"></div>
                         <div>
                             <p className="font-semibold">Welcome Back,</p>
-                            <p className="text-sm">Ahmed Hatem</p>
+                            <p className="text-sm">{studentName || 'Student'}</p>
                         </div>
                     </div>
                 </div>
-                <nav tabIndex="1" role="Navigation bar" aria-label="Links to each page, you can navigate vertically through the arrow keys"  className="m-2 space-y-4">
+                <nav tabIndex="1" role="Navigation bar" aria-label="Links to each page, you can navigate vertically through the arrow keys" className="m-2 space-y-4">
                     <a
                         href="#"
                         className="block py-2 px-4 bg-[#007ECA]/70 rounded-xl text-white hover:bg-[#007ECA]/60"
@@ -157,7 +208,15 @@ const Dashboard = () => {
                     </a>
                 </nav>
                 <div className="mt-auto p-6">
-                    <button className="w-full text-left py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl">
+                    <button
+                        className="w-full text-left py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
+                        onClick={() => {
+                            localStorage.removeItem('studentId');
+                            localStorage.removeItem('studentName');
+                            localStorage.removeItem('studentEmail');
+                            navigate('/login');
+                        }}
+                    >
                         Logout
                     </button>
                 </div>
@@ -166,76 +225,101 @@ const Dashboard = () => {
             {/* Main Dashboard */}
             <main className="flex-1 bg-blue-100 p-8">
                 <h1 tabIndex="2" role="Dashboard section" aria-label="You are now on the main dashboard" className="text-2xl font-bold mb-6 text-black">Dashboard</h1>
-                <div className="grid grid-cols-3 gap-6">
-                    {/* Current Learning Plan */}
-                    <div className="col-span-2 bg-[#007ECA] rounded-xl p-4 h-auto min-h-[12rem]">
-                        <h2 tabIndex="3" role="Current Learning Plan" aria-label="This section shows the current learning plan assigned" className="text-lg font-semibold mb-3">Current Learning Plan</h2>
-                        {currentLearningPlan[0].teachingSupport?.map((item, index) => (
-                            <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
-                                <p className="font-medium">{item.type}</p>
-                                <p className="text-sm">Status: {item.status}</p>
-                                <p className="text-sm">Courses: {item.courses.join(", ")}</p>
+                <div className="grid grid-cols-2 gap-6">
+                    {/* Current Learning Plan - First Column */}
+                    <div className="bg-gradient-to-br from-[#007ECA] to-[#2196f3] rounded-xl p-5 shadow-lg h-auto min-h-[calc(100vh-12rem)]">
+                        <h2 tabIndex="3" role="Current Learning Plan" aria-label="This section shows the current learning plan assigned" className="text-xl font-semibold mb-4 text-white">Current Learning Plan</h2>
+                        {currentLearningPlan[0] && currentLearningPlan[0].teachingSupport && currentLearningPlan[0].teachingSupport.length > 0 ? (
+                            currentLearningPlan[0].teachingSupport.map((item, index) => (
+                                <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
+                                    <p className="font-medium text-blue-900">{item.type}</p>
+                                    <p className="text-sm text-blue-800">Status: <span className={`font-semibold ${item.status === "Active" ? "text-green-700" : "text-blue-700"}`}>{item.status}</span></p>
+                                    <p className="text-sm text-blue-800">Courses: {item.courses.join(", ")}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="mb-2 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
+                                <p className="font-medium text-center text-blue-800">No current learning plan available</p>
                             </div>
-                        ))}
+                        )}
                     </div>
 
-                    {/* Pending Forms */}
-                    <div className="bg-[#007ECA] rounded-xl p-4">
-                        <h2 tabIndex="4" role="Pending Forms" aria-label="This section shows any pending forms" className="text-lg font-semibold mb-3">Requested Forms from Office</h2>
-                        {pendingForms?.map((form, index) => (
-                            <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
-                                <p className="font-medium">{form.type}</p>
-                                <p className="text-sm">ID: {form.id}</p>
-                                <p className="text-sm">Submitted: {form.submitted}</p>
+                    {/* Second Column - 4 Rows */}
+                    <div className="space-y-6">
+                        {/* Pending Forms - Row 1 */}
+                        <div className="bg-gradient-to-r from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg">
+                            <h2 tabIndex="4" role="Pending Forms" aria-label="This section shows any pending forms" className="text-lg font-semibold mb-3">Requested Forms from Office</h2>
+                            {pendingForms && pendingForms.length > 0 ? (
+                                pendingForms.map((form, index) => (
+                                    <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
+                                        <p className="font-medium text-blue-900">{form.type}</p>
+                                        <p className="text-sm text-blue-800">ID: <span className="font-mono">{form.id}</span></p>
+                                        <p className="text-sm text-blue-800">Submitted: {form.submitted}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="mb-2 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
+                                    <p className="font-medium text-center text-blue-800">No pending forms</p>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Approved Forms - Row 2 */}
+                        <div className="bg-gradient-to-r from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg">
+                            <h2 tabIndex="5" role="Approved Forms" className="text-lg font-semibold mb-3">Approved New Requests</h2>
+                            {approvedForms.map((form, index) => (
+                                <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
+                                    <p className="font-medium text-blue-900">{form.type}</p>
+                                    <p className="text-sm text-blue-800">ID: <span className="font-mono">{form.id}</span></p>
+                                    <p className="text-sm text-blue-800">Approved: {form.approved}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Previous Learning Plan - Row 3 */}
+                        <div className="bg-gradient-to-r from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg">
+                            <h2 tabIndex="6" role="Previous learning plan" className="text-lg font-semibold mb-3">Previous Learning Plan</h2>
+                            <div className="bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
+                                {previousPlan && previousPlan.length > 0 ? (
+                                    <>
+                                        <p className="font-medium text-blue-900">{previousPlan[0]?.semester}</p>
+                                        <ul className="list-disc list-inside text-sm mt-2 text-blue-800">
+                                            {previousPlan.map((plan, index) => (
+                                                <li key={index}>Accommodations:
+                                                    {plan.accommodations.map((accommodation, idx) => (
+                                                        <ol key={idx} className="ml-4 mt-1">{accommodation}</ol>
+                                                    ))}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </>
+                                ) : (
+                                    <p className="font-medium text-center text-blue-800">No previous learning plans</p>
+                                )}
                             </div>
-                        ))}
+                        </div>
+
+                        {/* Feedback - Row 4 */}
+                        <div className="bg-gradient-to-r from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg">
+                            <h2 tabIndex="7" role="Feedbacks" className="text-lg font-semibold mb-3">Feedback</h2>
+                            {feedbacks && feedbacks.length > 0 ? (
+                                feedbacks.map((feedback, index) => (
+                                    <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
+                                        <p className="font-medium text-blue-900">From: {feedback.from}</p>
+                                        <p className="text-sm text-blue-800">{feedback.message}</p>
+                                        <p className="text-xs mt-2 text-blue-600">{feedback.date}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="mb-2 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
+                                    <p className="font-medium text-center text-blue-800">No feedback available</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
 
-                    {/* Approved Forms */}
-                    <div className="bg-[#007ECA] rounded-xl p-4 h-auto">
-                        <h2 tabIndex="5" role="Approved Forms" className="text-lg font-semibold mb-3">Approved New Requests</h2>
-                        {approvedForms.map((form, index) => (
-                            <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
-                                <p className="font-medium">{form.type}</p>
-                                <p className="text-sm">ID: {form.id}</p>
-                                <p className="text-sm">Approved: {form.approved}</p>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Previous Learning Plan */}
-                    <div className="bg-[#007ECA] rounded-xl p-4">
-                        <h2 tabIndex="6" role="Previous learning plan" className="text-lg font-semibold mb-3">Previous Learning Plan</h2>
-                        <div className="bg-[#072D4A]/10 p-2 rounded-lg">
-        
-                            <p className="font-medium">{previousPlan[0]?.semester}</p>
-                            <ul className="list-disc list-inside text-sm mt-2">
-                                {previousPlan.map((plan, index) => (
-                                    <li key={index}>Accommodations:
-                                        {plan.accommodations.map((accommodation, index)=>(
-                                             <ol key={index}>{accommodation}</ol>
-                                        ))}</li>
-                                ))}
-                            </ul>
-                        </div>  
-                    </div>
-
-                    {/* Feedback */}
-                    <div className="bg-[#007ECA] rounded-xl p-4">
-                        <h2 tabIndex="7" role="Feedbacks" className="text-lg font-semibold mb-3">Feedback</h2>
-                        {feedbacks.map((feedback, index) => (
-                            <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
-                                <p className="font-medium">From: {feedback.from}</p>
-                                <p className="text-sm">{feedback.message}</p>
-                                <p className="text-xs mt-1">{feedback.date}</p>
-                            </div>
-                        ))}
-                    </div>
-
-
-
-                    {/* Calendar */}
-                    <div aria-hidden className="col-span-3 bg-[#B9E4FE] rounded-xl p-6 text-black">
+                    {/* Calendar - Full Width */}
+                    <div aria-hidden className="col-span-2 bg-gradient-to-r from-[#B9E4FE] to-[#c1e8ff] rounded-xl p-6 shadow-lg text-black">
                         <h2 className="text-lg font-semibold mb-4">November</h2>
                         <div className="grid grid-cols-7 text-center">
                             <span>Mo</span>
@@ -248,7 +332,7 @@ const Dashboard = () => {
                             {[...Array(30).keys()].map((day) => (
                                 <div
                                     key={day}
-                                    className={`py-2 rounded ${day + 1 === 23 ? "bg-[#072D4A]/90 text-white" : ""
+                                    className={`py-2 rounded ${day + 1 === 23 ? "bg-blue-600 text-white shadow-sm" : ""
                                         }`}
                                 >
                                     {day + 1}
@@ -261,22 +345,22 @@ const Dashboard = () => {
 
             {/* Right Sidebar */}
             <aside className="w-64 bg-[#072D4A]/90 p-6">
-                <div className="bg-[#007ECA] rounded-xl p-4 h-1/2 mb-6">
+                <div className="bg-gradient-to-b from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg h-1/2 mb-6">
                     <h2 tabIndex="8" role="Announcements" className="text-xl font-bold mb-3">Announcements</h2>
                     {announcements.map((announcement, index) => (
-                        <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
-                            <p className="font-medium">{announcement.title}</p>
-                            <p className="text-xs">{announcement.date}</p>
+                        <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
+                            <p className="font-medium text-blue-900">{announcement.title}</p>
+                            <p className="text-xs text-blue-600 mt-1">{announcement.date}</p>
                         </div>
                     ))}
                 </div>
-                <div className="bg-[#007ECA] rounded-xl p-4 h-2/5">
+                <div className="bg-gradient-to-b from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg h-2/5">
                     <h2 tabIndex="9" role="Meetings" className="text-xl font-bold mb-3">Meetings</h2>
                     {meetings.map((meeting, index) => (
-                        <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
-                            <p className="font-medium">{meeting.title}</p>
-                            <p className="text-xs">Date: {meeting.date}</p>
-                            <p className="text-xs">Time: {meeting.time}</p>
+                        <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
+                            <p className="font-medium text-blue-900">{meeting.title}</p>
+                            <p className="text-xs text-blue-700">Date: {meeting.date}</p>
+                            <p className="text-xs text-blue-700">Time: {meeting.time}</p>
                         </div>
                     ))}
                 </div>

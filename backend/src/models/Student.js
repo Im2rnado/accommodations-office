@@ -10,6 +10,11 @@ const studentSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
     dob: {
         type: Date,
         required: true
@@ -39,7 +44,17 @@ const studentSchema = new mongoose.Schema({
         name: String,
         url: String
     },
-    learningPlan: {
+    currentLearningPlan: {
+        examSupport: [{
+            item: String,
+            value: mongoose.Schema.Types.Mixed
+        }],
+        teachingSupport: [{
+            item: String,
+            value: mongoose.Schema.Types.Mixed
+        }]
+    },
+    previousLearningPlan: {
         examSupport: [{
             item: String,
             value: mongoose.Schema.Types.Mixed
