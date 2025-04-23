@@ -295,7 +295,7 @@ const AdminLearningPlan = () => {
         );
     }
 
-    if (student.status === "Pending") {
+    else if (student.status === "Pending") {
         return (
             <div className="flex min-h-screen bg-gray-900 text-white">
                 {/* Sidebar */}
@@ -650,6 +650,220 @@ const AdminLearningPlan = () => {
             </div>
         );
     }
+
+    if (student.status === "Approved") {
+        return (
+            <div className="flex min-h-screen bg-gray-900 text-white" >
+                {/* Sidebar */}
+                < aside className="w-64 bg-[#072D4A]/90 flex flex-col" >
+                    <div className="p-6">
+                        <h1 className="text-lg font-bold mb-4">Accommodation's Office</h1>
+                        <div className="flex items-center space-x-4">
+                            <div className="w-12 h-12 bg-gray-500 rounded-full"></div>
+                            <div>
+                                <p className="font-semibold">Welcome Back,</p>
+                                <p className="text-sm">Laila</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <nav className="m-2 space-y-4">
+                        <NavLink to="/admin-dashboard" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Dashboard </NavLink>
+                        <NavLink to="/admin-students" className="block py-2 px-4 bg-[#007ECA]/70 text-white hover:bg-[#007ECA]/60 rounded-xl"> Students </NavLink>
+                        <NavLink to="/admin-approved" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Approved </NavLink>
+                        <NavLink to="/admin-pending" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Pending </NavLink>
+                        <NavLink to="/admin-applied" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Applied </NavLink>
+                        <NavLink to="/admin-announcements" className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"> Announcements </NavLink>
+                    </nav>
+
+                    <div className="mt-auto p-6">
+                        <button className="w-full text-left py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl">
+                            Logout
+                        </button>
+                    </div>
+                </aside >
+
+                {/* Main Content */}
+                < main className="flex-1 bg-blue-100 p-8" >
+                    <h1 className="text-2xl font-bold mb-6 text-black">Approved Student</h1>
+
+                    {/* Student Header */}
+                    <div className="flex items-center space-x-4 mb-4">
+                        <img
+                            src={student.image || "https://via.placeholder.com/48"}
+                            alt={`${student.name}'s avatar`}
+                            className="w-12 h-12 rounded-full object-cover"
+                        />
+                        <div>
+                            <h2 className="text-xl font-bold text-black">{student.name}</h2>
+                            <p className="text-sm text-black">ID: <span className="font-bold">{student.id}</span></p>
+                            <p className="text-sm text-black">Faculty: <span className="font-bold">{student.faculty}</span></p>
+                            <p className="text-sm text-black mb-1">Disability: <a className="font-bold">{student.disability}</a></p>
+                            <span
+                                className={
+                                    "text-sm " +
+                                    (student.status === "Approved"
+                                        ? "bg-green-600"
+                                        : student.status === "Pending"
+                                            ? "bg-yellow-600"
+                                            : "bg-red-600") +
+                                    " text-white px-2 py-1 rounded-xl font-semibold"
+                                }
+                            >{student.status}
+                            </span>
+                        </div>
+                    </div>
+
+                    {/* Progress Bar */}
+                    <div className="w-full bg-[#072D4A] rounded-xl p-4 mb-6 shadow-lg">
+                        <div className="flex justify-between items-center">
+                            <div className="w-6 h-6 bg-[#007ECA] rounded-full"></div>
+                            <div className="flex-1 h-1 bg-gray-400 mx-2"></div>
+                            <div className="w-6 h-6 bg-white rounded-full"></div>
+                            <div className="flex-1 h-1 bg-gray-400 mx-2"></div>
+                            <div className="w-6 h-6 bg-white rounded-full"></div>
+                            <div className="flex-1 h-1 bg-gray-400 mx-2"></div>
+                            <div className="w-6 h-6 bg-white rounded-full"></div>
+                        </div>
+                    </div>
+
+                    {/* Student Details */}
+                    <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg p-6">
+                        <h1 className="text-2xl font-bold mb-4 text-black">Student Details</h1>
+
+                        <div className="grid grid-cols-2 gap-6">
+                            <div className="space-y-4">
+                                <div className="bg-white p-4 rounded-lg shadow">
+                                    <p className="text-sm text-gray-500">Student ID</p>
+                                    <p className="font-semibold text-black">{student.id}</p>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg shadow">
+                                    <p className="text-sm text-gray-500">First Name</p>
+                                    <p className="font-semibold text-black">{student.name.split(" ")[0]}</p>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg shadow">
+                                    <p className="text-sm text-gray-500">Last Name</p>
+                                    <p className="font-semibold text-black">{student.name.split(" ")[1]}</p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-4">
+                                <div className="bg-white p-4 rounded-lg shadow">
+                                    <p className="text-sm text-gray-500">Date of Birth</p>
+                                    <p className="font-semibold text-black">{new Date(student.dob).toLocaleDateString()}</p>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg shadow">
+                                    <p className="text-sm text-gray-500">School</p>
+                                    <p className="font-semibold text-black">{student.faculty}</p>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg shadow">
+                                    <p className="text-sm text-gray-500">Graduation Year</p>
+                                    <p className="font-semibold text-black">{student.graduationYear}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Documents */}
+                    <div className="grid grid-cols-2 gap-6 mb-6">
+                        {/* Medical Reports */}
+                        <div className="bg-[#B9E4FE] rounded-xl shadow-lg p-6">
+                            <h2 className="text-xl font-bold mb-4 text-black">Medical Reports</h2>
+
+                            {student.medicalReports && student.medicalReports.length > 0 ? (
+                                <div className="space-y-3">
+                                    {student.medicalReports.map((report, index) => (
+                                        <div key={index} className="bg-white p-3 rounded-lg shadow flex justify-between items-center">
+                                            <span className="text-black font-medium">{report.name || `Medical Report ${index + 1}`}</span>
+                                            <button
+                                                className="bg-[#007ECA] text-white px-4 py-1 rounded-lg hover:bg-[#007ECA]/80 transition-colors"
+                                                onClick={() => window.open(report.url || '#')}
+                                            >
+                                                Download
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-gray-500 italic">No medical reports submitted</p>
+                            )}
+                        </div>
+
+                        {/* Doctor's Form */}
+                        <div className="bg-[#B9E4FE] rounded-xl shadow-lg p-6">
+                            <h2 className="text-xl font-bold mb-4 text-black">Doctor's Form</h2>
+
+                            {student.doctorsForm ? (
+                                <div className="bg-white p-4 rounded-lg shadow flex justify-between items-center">
+                                    <span className="text-black font-medium">{student.doctorsForm.name || "Doctor's Form"}</span>
+                                    <button
+                                        className="bg-[#007ECA] text-white px-4 py-1 rounded-lg hover:bg-[#007ECA]/80 transition-colors"
+                                        onClick={() => window.open(student.doctorsForm.url || '#')}
+                                    >
+                                        Download
+                                    </button>
+                                </div>
+                            ) : (
+                                <p className="text-gray-500 italic">No doctor's form submitted</p>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Admin Actions */}
+                    <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg p-6">
+                    <h1 className="text-2xl font-bold mb-4 text-black">Send Feedback</h1>
+                    
+                    <h4 className="text-gray-700 font-bold">From:</h4>
+                    <input id="fromInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
+                    <h4 className="text-gray-700 mt-4 font-bold">Message:</h4>
+                    <textarea id="messageText" cols="30" rows="5" className="w-[80%] text-black rounded-md p-2 shadow-sm"></textarea>
+                    <br/>
+                    <button onClick={()=>sendFeedback(document.getElementById("fromInput").value, document.getElementById("messageText").value, student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Send</button>
+                    </div>
+                </main >
+
+                {/* Right Sidebar */}
+                < aside className="w-64 bg-[#072D4A]/90 p-6" >
+                    <div className="bg-[#007ECA] rounded-xl p-4 h-1/2 mb-6">
+                        <h2 className="text-xl font-bold">Announcements</h2>
+                    </div>
+                    <div className="bg-[#007ECA] rounded-xl p-4 h-2/5">
+                        <h2 className="text-xl font-bold">Meetings</h2>
+                    </div>
+                </aside >
+            </div >
+        );
+    }
 };
+
+async function sendFeedback(from, message, to)
+{
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const dateFormat = `${day}-${month}-${year}`;
+    const feedback = {
+        "from":from,
+        "to":to,
+        "date": dateFormat,
+        "message": message
+    };
+
+    try {
+        const response = await axios.post("http://localhost:4000/feedback", feedback, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        console.log("Data sent successfully:", response.data);
+      } catch (error) {
+        console.error("Error sending data:", error);
+      }
+}
 
 export default AdminLearningPlan;

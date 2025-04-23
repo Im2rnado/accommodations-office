@@ -1,16 +1,7 @@
 const express = require("express");
-const { default: mongoose } = require("mongoose");
+const Feedback = require("../models/Feedback");
 
 const feedbackRouter = express.Router();
-
-const feedbackSchema = new mongoose.Schema({ 
-    from: String, 
-    date: String, 
-    message: String,
-    objectId: mongoose.Schema.Types.ObjectId
-});
-
-const Feedback = mongoose.model("Feedback", feedbackSchema);
 
 feedbackRouter.get("/", async (req, res)=>{
 
@@ -23,6 +14,9 @@ feedbackRouter.get("/", async (req, res)=>{
         console.log("Fetching 'Feedbacks' Failed: " + error);
     }
     
+}).post("/", (req, res)=>{
+    console.log(req.body);
+    Feedback.create(req.body);
 });
 
 

@@ -31,6 +31,7 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    graduationYear: Number,
     medicalReports: [{
         name: String,
         url: String

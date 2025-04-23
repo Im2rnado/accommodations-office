@@ -170,7 +170,7 @@ const Dashboard = () => {
                     {/* Current Learning Plan */}
                     <div className="col-span-2 bg-[#007ECA] rounded-xl p-4 h-auto min-h-[12rem]">
                         <h2 tabIndex="3" role="Current Learning Plan" aria-label="This section shows the current learning plan assigned" className="text-lg font-semibold mb-3">Current Learning Plan</h2>
-                        {currentLearningPlan[0].teachingSupport?.map((item, index) => (
+                        {currentLearningPlan[0]?.teachingSupport?.map((item, index) => (
                             <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
                                 <p className="font-medium">{item.type}</p>
                                 <p className="text-sm">Status: {item.status}</p>
