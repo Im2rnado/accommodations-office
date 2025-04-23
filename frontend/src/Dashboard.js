@@ -111,11 +111,25 @@ const Dashboard = () => {
         fetchFeedbacks();
     }, []);
 
-    const announcements = [
-        { title: "Spring Break Support Services", date: "2024-02-23" },
-        { title: "New Assistive Technology Available", date: "2024-02-22" },
-        { title: "Upcoming Workshop: Study Strategies", date: "2024-02-20" }
-    ];
+    // const announcements = [
+    //     { title: "Spring Break Support Services", date: "2024-02-23" },
+    //     { title: "New Assistive Technology Available", date: "2024-02-22" },
+    //     { title: "Upcoming Workshop: Study Strategies", date: "2024-02-20" }
+    // ];
+
+    const [announcements, setAnnouncements] = useState([]);
+    useEffect(() => {
+        const fetchAnnouncements = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/api/announcements');
+                setAnnouncements(response.data.announcements);
+            } catch (error) {
+                console.error('Error fetching feedbacks:', error);
+            }
+        };
+
+        fetchAnnouncements();
+    }, []);
 
     const meetings = [
         { title: "Support Review Meeting", date: "2024-03-01", time: "14:00" },
@@ -225,17 +239,6 @@ const Dashboard = () => {
             {/* Main Dashboard */}
             <main className="flex-1 bg-blue-100 p-8">
                 <h1 tabIndex="2" role="Dashboard section" aria-label="You are now on the main dashboard" className="text-2xl font-bold mb-6 text-black">Dashboard</h1>
-<<<<<<< HEAD
-                <div className="grid grid-cols-3 gap-6">
-                    {/* Current Learning Plan */}
-                    <div className="col-span-2 bg-[#007ECA] rounded-xl p-4 h-auto min-h-[12rem]">
-                        <h2 tabIndex="3" role="Current Learning Plan" aria-label="This section shows the current learning plan assigned" className="text-lg font-semibold mb-3">Current Learning Plan</h2>
-                        {currentLearningPlan[0]?.teachingSupport?.map((item, index) => (
-                            <div key={index} className="mb-2 bg-[#072D4A]/10 p-2 rounded-lg">
-                                <p className="font-medium">{item.type}</p>
-                                <p className="text-sm">Status: {item.status}</p>
-                                <p className="text-sm">Courses: {item.courses.join(", ")}</p>
-=======
                 <div className="grid grid-cols-2 gap-6">
                     {/* Current Learning Plan - First Column */}
                     <div className="bg-gradient-to-br from-[#007ECA] to-[#2196f3] rounded-xl p-5 shadow-lg h-auto min-h-[calc(100vh-12rem)]">
@@ -251,7 +254,6 @@ const Dashboard = () => {
                         ) : (
                             <div className="mb-2 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
                                 <p className="font-medium text-center text-blue-800">No current learning plan available</p>
->>>>>>> 62da747487734727fe083ab508d8b1b76c98e1db
                             </div>
                         )}
                     </div>
@@ -359,7 +361,7 @@ const Dashboard = () => {
             <aside className="w-64 bg-[#072D4A]/90 p-6">
                 <div className="bg-gradient-to-b from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg h-1/2 mb-6">
                     <h2 tabIndex="8" role="Announcements" className="text-xl font-bold mb-3">Announcements</h2>
-                    {announcements.map((announcement, index) => (
+                    {announcements?.map((announcement, index) => (
                         <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
                             <p className="font-medium text-blue-900">{announcement.title}</p>
                             <p className="text-xs text-blue-600 mt-1">{announcement.date}</p>

@@ -13,6 +13,7 @@ const announcementSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    student: Number,
     date: {
         type: Date,
         default: Date.now

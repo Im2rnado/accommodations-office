@@ -819,16 +819,30 @@ const AdminLearningPlan = () => {
                         </div>
                     </div>
 
-                    {/* Admin Actions */}
+                    {/* Send Feedback */}
                     <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg p-6">
-                    <h1 className="text-2xl font-bold mb-4 text-black">Send Feedback</h1>
-                    
-                    <h4 className="text-gray-700 font-bold">From:</h4>
-                    <input id="fromInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
-                    <h4 className="text-gray-700 mt-4 font-bold">Message:</h4>
-                    <textarea id="messageText" cols="30" rows="5" className="w-[80%] text-black rounded-md p-2 shadow-sm"></textarea>
-                    <br/>
-                    <button onClick={()=>sendFeedback(document.getElementById("fromInput").value, document.getElementById("messageText").value, student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Send</button>
+                        <h1 className="text-2xl font-bold mb-4 text-black">Send Feedback</h1>
+                        
+                        <h4 className="text-gray-700 font-bold">From:</h4>
+                        <input id="fromInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
+                        <h4 className="text-gray-700 mt-4 font-bold">Message:</h4>
+                        <textarea id="messageText" cols="30" rows="5" className="w-[80%] text-black rounded-md p-2 shadow-sm"></textarea>
+                        <br/>
+                        <button onClick={()=>sendFeedback(document.getElementById("fromInput").value, document.getElementById("messageText").value, student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Send</button>
+                    </div>
+
+                    {/* Set Announcement */}
+                    <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg p-6">
+                        <h1 className="text-2xl font-bold mb-4 text-black">Set Announcement</h1>
+                        
+                        <h4 className="text-gray-700 font-bold">Title: </h4>
+                        <input id="titleInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
+                        <h4 className="text-gray-700 mt-4 font-bold">Sender:</h4>
+                        <input id="senderInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
+                        <h4 className="text-gray-700 mt-4 font-bold">Message:</h4>
+                        <input id="messageAnnouncementInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
+                        <br/>
+                        <button onClick={()=>setAnnouncement(document.getElementById("titleInput").value, document.getElementById("senderInput").value, document.getElementById("messageAnnouncementInput").value,student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Send</button>
                     </div>
                 </main >
 
@@ -862,6 +876,34 @@ async function sendFeedback(from, message, to)
 
     try {
         const response = await axios.post("http://localhost:4000/feedback", feedback, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        console.log("Data sent successfully:", response.data);
+      } catch (error) {
+        console.error("Error sending data:", error);
+      }
+}
+
+async function setAnnouncement(title, sender, message, student)
+{
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const dateFormat = `${day}-${month}-${year}`;
+
+    const announcement = {
+        title:title,
+        message:message,
+        sender:sender,
+        student:student,
+        date:Date.now()
+    };
+
+    try {
+        const response = await axios.post("http://localhost:4000/api/announcements", announcement, {
           headers: {
             "Content-Type": "application/json"
           }

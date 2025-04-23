@@ -15,8 +15,12 @@ feedbackRouter.get("/", async (req, res)=>{
     }
     
 }).post("/", (req, res)=>{
-    console.log(req.body);
-    Feedback.create(req.body);
+    try {
+        Feedback.create(req.body);
+        res.status(201).json({ success: true, announcement: req.body });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error });
+    }
 });
 
 
