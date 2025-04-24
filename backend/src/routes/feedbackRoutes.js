@@ -1,6 +1,5 @@
 const express = require("express");
 const Feedback = require("../models/Feedback");
-
 const feedbackRouter = express.Router();
 
 feedbackRouter.get("/", async (req, res)=>{

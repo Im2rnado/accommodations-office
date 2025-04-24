@@ -720,7 +720,7 @@ const AdminLearningPlan = () => {
                         </div>
                     </div>
 
-                    {/* Progress Bar */}
+                    {/* Progress Bar
                     <div className="w-full bg-[#072D4A] rounded-xl p-4 mb-6 shadow-lg">
                         <div className="flex justify-between items-center">
                             <div className="w-6 h-6 bg-[#007ECA] rounded-full"></div>
@@ -731,10 +731,10 @@ const AdminLearningPlan = () => {
                             <div className="flex-1 h-1 bg-gray-400 mx-2"></div>
                             <div className="w-6 h-6 bg-white rounded-full"></div>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Student Details */}
-                    <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg p-6">
+                    <div className="bg-blue-300 mb-6 rounded-xl shadow-lg p-6">
                         <h1 className="text-2xl font-bold mb-4 text-black">Student Details</h1>
 
                         <div className="grid grid-cols-2 gap-6">
@@ -777,7 +777,7 @@ const AdminLearningPlan = () => {
                     {/* Documents */}
                     <div className="grid grid-cols-2 gap-6 mb-6">
                         {/* Medical Reports */}
-                        <div className="bg-[#B9E4FE] rounded-xl shadow-lg p-6">
+                        <div className="bg-blue-300 rounded-xl shadow-lg p-6">
                             <h2 className="text-xl font-bold mb-4 text-black">Medical Reports</h2>
 
                             {student.medicalReports && student.medicalReports.length > 0 ? (
@@ -800,7 +800,7 @@ const AdminLearningPlan = () => {
                         </div>
 
                         {/* Doctor's Form */}
-                        <div className="bg-[#B9E4FE] rounded-xl shadow-lg p-6">
+                        <div className="bg-blue-300 rounded-xl shadow-lg p-6">
                             <h2 className="text-xl font-bold mb-4 text-black">Doctor's Form</h2>
 
                             {student.doctorsForm ? (
@@ -820,29 +820,39 @@ const AdminLearningPlan = () => {
                     </div>
 
                     {/* Send Feedback */}
-                    <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg p-6">
-                        <h1 className="text-2xl font-bold mb-4 text-black">Send Feedback</h1>
+                    <div className="bg-blue-400 mb-6 rounded-xl shadow-lg p-6">
+                        <h1 className="text-2xl font-bold mb-4 text-black"><i class="fa-solid fa-comment"></i> Send Feedback</h1>
                         
-                        <h4 className="text-gray-700 font-bold">From:</h4>
+                        <h4 className="text-gray-700 font-bold mb-1">From:</h4>
                         <input id="fromInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
-                        <h4 className="text-gray-700 mt-4 font-bold">Message:</h4>
+                        <h4 className="text-gray-700 mt-4 mb-1 font-bold">Message:</h4>
                         <textarea id="messageText" cols="30" rows="5" className="w-[80%] text-black rounded-md p-2 shadow-sm"></textarea>
                         <br/>
                         <button onClick={()=>sendFeedback(document.getElementById("fromInput").value, document.getElementById("messageText").value, student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Send</button>
                     </div>
 
                     {/* Set Announcement */}
-                    <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg p-6">
-                        <h1 className="text-2xl font-bold mb-4 text-black">Set Announcement</h1>
+                    <div className="bg-blue-400 mb-6 rounded-xl shadow-lg p-6">
+                        <h1 className="text-2xl font-bold mb-4 text-black"><i class="fa-solid fa-bullhorn"></i> Set Announcement</h1>
                         
-                        <h4 className="text-gray-700 font-bold">Title: </h4>
+                        <h4 className="text-gray-700 font-bold mb-1">Title: </h4>
                         <input id="titleInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
-                        <h4 className="text-gray-700 mt-4 font-bold">Sender:</h4>
+                        <h4 className="text-gray-700 mt-4 mb-1 font-bold">Sender:</h4>
                         <input id="senderInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
-                        <h4 className="text-gray-700 mt-4 font-bold">Message:</h4>
+                        <h4 className="text-gray-700 mt-4 mb-1 font-bold">Message:</h4>
                         <input id="messageAnnouncementInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
                         <br/>
                         <button onClick={()=>setAnnouncement(document.getElementById("titleInput").value, document.getElementById("senderInput").value, document.getElementById("messageAnnouncementInput").value,student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Send</button>
+                    </div>
+
+                    {/* Request Forms */}
+                    <div className="bg-blue-400 mb-6 rounded-xl shadow-lg p-6">
+                        <h1 className="text-2xl font-bold mb-4 text-black">
+                        <i class="fa-solid fa-file-invoice"></i> Request Forms</h1>
+                        <h4 className="text-gray-700 font-bold mb-1">Form Type: </h4>
+                        <input id="formTypeInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
+                        <br/>
+                        <button onClick={()=>requestForm(document.getElementById("formTypeInput").value, student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Request</button>
                     </div>
                 </main >
 
@@ -904,6 +914,33 @@ async function setAnnouncement(title, sender, message, student)
 
     try {
         const response = await axios.post("http://localhost:4000/api/announcements", announcement, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        console.log("Data sent successfully:", response.data);
+      } catch (error) {
+        console.error("Error sending data:", error);
+      }
+}
+
+async function requestForm(type, student)
+{
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const dateFormat = `${day}-${month}-${year}`;
+
+    const form = {
+        id: "F-2024-089",
+        type:type,
+        submitted: dateFormat,
+        status:"pending",
+        student:student
+    };
+    try {
+        const response = await axios.post("http://localhost:4000/forms", form, {
           headers: {
             "Content-Type": "application/json"
           }

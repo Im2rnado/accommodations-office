@@ -74,19 +74,19 @@ const Dashboard = () => {
         fetchStudentData();
     }, [studentId]);
 
-    const [pendingForms, setPendingForms] = useState([]);
+    const [forms, setForms] = useState([]);
 
     useEffect(() => {
-        const fetchPendingForms = async () => {
+        const fetchForms = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/pendingForms');
-                setPendingForms(response.data);
+                const response = await axios.get('http://localhost:4000/forms');
+                setForms(response.data);
             } catch (error) {
                 console.error('Error fetching PendingForms:', error);
             }
         };
 
-        fetchPendingForms();
+        fetchForms();
     }, []);
 
     const approvedForms = [
@@ -260,11 +260,12 @@ const Dashboard = () => {
 
                     {/* Second Column - 4 Rows */}
                     <div className="space-y-6">
-                        {/* Pending Forms - Row 1 */}
+                        {/* Forms - Row 1 */}
                         <div className="bg-gradient-to-r from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg">
                             <h2 tabIndex="4" role="Pending Forms" aria-label="This section shows any pending forms" className="text-lg font-semibold mb-3">Requested Forms from Office</h2>
-                            {pendingForms && pendingForms.length > 0 ? (
-                                pendingForms.map((form, index) => (
+                            {forms && forms.length > 0 ? (
+                                forms.filter((forms)=>forms.status === "pending").map((form, index) => (
+                                    
                                     <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
                                         <p className="font-medium text-blue-900">{form.type}</p>
                                         <p className="text-sm text-blue-800">ID: <span className="font-mono">{form.id}</span></p>
