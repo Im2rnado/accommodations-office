@@ -19,6 +19,7 @@ import AccessabilityTutorialTest from './AccessibilityTutorial';
 import MissionVision from './MissionVision.js';
 import Policy from './Policy';
 import ApplyLandingPage from './ApplyLandingPage';
+import ContactUs from './ContactUs';
 
 function Router() {
   return (
@@ -26,6 +27,7 @@ function Router() {
       <Routes>
         <Route index element={<Homepage />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="contactus" element={<ContactUs />} />
         <Route path="Policy" element={<Policy />} />
         <Route path="ApplyLandingPage" element={<ApplyLandingPage />} />
         <Route path="login" element={<Login />} />

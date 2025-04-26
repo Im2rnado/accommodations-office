@@ -19,6 +19,11 @@ function NavbarLanding()
                     <a href="./Policy" className="font-thin text-white m-auto flex justify-center 
                     items-center transition-all text-2xl h-full bg-transparent 
                     hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-file-lines mr-2"></i>Policy</a>
+
+                    <a href="./contactus" className="font-thin text-white m-auto flex justify-center 
+                    items-center transition-all text-2xl h-full bg-transparent 
+                    hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-envelope mr-2"></i>Contact Us</a>
+
                     <a href="./ApplyLandingPage" className="font-thin text-white m-auto flex justify-center 
                     items-center transition-all text-2xl h-full bg-transparent 
                     hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-graduation-cap mr-2"></i>Apply</a>
