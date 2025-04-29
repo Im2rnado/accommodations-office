@@ -2,6 +2,8 @@ import React from "react";
 import DisabilityForm from "./assets/Disability Evidence Form.docx";
 import LearningPlan from "./assets/Learning Support Plans.docx";
 import NavbarLanding from "./NavbarLanding";
+import axios from "axios";
+
 function ApplyLandingPage()
 {
     return(
@@ -29,11 +31,11 @@ function ApplyLandingPage()
                 <div className="w-[80%] m-auto mb-0 flex justify-between">
                     <div className="flex flex-col w-[48%]">
                         <label className="text-white font-bold text-xl mb-1">Name</label>
-                        <input type="text" required className="w-full p-2 text-xl rounded-lg text-blue-950" placeholder="enter your full name"/>                
+                        <input id="nameInput" type="text" required className="w-full p-2 text-xl rounded-lg text-blue-950" placeholder="enter your full name"/>                
                     </div>
                     <div className="flex flex-col w-[48%]">
                         <label className="text-white font-bold text-xl mb-1">Type</label>
-                        <select required className="w-full p-2 text-xl rounded-lg font-bold text-blue-950">
+                        <select id="typeInput" required className="w-full p-2 text-xl rounded-lg font-bold text-blue-950">
                             <option value="inquiry" key="">Inquiry</option>
                             <option value="complaint" key="">Complaint</option>
                             <option value="suggestion" key="">Suggestion</option>
@@ -42,16 +44,19 @@ function ApplyLandingPage()
                 </div>
                 <div className="flex flex-col w-[80%] m-auto mt-2 mb-0">
                     <label className="text-white font-bold text-xl mb-1">Email</label>
-                    <input type="text" required className="w-full  p-2 text-xl rounded-lg text-blue-950" placeholder="example@example.com"/>
+                    <input id="emailInput" type="text" required className="w-full  p-2 text-xl rounded-lg text-blue-950" placeholder="example@example.com"/>
                 </div>
 
                 <div className="flex flex-col w-[80%] m-auto mt-2">
                     <label className="text-white font-bold text-xl mb-1">Message</label>
-                    <textarea required cols="30" rows="10" className="w-full p-2 text-xl rounded-lg text-blue-950"
+                    <textarea id="messageInput" required cols="30" rows="10" className="w-full p-2 text-xl rounded-lg text-blue-950"
                     placeholder="enter your message here"></textarea>
                 </div>
 
-                <button className="w-[20%] pt-3 pb-3 bg-white flex justify-center
+                <button onClick={()=>{sendContact(document.getElementById("nameInput").value, 
+                document.getElementById("typeInput").value, 
+                document.getElementById("emailInput").value,
+                document.getElementById("messageInput").value)}} className="w-[20%] pt-3 pb-3 bg-white flex justify-center
                 items-center rounded-lg font-bold text-blue-700 text-2xl m-auto mb-0 mt-5 transition-all duration-200
                 hover:bg-blue-700 hover:text-white">Submit<i class="fa-solid fa-paper-plane ml-2"></i></button>
             </form>
@@ -69,6 +74,27 @@ function ApplyLandingPage()
             </section>
         </div>
     );
+}
+
+async function sendContact(name, type, email, message) {
+    const contact = {
+        name:name,
+        type:type,
+        email:email,
+        message:message,
+        date:Date
+    };
+
+    try {
+        const response = await axios.post("http://localhost:4000/contact", contact, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        console.log("Data sent successfully:", response.data);
+      } catch (error) {
+        console.error("Error sending data:", error);
+      }
 }
 
 export default ApplyLandingPage;
