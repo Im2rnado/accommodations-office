@@ -76,11 +76,11 @@ function ApplyLandingPage()
                 <div className="flex m-auto">
                     <a href={DisabilityForm} className="m-10 text-white text-3xl pl-10 pr-10 pb-2 rounded-lg
                     border-2 border-white flex flex-col justify-center items-center border-solid
-                    font-bold hover:bg-white hover:text-blue-900 transition-all hover:shadow-gray-solid" download><i class="fa-solid fa-download mb-2 text-5xl mt-4"></i>Dowload Disability Evidence Form</a>
+                    font-bold hover:bg-white hover:text-blue-900 transition-all hover:shadow-gray-solid" download><i class="fa-solid fa-download mb-2 text-5xl mt-4"></i>Download Disability Evidence Form</a>
 
                     <a href={LearningPlan} className="m-10 text-white text-3xl pl-10 pr-10 pb-2 rounded-lg
                     border-2 border-white flex flex-col justify-center items-center border-solid
-                    font-bold hover:bg-white hover:text-blue-900 transition-all hover:shadow-gray-solid" download><i class="fa-solid fa-download mb-2 text-5xl mt-4"></i>Dowload Learning Support Plans</a>
+                    font-bold hover:bg-white hover:text-blue-900 transition-all hover:shadow-gray-solid" download><i class="fa-solid fa-download mb-2 text-5xl mt-4"></i>Download Learning Support Plans</a>
                 </div>
                 
             </section>

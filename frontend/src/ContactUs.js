@@ -77,12 +77,19 @@ function ApplyLandingPage()
 }
 
 async function sendContact(name, type, email, message) {
+
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const dateFormat = `${day}-${month}-${year}`;
+
     const contact = {
         name:name,
         type:type,
         email:email,
         message:message,
-        date:Date
+        date:dateFormat
     };
 
     try {

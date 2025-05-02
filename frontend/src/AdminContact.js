@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
-const AdminDashboard = () => {
+const AdminContact = () => {
     const [stats, setStats] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const [contacts, setContacts] = useState([]);
 
     useEffect(() => {
         axios
@@ -23,6 +25,19 @@ const AdminDashboard = () => {
                 setError(err.message);
                 setLoading(false);
             });
+    }, []);
+
+    useEffect(() => {
+        const fetchContact = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/contact');
+                setContacts(response.data);
+            } catch (error) {
+                console.error('Error fetching PendingForms:', error);
+            }
+        };
+
+        fetchContact();
     }, []);
 
     if (loading) {
@@ -71,83 +86,69 @@ const AdminDashboard = () => {
 
             {/* Main Dashboard */}
             <main className="flex-1 bg-blue-100 p-8">
-                <h1 className="text-2xl font-bold mb-6 text-black">Dashboard</h1>
-
-                {/* Stats Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                    {stats.map((stat, index) => (
-                        <div
-                            key={index}
-                            className="bg-[#007ECA] p-6 rounded-xl shadow-lg text-center"
-                        >
-                            <h2 className="text-2xl font-semibold">{stat.title}</h2>
-                            <p className="text-4xl mt-2">{stat.value}</p>
-                        </div>
-                    ))}
+                <h1 className="text-2xl font-bold mb-6 text-black">Contact Messages</h1>
+                
+                {contacts[0] && contacts.length > 0 ?(
+                    contacts.map((item, key)=>(
+                        <div id={"key" + key} className="w-[50%] h-max bg-blue-600 rounded-lg pt-10 pb-10 mb-5">  
+                <div className="w-[80%] m-auto mb-0 flex justify-between">
+                    <div className="flex flex-col w-[48%]">
+                        <label className="text-white font-bold text-xl mb-1">Name</label>
+                        <div className="w-full p-2 text-xl rounded-lg text-blue-950 bg-white">{item.name}</div>              
+                    </div>
+                    <div className="flex flex-col w-[48%]">
+                        <label className="text-white font-bold text-xl mb-1">Type</label>
+                        <div className="w-full p-2 text-xl rounded-lg font-bold text-blue-950 bg-white">{item.type}</div>             
+                    </div>
                 </div>
+                <div className="w-[80%] m-auto mb-0 flex justify-between">
+                    <div className="flex flex-col w-[48%]">
+                        <label className="text-white font-bold text-xl mb-1">Email</label>
+                        <div className="w-full  p-2 text-xl rounded-lg text-blue-950 bg-white">{item.email}</div>
+                    </div>
 
-                {/* Calendar */}
-                <div className="col-span-3 bg-[#B9E4FE] rounded-xl shadow-lg p-6 mb-6 text-black">
-                    <h2 className="text-lg font-semibold mb-4">November</h2>
-                    <div className="grid grid-cols-7 text-center">
-                        <span>Mo</span>
-                        <span>Tu</span>
-                        <span>We</span>
-                        <span>Th</span>
-                        <span>Fr</span>
-                        <span>Sa</span>
-                        <span>Su</span>
-                        {[...Array(30).keys()].map((day) => (
-                            <div
-                                key={day}
-                                className={`py-2 rounded ${day + 1 === 23 ? "bg-[#072D4A]/90 text-white" : ""
-                                    }`}
-                            >
-                                {day + 1}
-                            </div>
-                        ))}
+                    <div className="flex flex-col w-[48%]">
+                        <label className="text-white font-bold text-xl mb-1">Date</label>
+                        <div className="w-full p-2 text-xl rounded-lg  text-blue-950 bg-white">{item.date}</div>             
                     </div>
                 </div>
 
-                {/* Pending Students Sections */}
-                <div className="grid grid-cols-2 gap-6">
-                    <NavLink to={"/admin-pending"} className="bg-[#007ECA] rounded-xl p-6 shadow-lg">
-                        <h2 className="text-2xl font-bold">Pending Students</h2>
-                        <ul className="mt-4 space-y-2">
-                            <li>Student 1</li>
-                            <li>Student 2</li>
-                            <li>Student 3</li>
-                            <li>Student 4</li>
-                            <li>Student 5</li>
-                            <li>Student 6</li>
-                        </ul>
-                    </NavLink>
-
-                    <NavLink to={"/admin-applied"} className="bg-[#6A5ACD] rounded-xl p-6 shadow-lg">
-                        <h2 className="text-2xl font-bold">Unviewed Students</h2>
-                        <ul className="mt-4 space-y-2">
-                            <li>Student 1</li>
-                            <li>Student 2</li>
-                            <li>Student 3</li>
-                            <li>Student 4</li>
-                            <li>Student 5</li>
-                            <li>Student 6</li>
-                        </ul>
-                    </NavLink>
+                <div className="flex flex-col w-[80%] m-auto mt-2">
+                    <label className="text-white font-bold text-xl mb-1">Message</label>
+                    <div className="w-full p-2 text-xl rounded-lg text-blue-950 font-bold bg-white">{item.message}</div>
                 </div>
+
+                <button onClick={()=>{deleteContact(item, ("key" + key))}} className="w-[20%] pt-3 pb-3 bg-white flex justify-center
+                items-center rounded-lg font-bold text-red-700 text-2xl m-auto mt-5 transition-all duration-200
+                hover:bg-red-700 hover:text-white">Remove<i class="fa-solid fa-trash ml-2"></i></button>
+            </div>
+                    )
+                )):(<p>Loading messages</p>)}
+                
+              
             </main>
 
-            {/* Right Sidebar */}
-            <aside className="w-64 bg-[#072D4A]/90 p-6">
-                <div className="bg-[#007ECA] rounded-xl p-4 h-1/2 mb-6">
-                    <h2 className="text-xl font-bold">Announcements</h2>
-                </div>
-                <div className="bg-[#007ECA] rounded-xl p-4 h-2/5">
-                    <h2 className="text-xl font-bold">Meetings</h2>
-                </div>
-            </aside>
+            
         </div>
     );
 };
 
-export default AdminDashboard;
+
+async function deleteContact(contactItem, object)
+{
+    const contact = contactItem;
+    const element = document.getElementById(object);
+    element.remove();
+    try {
+        const response = await axios.post("http://localhost:4000/contact/delete", contact, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        console.log("Data sent successfully:", response.data);
+      } catch (error) {
+        console.error("Error sending data:", error);
+      }
+}
+
+export default AdminContact;

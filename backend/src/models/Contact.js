@@ -7,7 +7,7 @@ const contactSchema = new mongoose.Schema({
     type: String,
     email: String,
     message: String,
-    date:Date,
+    date:String,
     objectId: mongoose.Schema.Types.ObjectId
 });
 

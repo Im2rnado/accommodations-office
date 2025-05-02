@@ -20,6 +20,7 @@ import MissionVision from './MissionVision.js';
 import Policy from './Policy';
 import ApplyLandingPage from './ApplyLandingPage';
 import ContactUs from './ContactUs';
+import AdminContact from './AdminContact';
 
 function Router() {
   return (
@@ -45,6 +46,7 @@ function Router() {
         <Route path="admin-approved" element={<AdminApproved />} />
         <Route path="admin-pending" element={<AdminPending />} />
         <Route path="admin-applied" element={<AdminApplied />} />
+        <Route path="admin-contact" element={<AdminContact />} />
         <Route path="admin-announcements" element={<AdminAnnoucements />} />
         <Route path="accessability-tutorial-test" element={<AccessabilityTutorialTest />} />
         <Route path="Mission-Vision" element={<MissionVision />} />
