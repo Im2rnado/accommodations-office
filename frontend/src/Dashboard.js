@@ -2,13 +2,14 @@
 import React from "react";
 import AccessabilityFeatures from './AccessibilityFeatures';
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+import DashboardNavBar from "./DashboardNavBar";
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const studentId = localStorage.getItem('studentId');
-    const studentName = localStorage.getItem('studentName');
     const [currentLearningPlan, setCurrentLearningPlan] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError,] = useState(null);
@@ -166,76 +167,8 @@ const Dashboard = () => {
         <div className="flex min-h-screen bg-gray-900 text-white">
             <AccessabilityFeatures></AccessabilityFeatures>
             {/* Sidebar */}
-            <aside className="w-64 bg-[#072D4A]/90 flex flex-col">
-                <div className="p-6">
-                    <h1 className="text-lg font-bold mb-4" tabIndex="0" role="Website title" aria-label="ESLSCA Accomodation Website">Accommodation's Office</h1>
-                    <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-gray-500 rounded-full"></div>
-                        <div>
-                            <p className="font-semibold">Welcome Back,</p>
-                            <p className="text-sm">{studentName || 'Student'}</p>
-                        </div>
-                    </div>
-                </div>
-                <nav tabIndex="1" role="Navigation bar" aria-label="Links to each page, you can navigate vertically through the arrow keys" className="m-2 space-y-4">
-                    <a
-                        href="#"
-                        className="block py-2 px-4 bg-[#007ECA]/70 rounded-xl text-white hover:bg-[#007ECA]/60"
-                    >
-                        Dashboard
-                    </a>
-                    <a
-                        href="/StudentForm"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Forms
-                    </a>
-                    <a
-                        href="/StudentRequests"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Requests
-                    </a>
-                    <a
-                        href="/StudentPlan"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Plans
-                    </a>
-                    <a
-                        href="#"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Feedback
-                    </a>
-                    <a
-                        href="#"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Calendar
-                    </a>
-                    <a
-                        href="./StudentPDF"
-                        className="block py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                    >
-                        Convert PDF
-                    </a>
-                </nav>
-                <div className="mt-auto p-6">
-                    <button
-                        className="w-full text-left py-2 px-4 text-white hover:bg-[#007ECA]/60 rounded-xl"
-                        onClick={() => {
-                            localStorage.removeItem('studentId');
-                            localStorage.removeItem('studentName');
-                            localStorage.removeItem('studentEmail');
-                            navigate('/login');
-                        }}
-                    >
-                        Logout
-                    </button>
-                </div>
-            </aside>
-
+            
+            <DashboardNavBar/>
             {/* Main Dashboard */}
             <main className="flex-1 bg-blue-100 p-8">
                 <h1 tabIndex="2" role="Dashboard section" aria-label="You are now on the main dashboard" className="text-2xl font-bold mb-6 text-black">Dashboard</h1>
@@ -360,8 +293,8 @@ const Dashboard = () => {
 
             {/* Right Sidebar */}
             <aside className="w-64 bg-[#072D4A]/90 p-6">
-                <div className="bg-gradient-to-b from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg h-1/2 mb-6">
-                    <h2 tabIndex="8" role="Announcements" className="text-xl font-bold mb-3">Announcements</h2>
+                <div className="bg-gradient-to-b from-[#007ECA] to-[#1e88e5] rounded-xl p-3 shadow-lg h-max mb-6">
+                    <h2 tabIndex="8" role="Announcements" className="text-xl font-bold mb-3"><i class="fa-solid fa-bullhorn"></i> Announcements</h2>
                     {announcements?.map((announcement, index) => (
                         <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
                             <p className="font-medium text-blue-900">{announcement.title}</p>
@@ -369,8 +302,8 @@ const Dashboard = () => {
                         </div>
                     ))}
                 </div>
-                <div className="bg-gradient-to-b from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg h-2/5">
-                    <h2 tabIndex="9" role="Meetings" className="text-xl font-bold mb-3">Meetings</h2>
+                <div className="bg-gradient-to-b from-[#007ECA] to-[#1e88e5] rounded-xl p-3 shadow-lg h-max">
+                    <h2 tabIndex="9" role="Meetings" className="text-xl font-bold mb-3"><i class="fa-solid fa-calendar-check"></i> Meetings</h2>
                     {meetings.map((meeting, index) => (
                         <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
                             <p className="font-medium text-blue-900">{meeting.title}</p>

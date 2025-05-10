@@ -13,12 +13,16 @@ function NavbarLanding()
 
                     <a href="./Homepage" className="font-thin text-white m-auto flex justify-center 
                     items-center transition-all text-2xl h-full bg-transparent 
-                    hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-screwdriver-wrench mr-2"></i>Accessability Tools</a>
+                    hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-screwdriver-wrench mr-2"></i>Accommodations Provided</a>
 
 
                     <a href="./Policy" className="font-thin text-white m-auto flex justify-center 
                     items-center transition-all text-2xl h-full bg-transparent 
                     hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-file-lines mr-2"></i>Policy</a>
+
+                    <a href="./About" className="font-thin text-white m-auto flex justify-center 
+                    items-center transition-all text-2xl h-full bg-transparent 
+                    hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-circle-question mr-2"></i>About</a>
 
                     <a href="./contactus" className="font-thin text-white m-auto flex justify-center 
                     items-center transition-all text-2xl h-full bg-transparent 

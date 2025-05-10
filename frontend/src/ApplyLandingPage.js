@@ -20,24 +20,34 @@ function ApplyLandingPage()
 
                 <div className="flex flex-col justify-start items-start mb-5 ml-5">
                     <div className="flex justify-start items-center">
-                        <div className="w-52 h-52 bg-gradient-to-r from-blue-900 to-blue-950 rounded-xl text-white text-8xl flex
+                        <div className="w-52 h-52 bg-gradient-to-b from-blue-600 to-blue-700 rounded-xl text-white text-8xl flex
                         justify-center items-center font-bold">1</div>
-                        <p className="text-2xl font-bold ml-10">
-                            Visit admission office or apply online
-                        </p>
+                        <div className="flex flex-col justify-start items-start h-full pt-10">
+                            <p className="text-4xl font-bold ml-10">
+                                Fill the required forms
+                            </p>
+                            <p className="text-3xl ml-10 mt-4">
+                                Fill the admission application form through this <a target="_blank" href="https://eslsca.edu.eg/undergraduate-admission/" className="text-blue-600"><i class="fa-solid fa-square-arrow-up-right"></i> link</a>.<br/> The Admission office will then send you an ID to use throught the admission process    
+                            </p>
+                        </div>
                     </div>
-                    <div className="w-[5px] h-24 bg-blue-900 ml-[100px] mt-5 rounded">
+                    <div className="w-[5px] h-24 bg-blue-700 ml-[100px] mt-5 rounded">
 
                     </div>
                 </div>
 
                 <div className="flex flex-col justify-start items-start mb-5 ml-5">
                     <div className="flex justify-start items-center">
-                        <div className="w-52 h-52 bg-gradient-to-r from-blue-900 to-blue-950 rounded-xl text-white text-8xl flex
+                        <div className="w-52 h-52 bg-gradient-to-b from-blue-700 to-blue-800 rounded-xl text-white text-8xl flex
                         justify-center items-center font-bold">2</div>
-                        <p className="text-2xl font-bold ml-10">
-                            Fill the required docuements
-                        </p>
+                        <div className="flex flex-col justify-start items-start h-full pt-10">
+                            <p className="text-4xl font-bold ml-10">
+                                Visit the Admission Office
+                            </p>
+                            <p className="text-3xl ml-10 mt-4">
+                                Once you have obtained your ID, head to the Admission Office at the university and<br/> submit all the required documents (documents can be found on this <a target="_blank"  href="https://eslsca.edu.eg/undergraduate-admission/" className="text-blue-600"><i class="fa-solid fa-square-arrow-up-right"></i> link</a>)  
+                            </p>
+                        </div>
                     </div>
                     <div className="w-[5px] h-24 bg-blue-900 ml-[100px] mt-5 rounded">
 
@@ -46,11 +56,16 @@ function ApplyLandingPage()
 
                 <div className="flex flex-col justify-start items-start mb-5 ml-5">
                     <div className="flex justify-start items-center">
-                        <div className="w-52 h-52 bg-gradient-to-r from-blue-900 to-blue-950 rounded-xl text-white text-8xl flex
+                        <div className="w-52 h-52 bg-gradient-to-b from-blue-800 to-blue-900 rounded-xl text-white text-8xl flex
                         justify-center items-center font-bold">3</div>
-                        <p className="text-2xl font-bold ml-10">
-                            Submit the docuements to the office
-                        </p>
+                        <div className="flex flex-col justify-start items-start h-full pt-10">
+                            <p className="text-4xl font-bold ml-10">
+                                Apply to The Accommodation Office Website
+                            </p>
+                            <p className="text-3xl ml-10 mt-4">
+                                Once approved from the Admission office, you can now download the required documents<br/> below and fill the application form of the Accommodation Office down below  
+                            </p>
+                        </div>
                     </div>
                 </div>
 
