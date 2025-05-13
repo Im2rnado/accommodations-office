@@ -36,7 +36,7 @@ const Dashboard = () => {
                         // Set current learning plan from student data
                         if (student.currentLearningPlan) {
                             setCurrentLearningPlan([{
-                                teachingSupport: student.currentLearningPlan.teachingSupport?.map(item => ({
+                                teachingSupport: student.currentLearningPlan["Teaching Support"]?.map(item => ({
                                     type: item.item,
                                     status: item.value === true ? "Active" : "Inactive",
                                     courses: Array.isArray(item.subject) ? item.subject : ["All Courses"]
@@ -50,7 +50,7 @@ const Dashboard = () => {
                         if (student.previousLearningPlan) {
                             setPreviousPlan([{
                                 semester: "Previous Semester",
-                                accommodations: student.previousLearningPlan.teachingSupport?.map(item =>
+                                accommodations: student.previousLearningPlan["Teaching Support"]?.map(item =>
                                     `${item.item}${typeof item.value === 'boolean' ? (item.value ? " - Enabled" : " - Disabled") : `: ${item.value}`}`
                                 ) || []
                             }]);
@@ -167,8 +167,8 @@ const Dashboard = () => {
         <div className="flex min-h-screen bg-gray-900 text-white">
             <AccessabilityFeatures></AccessabilityFeatures>
             {/* Sidebar */}
-            
-            <DashboardNavBar/>
+
+            <DashboardNavBar />
             {/* Main Dashboard */}
             <main className="flex-1 bg-blue-100 p-8">
                 <h1 tabIndex="2" role="Dashboard section" aria-label="You are now on the main dashboard" className="text-2xl font-bold mb-6 text-black">Dashboard</h1>
@@ -176,8 +176,8 @@ const Dashboard = () => {
                     {/* Current Learning Plan - First Column */}
                     <div className="bg-gradient-to-br from-[#007ECA] to-[#2196f3] rounded-xl p-5 shadow-lg h-auto min-h-[calc(100vh-12rem)]">
                         <h2 tabIndex="3" role="Current Learning Plan" aria-label="This section shows the current learning plan assigned" className="text-xl font-semibold mb-4 text-white">Current Learning Plan</h2>
-                        {currentLearningPlan[0] && currentLearningPlan[0].teachingSupport && currentLearningPlan[0].teachingSupport.length > 0 ? (
-                            currentLearningPlan[0].teachingSupport.map((item, index) => (
+                        {currentLearningPlan[0] && currentLearningPlan[0]["Teaching Support"] && currentLearningPlan[0]["Teaching Support"].length > 0 ? (
+                            currentLearningPlan[0]["Teaching Support"].map((item, index) => (
                                 <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
                                     <p className="font-medium text-blue-900">{item.type}</p>
                                     <p className="text-sm text-blue-800">Status: <span className={`font-semibold ${item.status === "Active" ? "text-green-700" : "text-blue-700"}`}>{item.status}</span></p>
@@ -197,8 +197,8 @@ const Dashboard = () => {
                         <div className="bg-gradient-to-r from-[#007ECA] to-[#1e88e5] rounded-xl p-5 shadow-lg">
                             <h2 tabIndex="4" role="Pending Forms" aria-label="This section shows any pending forms" className="text-lg font-semibold mb-3">Requested Forms from Office</h2>
                             {forms && forms.length > 0 ? (
-                                forms.filter((forms)=>forms.status === "pending").map((form, index) => (
-                                    
+                                forms.filter((forms) => forms.status === "pending").map((form, index) => (
+
                                     <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
                                         <p className="font-medium text-blue-900">{form.type}</p>
                                         <p className="text-sm text-blue-800">ID: <span className="font-mono">{form.id}</span></p>
@@ -294,7 +294,7 @@ const Dashboard = () => {
             {/* Right Sidebar */}
             <aside className="w-64 bg-[#072D4A]/90 p-6">
                 <div className="bg-gradient-to-b from-[#007ECA] to-[#1e88e5] rounded-xl p-3 shadow-lg h-max mb-6">
-                    <h2 tabIndex="8" role="Announcements" className="text-xl font-bold mb-3"><i class="fa-solid fa-bullhorn"></i> Announcements</h2>
+                    <h2 tabIndex="8" role="Announcements" className="text-xl font-bold mb-3">Announcements</h2>
                     {announcements?.map((announcement, index) => (
                         <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
                             <p className="font-medium text-blue-900">{announcement.title}</p>
@@ -303,7 +303,7 @@ const Dashboard = () => {
                     ))}
                 </div>
                 <div className="bg-gradient-to-b from-[#007ECA] to-[#1e88e5] rounded-xl p-3 shadow-lg h-max">
-                    <h2 tabIndex="9" role="Meetings" className="text-xl font-bold mb-3"><i class="fa-solid fa-calendar-check"></i> Meetings</h2>
+                    <h2 tabIndex="9" role="Meetings" className="text-xl font-bold mb-3">Meetings</h2>
                     {meetings.map((meeting, index) => (
                         <div key={index} className="mb-3 bg-blue-50/85 p-3 rounded-lg shadow-sm border border-blue-200">
                             <p className="font-medium text-blue-900">{meeting.title}</p>

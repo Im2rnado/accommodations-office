@@ -20,6 +20,30 @@ const Login = () => {
                 return;
             }
 
+            // Check if email is for a dean
+            if (email.includes('dean')) {
+                try {
+                    const response = await axios.post('http://localhost:4000/api/deans/login', {
+                        email: email,
+                        password: "deanpassword" // In a real application, you would collect a password
+                    });
+
+                    if (response.data.success) {
+                        // Store dean info in localStorage
+                        localStorage.setItem('deanData', JSON.stringify(response.data.dean));
+                        navigate('/dean-dashboard');
+                    } else {
+                        setError('Invalid dean credentials');
+                    }
+                    return;
+                } catch (err) {
+                    console.error('Dean login error:', err);
+                    setError('Dean account not found or incorrect credentials');
+                    setLoading(false);
+                    return;
+                }
+            }
+
             // Check if student exists with this email
             const response = await axios.get('http://localhost:4000/api/students');
             if (response.data.success) {

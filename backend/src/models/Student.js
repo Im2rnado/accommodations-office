@@ -29,7 +29,7 @@ const studentSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["Approved", "Pending", "Applied"],
+        enum: ["Approved", "Pending", "Applied", "Dean Review"],
         required: true
     },
     disability: {
@@ -46,28 +46,79 @@ const studentSchema = new mongoose.Schema({
         url: String
     },
     currentLearningPlan: {
-        examSupport: [{
+        "Exam Support": [{
+            item: String,
+            value: mongoose.Schema.Types.Mixed,
+            deanApproved: {
+                type: Boolean,
+                default: null
+            },
+            deanFlagged: {
+                type: Boolean,
+                default: false
+            },
+            deanNotes: String
+        }],
+        "Teaching Support": [{
+            item: String,
+            value: mongoose.Schema.Types.Mixed,
+            deanApproved: {
+                type: Boolean,
+                default: null
+            },
+            deanFlagged: {
+                type: Boolean,
+                default: false
+            },
+            deanNotes: String
+        }]
+    },
+    previousLearningPlan: {
+        "Exam Support": [{
             item: String,
             value: mongoose.Schema.Types.Mixed
         }],
-        teachingSupport: [{
+        "Teaching Support": [{
             item: String,
             value: mongoose.Schema.Types.Mixed
         }]
     },
-    previousLearningPlan: {
-        examSupport: [{
+    learningPlan: {
+        "Exam Support": [{
             item: String,
-            value: mongoose.Schema.Types.Mixed
+            value: mongoose.Schema.Types.Mixed,
+            deanApproved: {
+                type: Boolean,
+                default: null
+            },
+            deanFlagged: {
+                type: Boolean,
+                default: false
+            },
+            deanNotes: String
         }],
-        teachingSupport: [{
+        "Teaching Support": [{
             item: String,
-            value: mongoose.Schema.Types.Mixed
+            value: mongoose.Schema.Types.Mixed,
+            deanApproved: {
+                type: Boolean,
+                default: null
+            },
+            deanFlagged: {
+                type: Boolean,
+                default: false
+            },
+            deanNotes: String
         }]
     },
     subjects: [{
         type: String
-    }]
+    }],
+    deanReviewedAt: Date,
+    deanReviewedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Dean'
+    }
 });
 
 const Student = mongoose.model("Student", studentSchema);
