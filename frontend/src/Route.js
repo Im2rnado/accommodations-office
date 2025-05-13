@@ -22,6 +22,7 @@ import ApplyLandingPage from './ApplyLandingPage';
 import ContactUs from './ContactUs';
 import AdminContact from './AdminContact';
 import About from "./About";
+import AccommodationsProvided from './AccomodationsProvided';
 
 function Router() {
   return (
@@ -42,6 +43,7 @@ function Router() {
         <Route path="apply" element={<Apply />} />
         <Route path="login" element={<Login />} />
         <Route path="about" element={<About />} />
+        <Route path="accomodationsProvided" element={<AccommodationsProvided />} />
         <Route path="admin-dashboard" element={<AdminDashboard />} />
         <Route path="admin-students" element={<AdminStudents />} />
         <Route path="admin-learning-plan/:id" element={<AdminLearningPlan />} />

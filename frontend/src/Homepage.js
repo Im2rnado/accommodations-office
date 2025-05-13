@@ -40,7 +40,7 @@ function Homepage() {
                         </p>
 
 
-                        <a href="./login" className="text-blue-900 w-[40%] text-3xl flex justify-center items-center transition-all
+                        <a href="./about" className="text-blue-900 w-[40%] text-3xl flex justify-center items-center transition-all
                             pr-5 pl-5 h-14 border-2 border-blue-900 rounded-lg hover:bg-blue-900 hover:text-white hover:font-bold">See more</a>
 
                     </div>
@@ -65,7 +65,7 @@ function Homepage() {
                             In addition to accessabile ramps, elevators, and tactile pathways around the campus
                         </p>
 
-                        <a href="./login" className="text-white text-3xl flex justify-center items-center transition-all    
+                        <a href="./AccomodationsProvided" className="text-white text-3xl flex justify-center items-center transition-all    
                         pr-24 pl-24 h-14 border-2 border-white rounded-lg hover:bg-white hover:text-blue-900 hover:font-bold">See all accommodations</a>
                     </div>
                     <div style={{ backgroundImage: `url(${wheelchair_ramps})` }}

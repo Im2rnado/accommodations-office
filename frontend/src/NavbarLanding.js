@@ -11,7 +11,7 @@ function NavbarLanding()
                     items-center transition-all text-2xl h-full bg-transparent 
                     hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-house mr-2"></i>Home</a>
 
-                    <a href="./Homepage" className="font-thin text-white m-auto flex justify-center 
+                    <a href="./accomodationsProvided" className="font-thin text-white m-auto flex justify-center 
                     items-center transition-all text-2xl h-full bg-transparent 
                     hover:bg-white hover:text-blue-900 pr-4 pl-4"><i class="fa-solid fa-screwdriver-wrench mr-2"></i>Accommodations Provided</a>
 
