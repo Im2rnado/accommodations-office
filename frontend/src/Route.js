@@ -22,7 +22,14 @@ import ApplyLandingPage from './ApplyLandingPage';
 import ContactUs from './ContactUs';
 import AdminContact from './AdminContact';
 import About from "./About";
+<<<<<<< HEAD
 import AccommodationsProvided from './AccomodationsProvided';
+=======
+import DeanDashboard from './DeanDashboard';
+import DeanPendingReviews from './DeanPendingReviews';
+import DeanReview from './DeanReview';
+import DeanReviewed from './DeanReviewed';
+>>>>>>> 1c5dc132389c8b58ddb82151029864bb7d06d247
 
 function Router() {
   return (
@@ -38,7 +45,7 @@ function Router() {
         <Route path="StudentSettings" element={<StudentSettings />} />
         <Route path="StudentForm" element={<StudentForm />} />
         <Route path="StudentPlan" element={<StudentPlan />} />
-        <Route path="StudentPDF" element={<StudentPDF/>}/>
+        <Route path="StudentPDF" element={<StudentPDF />} />
         <Route path="StudentRequests" element={<StudentRequests />} />
         <Route path="apply" element={<Apply />} />
         <Route path="login" element={<Login />} />
@@ -52,6 +59,10 @@ function Router() {
         <Route path="admin-applied" element={<AdminApplied />} />
         <Route path="admin-contact" element={<AdminContact />} />
         <Route path="admin-announcements" element={<AdminAnnoucements />} />
+        <Route path="dean-dashboard" element={<DeanDashboard />} />
+        <Route path="dean-pending-reviews" element={<DeanPendingReviews />} />
+        <Route path="dean-review/:id" element={<DeanReview />} />
+        <Route path="dean-reviewed" element={<DeanReviewed />} />
         <Route path="accessability-tutorial-test" element={<AccessabilityTutorialTest />} />
         <Route path="Mission-Vision" element={<MissionVision />} />
       </Routes>

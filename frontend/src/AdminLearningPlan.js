@@ -19,7 +19,7 @@ const AdminLearningPlan = () => {
                     setStudent(response.data.student);
 
                     const initializedLearningPlan = {};
-                    Object.entries(response.data.student.currentLearningPlan).forEach(
+                    Object.entries(response.data.student.learningPlan).forEach(
                         ([category, supports]) => {
                             initializedLearningPlan[category] = supports.map((support) => ({
                                 ...support,
@@ -27,7 +27,10 @@ const AdminLearningPlan = () => {
                             }));
                         }
                     );
+
                     setLearningPlan(initializedLearningPlan);
+                    console.log(learningPlan)
+
                 } else {
                     setError("Failed to fetch student data.");
                 }
@@ -55,6 +58,29 @@ const AdminLearningPlan = () => {
                 // navigate(`/admin-learning-plan/${id}`);
             } else {
                 setError("Failed to update student status");
+                setLoading(false);
+            }
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+            setLoading(false);
+        }
+    };
+
+    // Send to dean for review
+    const handleSendToDean = async () => {
+        try {
+            setLoading(true);
+            // Call API to update student status to "Dean Review"
+            const response = await axios.put(`http://localhost:4000/api/students/${id}`, {
+                status: "Dean Review"
+            });
+
+            if (response.data.success) {
+                // If the update was successful, reload the page to show the changes
+                window.location.reload();
+            } else {
+                setError("Failed to send to dean for review");
                 setLoading(false);
             }
         } catch (err) {
@@ -642,6 +668,19 @@ const AdminLearningPlan = () => {
                             ))}
                         </form>
                     </div>
+
+                    {/* Admin Actions */}
+                    <div className="bg-[#B9E4FE] mb-6 rounded-xl shadow-lg p-4">
+                        <div className="flex space-x-4">
+                            <button
+                                className="w-full bg-green-600 hover:bg-green-700 text-white p-6 rounded-lg font-medium transition-colors"
+                                onClick={handleSendToDean}
+                                disabled={loading}
+                            >
+                                {loading ? "Processing..." : "Send to Dean for Approval"}
+                            </button>
+                        </div>
+                    </div>
                 </main>
 
                 {/* Right Sidebar */}
@@ -822,37 +861,37 @@ const AdminLearningPlan = () => {
                     {/* Send Feedback */}
                     <div className="bg-blue-400 mb-6 rounded-xl shadow-lg p-6">
                         <h1 className="text-2xl font-bold mb-4 text-black"><i class="fa-solid fa-comment"></i> Send Feedback</h1>
-                        
+
                         <h4 className="text-gray-700 font-bold mb-1">From:</h4>
                         <input id="fromInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
                         <h4 className="text-gray-700 mt-4 mb-1 font-bold">Message:</h4>
                         <textarea id="messageText" cols="30" rows="5" className="w-[80%] text-black rounded-md p-2 shadow-sm"></textarea>
-                        <br/>
-                        <button onClick={()=>sendFeedback(document.getElementById("fromInput").value, document.getElementById("messageText").value, student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Send</button>
+                        <br />
+                        <button onClick={() => sendFeedback(document.getElementById("fromInput").value, document.getElementById("messageText").value, student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Send</button>
                     </div>
 
                     {/* Set Announcement */}
                     <div className="bg-blue-400 mb-6 rounded-xl shadow-lg p-6">
                         <h1 className="text-2xl font-bold mb-4 text-black"><i class="fa-solid fa-bullhorn"></i> Set Announcement</h1>
-                        
+
                         <h4 className="text-gray-700 font-bold mb-1">Title: </h4>
                         <input id="titleInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
                         <h4 className="text-gray-700 mt-4 mb-1 font-bold">Sender:</h4>
                         <input id="senderInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
                         <h4 className="text-gray-700 mt-4 mb-1 font-bold">Message:</h4>
                         <input id="messageAnnouncementInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
-                        <br/>
-                        <button onClick={()=>setAnnouncement(document.getElementById("titleInput").value, document.getElementById("senderInput").value, document.getElementById("messageAnnouncementInput").value,student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Send</button>
+                        <br />
+                        <button onClick={() => setAnnouncement(document.getElementById("titleInput").value, document.getElementById("senderInput").value, document.getElementById("messageAnnouncementInput").value, student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Send</button>
                     </div>
 
                     {/* Request Forms */}
                     <div className="bg-blue-400 mb-6 rounded-xl shadow-lg p-6">
                         <h1 className="text-2xl font-bold mb-4 text-black">
-                        <i class="fa-solid fa-file-invoice"></i> Request Forms</h1>
+                            <i class="fa-solid fa-file-invoice"></i> Request Forms</h1>
                         <h4 className="text-gray-700 font-bold mb-1">Form Type: </h4>
                         <input id="formTypeInput" type="text" className="w-[80%] text-black rounded-md p-2 shadow-sm" />
-                        <br/>
-                        <button onClick={()=>requestForm(document.getElementById("formTypeInput").value, student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Request</button>
+                        <br />
+                        <button onClick={() => requestForm(document.getElementById("formTypeInput").value, student.id)} className="w-28 h-8 bg-green-600 mt-2 text-white rounded-md shadow-sm">Request</button>
                     </div>
                 </main >
 
@@ -870,34 +909,32 @@ const AdminLearningPlan = () => {
     }
 };
 
-async function sendFeedback(from, message, to)
-{
+async function sendFeedback(from, message, to) {
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const dateFormat = `${day}-${month}-${year}`;
     const feedback = {
-        "from":from,
-        "to":to,
+        "from": from,
+        "to": to,
         "date": dateFormat,
         "message": message
     };
 
     try {
         const response = await axios.post("http://localhost:4000/feedback", feedback, {
-          headers: {
-            "Content-Type": "application/json"
-          }
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
         console.log("Data sent successfully:", response.data);
-      } catch (error) {
+    } catch (error) {
         console.error("Error sending data:", error);
-      }
+    }
 }
 
-async function setAnnouncement(title, sender, message, student)
-{
+async function setAnnouncement(title, sender, message, student) {
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth() + 1;
@@ -905,27 +942,26 @@ async function setAnnouncement(title, sender, message, student)
     const dateFormat = `${day}-${month}-${year}`;
 
     const announcement = {
-        title:title,
-        message:message,
-        sender:sender,
-        student:student,
-        date:Date.now()
+        title: title,
+        message: message,
+        sender: sender,
+        student: student,
+        date: Date.now()
     };
 
     try {
         const response = await axios.post("http://localhost:4000/api/announcements", announcement, {
-          headers: {
-            "Content-Type": "application/json"
-          }
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
         console.log("Data sent successfully:", response.data);
-      } catch (error) {
+    } catch (error) {
         console.error("Error sending data:", error);
-      }
+    }
 }
 
-async function requestForm(type, student)
-{
+async function requestForm(type, student) {
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth() + 1;
@@ -934,21 +970,21 @@ async function requestForm(type, student)
 
     const form = {
         id: "F-2024-089",
-        type:type,
+        type: type,
         submitted: dateFormat,
-        status:"pending",
-        student:student
+        status: "pending",
+        student: student
     };
     try {
         const response = await axios.post("http://localhost:4000/forms", form, {
-          headers: {
-            "Content-Type": "application/json"
-          }
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
         console.log("Data sent successfully:", response.data);
-      } catch (error) {
+    } catch (error) {
         console.error("Error sending data:", error);
-      }
+    }
 }
 
 export default AdminLearningPlan;

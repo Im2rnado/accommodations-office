@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const currentLearningPlanRouter = express.Router();
 
 const currentLearningPlanSchema = new mongoose.Schema({
-    teachingSupport:Array,
-    objectId:mongoose.Schema.Types.ObjectId
+    "Teaching Support": Array,
+    objectId: mongoose.Schema.Types.ObjectId
 });
 
 const CurrentLearningPlan = mongoose.model("CurrentLearningPlan", currentLearningPlanSchema);
 
-currentLearningPlanRouter.get("/", async (req, res)=>{
+currentLearningPlanRouter.get("/", async (req, res) => {
     try {
         const currentLearningPlan = await CurrentLearningPlan.find({});
         console.log("CurrentLearningPlan successfully fetched");
